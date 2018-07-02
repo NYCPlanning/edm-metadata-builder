@@ -5,7 +5,7 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
       header('Location: readme.php');
       break;
     case 'SSec':  // Value of second radio button
-      header('Location: impcsv.php');
+      header('Location: dict_name.php');
       break;
     default:
       break;
