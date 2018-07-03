@@ -2,16 +2,18 @@
 if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
   switch ($_POST['group']) {
     case 'Sec':  // Value of first radio button
-      header('Location: Main_form.php');
+      header('Location: readme.php');
       break;
     case 'SSec':  // Value of second radio button
-      header('Location: Main_csv.php');
+      header('Location: dict_name.php');
       break;
     default:
       break;
   }    
 }
 ?>
+ 
+
 <body style="background-color:ivory;"> 
 <br>
 <br>
@@ -21,15 +23,16 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 <br>
 <br>
 <br>
-<h2 style="text-align:center; vertical-align: middle; font-family:tahoma; color:black;">Importing data from Form or CSV</h2>
+<h2 style="text-align:center; vertical-align: middle; font-family:tahoma; color:black;">Importing data from Form</h2>
 
 
-<td align="center" class="bgcolor_02">
+
+<td align="center" class="bgcolor_03">
   <form action="" method="POST" >
     <input type="radio" class="import" name="group" id="group" value="Sec"  />
-    Form
+    ReadMe
     <input type="radio" class="import" name="group" id="group2" value="SSec"  />
-    CSV
+    Data Dictionary
     <br />
     <br>
     <input type="submit" value="Done" />
@@ -46,7 +49,4 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 </style>
 </td>
 </body>
-
-
-
 

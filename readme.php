@@ -8,7 +8,7 @@ list-style: none;
 }
 </style>
 </head>
-<body>
+<body style="background-color:ivory;"> 
 <h2>Enter the following details about the Table into ReadMe</h2>
 <ul>
 <form name="readme" action="readme-p.php" method="POST" >

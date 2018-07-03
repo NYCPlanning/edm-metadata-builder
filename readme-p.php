@@ -88,9 +88,12 @@ echo '</table></body></html>';
 
 
 <html>
-<div>
+<body style="background-color:ivory;"> 
+    <div id="wrap">
+        <div class="container">
+            <div class="row">
 	<br>
-            <form class="form-horizontal" action="export.php" method="post" name="upload_excel"   
+            <form class="form-horizontal" action="expbut.php" method="post" name="upload_excel"   
                       enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
@@ -98,5 +101,16 @@ echo '</table></body></html>';
                             </div>
                    </div>                    
             </form>           
+
+            <form class="form-horizontal" action="expxml.php" method="post"  name="upload_excel" enctype="multipart/form-data">
+                  <div class="form-group">
+                            <div class="col-md-4 col-md-offset-4">
+                                <input type="submit" name="Expor2xml" class="btn btn-success" value="export to xml"/>
+                            </div>
+                   </div>                    
+            </form>           
  </div>
+</div>
+</div>
+</body>
  </html>
