@@ -28,14 +28,13 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 
 <td align="center" class="bgcolor_03">
   <form action="" method="POST" >
-    Select:
-    <input type="radio" class="import" name="group" id="group" value="Sec"  />
+    <input type="radio" class="import" name="group" id="group" value="Sec" style="font-size:75%;color:green" />
     ReadMe
-    <input type="radio" class="import" name="group" id="group2" value="SSec"  />
+    <input type="radio" class="import" name="group" id="group2" value="SSec"  style="font-size:75%;color:green"/>
     Data Dictionary
     <br />
     <br>
-    <input type="submit" value="Done" />
+    <input type="submit" value="Done" style="font-size:75%;color:green"/>
   </form>
  <style>
  form {

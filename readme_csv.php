@@ -1,7 +1,7 @@
 <?php  
 $db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
 
-if(!empty('_POST[csv_submit]')) {
+if(isset($_POST['csv_submit'])) {
 // 
     $file = $_FILES["csv"]["tmp_name"]; 
 
@@ -13,11 +13,13 @@ if ($_FILES["csv"]["size"] > 0) {
      
     //loop through the csv file and insert into database 
     $flag = true;
-  while (($data = fgetcsv($handle,10000,",","'")) !== FALSE) { 
+  while (($data = fgetcsv($handle,10000,",")) !== FALSE) { 
         //if ($data[0]) { 
      if($flag) { $flag = false; continue; }
            $query="INSERT INTO ReadMe VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]','$data[11]','$data[12]','$data[13]','$data[14]','$data[15]','$data[16]','$data[17]','$data[18]')";
-      $res = pg_query($db, $query);      
+      $res = pg_query($db, $query);    
+
+
         //} 
     } 
 fclose($handle);

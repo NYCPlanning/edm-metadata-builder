@@ -11,8 +11,15 @@ list-style: none;
 <body style="background-color:ivory;"> 
 <h2>Enter the following details about the Table into ReadMe</h2>
 <ul>
+	<style>
+	input {
+		font-size:12pt;
+		height:30px;
+		width:350px;
+	}
+	</style>
 <form name="readme" action="readme-p.php" method="POST" >
-<li>Common Name:</li><li><input type="text" name="common_name" /></li>
+<li>Common Name:</li><li><input type="text" name="common_name" required/></li>
 <li>SDE Name:</li><li><input type="text" name="sde_name" /></li>
 <li>Tags:</li><li><input type="text" name="tags" /></li>
 <li>Summary:</li><li><input type="text" name="summary" /></li>
@@ -32,8 +39,9 @@ list-style: none;
 <li>Future Plans:</li><li><input type="text" name="future_plans" /></li>
 <li>Distribution:</li><li><input type="text" name="distribution" /></li>
 <br>
-<li><input type="submit" /></li>
+<li><input type="submit" style="width:auto"/></li>
 </form>
+
 </ul>
 </body>
 </html>

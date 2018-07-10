@@ -5,5 +5,5 @@ header('Content-Disposition: attachment; filename=ReadMe.xml');
 ?>
 <DOCUMENT>
 <?php 
-sql2xml('select * from ReadMe');?>
+sql2xml("select * from ReadMe");?>
 </DOCUMENT>

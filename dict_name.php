@@ -15,7 +15,17 @@ if ($result) {
         header("Location: dict_name-p2.php?tableName=".$tableName);
     }
     else{
-        die("query failed!");
+        $message = "Table already exits. Do you want to insert data into the existing Table?";
+        echo "<script type='text/javascript'>var r = confirm('$message');
+        if(r == true)
+        {
+          window.location.href = 'dict_name-p2.php?tableName=$tableName';
+        }
+        else
+        {
+          window.location.href = 'dict_name.php';
+        }
+         </script>";
     }
 }
 
@@ -26,7 +36,7 @@ if ($result) {
 <h2>Enter table name to be created</h2>
 <ul>
 <form name="dict_name" method="POST" >
-<li>Name:</li><li><input type="text" name="nameid" /></li>
+<li>Name:</li><li><input type="text" name="nameid" required/></li>
 <!-- <li>Address:</li><li><input type="text" name="addressid" /></li>
  --><br>
  <li><input type="submit" name="dictname-submit" value="Create Table" /></li>

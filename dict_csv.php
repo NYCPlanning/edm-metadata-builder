@@ -1,7 +1,7 @@
 <?php  
 $db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
 session_start();
-if(!empty('_POST[csv_submit]')) {
+if(isset($_POST['csv_submit'])) {
 // storing the file name and getting rid of the extension to use it as the table name 
    $namewithEx = $_FILES["csv"]["name"];
    $tableName = preg_replace('/.csv/', '', $namewithEx);
@@ -17,26 +17,48 @@ if ($_FILES["csv"]["size"] > 0) {
      
     //loop through the csv file and insert into database 
     $flag = true;
-  while (($data = fgetcsv($handle,10000,",","'")) !== FALSE) { 
-        //if ($data[0]) { 
-     if($flag) { $flag = false; continue; }
-           $query="CREATE TABLE $tableName (
+    $query="CREATE TABLE $tableName (
 column_name text,
 column_description text,
 code_def text,
 add_notes text
 )";
-      $res = pg_query($db, $query); 
-      if (res)
+      $res = pg_query($query); 
+      if ($res)
       {  
+  while (($data = fgetcsv($handle,10000,",")) !== FALSE) { 
+        //if ($data[0]) { 
+     if($flag) { $flag = false; continue; }
+//            $query="CREATE TABLE $tableName (
+// column_name text,
+// column_description text,
+// code_def text,
+// add_notes text
+// )";
+//       $res = pg_query($query); 
+//       if ($res)
+//       {  
       $query2 = "INSERT INTO ".$tableName." VALUES ('$data[0]','$data[1]','$data[2]','$data[3]')";
-      $res2 = pg_query($db, $query2);  }
+      $res2 = pg_query($db, $query2);  
+    }
+  }
       else 
       {
-        echo pg_last_error($db);
+        $message = "Table already exits. Do you want to drop the existing Table?";
+        echo "<script type='text/javascript'>var r = confirm('$message');
+        if(r == true)
+        {
+          window.location.href = 'drop.php?tableName=$tableName';
+        }
+        else
+        {
+          window.location.href = 'dict_csv.php';
+        }
+         </script>";
+
+
       }
-        //} 
-    } 
+        //}  
 
 
 fclose($handle);
@@ -121,12 +143,14 @@ if (!$link)
 {
     die('Error: Could not connect: ' . pg_last_error());
 }
-if(!empty('_POST[csv_submit]')) 
-{
+
+
 $query = "select * from ".$_SESSION['tableName'];
 
-$result = pg_query($query);
+if(isset($_POST['csv_submit'])) 
+{
 
+$result = pg_query($query);
 $i = 0;
 echo '<html><body><style>
 table, td, th {    
@@ -164,6 +188,7 @@ while ($row = pg_fetch_row($result))
 pg_free_result($result);
 
 echo '</table></body></html>';
+
 }
 ?> 
 

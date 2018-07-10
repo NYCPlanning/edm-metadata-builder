@@ -1,6 +1,15 @@
 <?php
 $db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
-$query = "INSERT INTO ReadMe VALUES ('$_POST[common_name]', 
+
+ $query1 = pg_query("SELECT common_name FROM ReadMe WHERE common_name = '$_POST[common_name]'");  
+      if (pg_num_rows($query1) > 0)
+      {
+        $message = "Table already exists. Please Enter different name in Common Name!";
+        echo "<script type='text/javascript'>alert('$message'); window.location.href = 'readme.php? echo common_name=$_POST[common_name]'; </script>";
+              }
+      else
+      {
+        $query = "INSERT INTO ReadMe VALUES ('$_POST[common_name]', 
 '$_POST[sde_name]',
 '$_POST[tags]',
 '$_POST[summary]',
@@ -21,6 +30,8 @@ $query = "INSERT INTO ReadMe VALUES ('$_POST[common_name]',
 '$_POST[distribution]')";
 
 $result = pg_query($query); 
+      }
+
 ?>
 
 

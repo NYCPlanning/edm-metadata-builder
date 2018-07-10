@@ -15,13 +15,13 @@ $result = pg_query($query);
 <h2>Enter values</h2>
 <form name="dict_data" action="dict_name-p2.php?tableName=<?php echo $tbname;?>" method="POST">
 <label>Column Name:</label>
-<input type="text" name="col_name" maxlength="30" value="" />
+<input type="text" name="col_name" maxlength="50" value="" required />
 <label>Column Description:</label> 
-<input type="text" name="col_des" maxlength="500" value="" />
+<input type="text" name="col_des" maxlength="1000" value="" />
 <label>Term, Acronym or Code Definition:</label> 
-<input type="text" name="cd" maxlength="100" value="" />
+<input type="text" name="cd" maxlength="500" value="" />
 <label>Additional Notes:</label> 
-<input type="text" name="add_notes" maxlength="500" value="" />
+<input type="text" name="add_notes" maxlength="1000" value="" />
 
 <input type="submit" name="submit" value="Insert Data" />
 <style type="text/css">

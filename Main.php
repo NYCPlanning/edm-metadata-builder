@@ -7,6 +7,9 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
     case 'SSec':  // Value of second radio button
       header('Location: Main_csv.php');
       break;
+    case 'SSSec':  // Value of second radio button
+      header('Location: Main_export.php');
+      break;
     default:
       break;
   }    
@@ -26,13 +29,15 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 
 <td align="center" class="bgcolor_02">
   <form action="" method="POST" >
-    <input type="radio" class="import" name="group" id="group" value="Sec"  />
+    <input type="radio" class="import" name="group" id="group" value="Sec" style="font-size:75%;color:green" />
     Form
-    <input type="radio" class="import" name="group" id="group2" value="SSec"  />
+    <input type="radio" class="import" name="group" id="group2" value="SSec" style="font-size:75%;color:green" />
     CSV
+    <input type="radio" class="import" name="group" id="group3" value="SSSec" style="font-size:75%;color:green" />
+    Export Data
     <br />
     <br>
-    <input type="submit" value="Done" />
+    <input type="submit" value="Done" style="font-size:75%;color:green" />
   </form>
   <style>
  form {

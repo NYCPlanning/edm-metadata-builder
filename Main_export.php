@@ -2,10 +2,10 @@
 if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
   switch ($_POST['group']) {
     case 'Sec':  // Value of first radio button
-      header('Location: readme.php');
+      header('Location: readme_index.php');
       break;
     case 'SSec':  // Value of second radio button
-      header('Location: dict_name.php');
+      header('Location: dict_index.php');
       break;
     default:
       break;
@@ -13,7 +13,6 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 }
 ?>
  
-
 <body style="background-color:ivory;"> 
 <br>
 <br>
@@ -23,21 +22,21 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 <br>
 <br>
 <br>
-<h2 style="text-align:center; vertical-align: middle; font-family:tahoma; color:black;">Importing data from Form</h2>
+<h2 style="text-align:center; vertical-align: middle; font-family:tahoma; color:black;">Exporting data </h2>
 
 
 
 <td align="center" class="bgcolor_03">
   <form action="" method="POST" >
-    <input type="radio" class="import" name="group" id="group" value="Sec"  style="font-size:75%;color:green"/>
+    <input type="radio" class="import" name="group" id="group" value="Sec" style="font-size:75%;color:green" />
     ReadMe
-    <input type="radio" class="import" name="group" id="group2" value="SSec" style="font-size:75%;color:green"  />
+    <input type="radio" class="import" name="group" id="group2" value="SSec" style="font-size:75%;color:green" />
     Data Dictionary
     <br />
     <br>
-    <input type="submit" value="Done" style="font-size:75%;color:green"/>
+    <input type="submit" value="Done" style="font-size:75%;color:green" />
   </form>
-  <style>
+ <style>
  form {
   text-align: center;
   vertical-align: middle;
@@ -49,4 +48,3 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 </style>
 </td>
 </body>
-
