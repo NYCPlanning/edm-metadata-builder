@@ -1,15 +1,9 @@
 <?php  
-
-//connect to the database $db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani"); 
-$db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
-
-// 
+include 'config.php';
     $file = $_FILES["csv"]["tmp_name"]; 
 
 if ($_FILES["csv"]["size"] > 0) { 
 
-    //get the csv file 
-    //$file = $_FILES[csv][tmp_name]; 
     $handle = fopen($file,"r"); 
      
     //loop through the csv file and insert into database 
@@ -19,36 +13,8 @@ if ($_FILES["csv"]["size"] > 0) {
       $res = pg_query($db, $query);      
         //} 
     } 
-
-//if (!$sth) {
-    //echo "<p>\nPDO::errorInfo():\n</p>";
-    //print_r($db->errorInfo());
-//} 
 fclose($handle);
-
-    
-
-//redirect 
  echo "<p><b>Records Imported</b></p>";
-
-// while (!feof($handle) ) {
-
-//     $text_file = fgetcsv($handle);
-
-//     //print_r($text_file);
-// $query=<<<eof
-// INSERT INTO info VALUES ('$text_file[0]','$text_file[1]')
-// eof;
-// $sth = $db->query($query);
-// }
-// if (!$sth) {
-//     echo "<p>\nPDO::errorInfo():\n</p>";
-//     print_r($db->errorInfo());
-// } 
-// fclose($handle);
-
-// echo "<p><b>Records Imported</b></p>";
-
 
 } 
 
@@ -58,22 +24,7 @@ fclose($handle);
 
 <?php
 
-$host = 'localhost';
-$port = '5432';
-$database = 'postgres';
-$user = 'amolivani';
-
-$connectString = 'host=' . $host . ' port=' . $port . ' dbname=' . $database . 
-  ' user=' . $user;
-
-
-$link = pg_connect ($connectString);
-if (!$link)
-{
-  die('Error: Could not connect: ' . pg_last_error());
-}
-
-
+include 'config.php';
 $query = 'select * from info';
 
 $result = pg_query($query);

@@ -1,11 +1,12 @@
 <?php
-$db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
+
+include 'config.php';
 
  $query1 = pg_query("SELECT common_name FROM ReadMe WHERE common_name = '$_POST[common_name]'");  
       if (pg_num_rows($query1) > 0)
       {
         $message = "Table already exists. Please Enter different name in Common Name!";
-        echo "<script type='text/javascript'>alert('$message'); window.location.href = 'readme.php? echo common_name=$_POST[common_name]'; </script>";
+        echo "<script type='text/javascript'>alert('$message'); window.location.href = 'readme.php? echo isset($_POST['common_name']) ? $_POST['common_name'] : ''' </script>";
               }
       else
       {
@@ -37,21 +38,7 @@ $result = pg_query($query);
 
 <?php
 
-$host = 'localhost';
-$port = '5432';
-$database = 'postgres';
-$user = 'amolivani';
-
-$connectString = 'host=' . $host . ' port=' . $port . ' dbname=' . $database . 
-	' user=' . $user;
-
-
-$link = pg_connect ($connectString);
-if (!$link)
-{
-	die('Error: Could not connect: ' . pg_last_error());
-}
-
+include 'config.php';
 
 $query = 'select * from ReadMe';
 

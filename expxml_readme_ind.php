@@ -1,6 +1,6 @@
 <?php
 include('sqltoxml.php');
-$db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
+include 'config.php';
 $tbname = $_GET['selection'];
 header('content-type: text/xml');
 header('Content-Disposition: attachment; filename='.$tbname.'.xml');
@@ -8,7 +8,7 @@ header('Content-Disposition: attachment; filename='.$tbname.'.xml');
 <DOCUMENT>
 <?php 
 $tbname = $_GET['selection'];
-sql2xml("SELECT * FROM readme WHERE common_name = '". $tbname ."'");?>
+sql2xml("SELECT * FROM readme WHERE sde_name = '". $tbname ."'");?>
 </DOCUMENT>
 
 

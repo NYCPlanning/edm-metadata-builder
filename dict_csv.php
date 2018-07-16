@@ -1,5 +1,5 @@
 <?php  
-$db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
+include 'config.php';
 session_start();
 if(isset($_POST['csv_submit'])) {
 // storing the file name and getting rid of the extension to use it as the table name 
@@ -129,21 +129,8 @@ fclose($handle);
 
 
 <?php
-$host = 'localhost';
-$port = '5432';
-$database = 'postgres';
-$user = 'amolivani';
-
-$connectString = 'host=' . $host . ' port=' . $port . ' dbname=' . $database . 
-    ' user=' . $user;
+include 'config.php';
 session_start();
-
-$link = pg_connect ($connectString);
-if (!$link)
-{
-    die('Error: Could not connect: ' . pg_last_error());
-}
-
 
 $query = "select * from ".$_SESSION['tableName'];
 

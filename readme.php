@@ -19,8 +19,8 @@ list-style: none;
 	}
 	</style>
 <form name="readme" action="readme-p.php" method="POST" >
-<li>Common Name:</li><li><input type="text" name="common_name" required/></li>
-<li>SDE Name:</li><li><input type="text" name="sde_name" /></li>
+<li>Common Name:</li><li><input type="text" name="common_name" /></li>
+<li>SDE Name:</li><li><input type="text" name="sde_name" required/></li>
 <li>Tags:</li><li><input type="text" name="tags" /></li>
 <li>Summary:</li><li><input type="text" name="summary" /></li>
 <li>Description:</li><li><input type="text" name="description" /></li>

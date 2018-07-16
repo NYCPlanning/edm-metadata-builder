@@ -1,5 +1,5 @@
 <?php
-    $dbname = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
+include 'config.php';
 
     $sql = "SELECT c.relname AS Tables_in FROM pg_catalog.pg_class c
         LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace

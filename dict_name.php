@@ -1,6 +1,6 @@
 <?php
 
-$db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
+include 'config.php';
 $tableName = $_POST['nameid'];
 
 if (!empty($_POST['dictname-submit'])) {

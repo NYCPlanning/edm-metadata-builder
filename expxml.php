@@ -1,5 +1,6 @@
 <?php
 include('sqltoxml.php');
+include 'config.php';
 header('content-type: text/xml');
 header('Content-Disposition: attachment; filename=ReadMe.xml');
 ?>

@@ -1,17 +1,7 @@
 <?php
-/**
- * sql2xml prints structured XML
- *
-  @param string  $sql       - SQL statement
- * @param string  $structure - XML hierarchy
- */
 function sql2xml($sql, $structure = 0) {
-    // init variables for row processing
     $row_current = $row_previous = null;
-    // set MySQL username/password and connect to the database
-    //$db_cn = pg_close('localhost', 'username', 'password');
-    //mysql_select_db('test', $db_cn);
-    $db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
+include 'config.php';
     $result = pg_query($sql);
     // get number of columns in result
     $ncols = pg_num_fields($result);

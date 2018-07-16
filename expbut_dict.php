@@ -1,6 +1,6 @@
 <?php
 
-$db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
+include 'config.php';
 $tbname = $_GET['tableName'];
  // Connect to the Database
 if (isset($_POST["Export"])) {

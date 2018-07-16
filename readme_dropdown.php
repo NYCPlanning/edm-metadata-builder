@@ -1,7 +1,7 @@
 <?php
-    $dbname = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
+include 'config.php';
 
-    $sql = "SELECT common_name FROM ReadMe";
+    $sql = "SELECT sde_name FROM ReadMe";
     $result = pg_query($sql);
 
     if (!$result) {

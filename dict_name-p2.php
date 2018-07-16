@@ -1,7 +1,7 @@
 <?php
 
 $tbname = $_GET['tableName'];
-$db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
+include 'config.php';
 if (!empty($_POST['submit'])) {
 $query = "INSERT INTO ".$tbname." VALUES ('$_POST[col_name]','$_POST[col_des]','$_POST[cd]','$_POST[add_notes]')";
 $result = pg_query($query); 
@@ -41,20 +41,7 @@ input, label {
 
 <?php
 $tbname = $_GET['tableName'];
-$host = 'localhost';
-$port = '5432';
-$database = 'postgres';
-$user = 'amolivani';
-
-$connectString = 'host=' . $host . ' port=' . $port . ' dbname=' . $database . 
-	' user=' . $user;
-
-
-$link = pg_connect ($connectString);
-if (!$link)
-{
-	die('Error: Could not connect: ' . pg_last_error());
-}
+include 'config.php';
 
 $query = "select * from ".$tbname;
 
