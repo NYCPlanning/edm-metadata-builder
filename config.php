@@ -10,5 +10,8 @@ server with default setting (user 'root' with no password) */
 //  Attempt to connect to MySQL database 
 // //$link = pg_connect(DB_SERVER, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD );
 // $link = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
-$db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
+// $db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
+
+$db = pg_connect(getenv("DATABASE_URL"));
+
 ?>
