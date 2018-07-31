@@ -6,7 +6,7 @@ include 'config.php';
       if (pg_num_rows($query1) > 0)
       {
         $message = "Table already exists. Please Enter different name in Common Name!";
-        echo "<script type='text/javascript'>alert('$message'); window.location.href = 'readme.php? echo isset($_POST['common_name']) ? $_POST['common_name'] : ''' </script>";
+        echo "<script type='text/javascript'>alert('$message'); window.location.href = 'readme.php?' </script>";
               }
       else
       {
@@ -99,14 +99,7 @@ echo '</table></body></html>';
                             </div>
                    </div>                    
             </form>           
-
-            <form class="form-horizontal" action="expxml.php" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <div class="form-group">
-                            <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Expor2xml" class="btn btn-success" value="export to xml"/>
-                            </div>
-                   </div>                    
-            </form>           
+        
  </div>
 </div>
 </div>
