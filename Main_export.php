@@ -22,7 +22,7 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 <br>
 <br>
 <br>
-<h2 style="text-align:center; vertical-align: middle; font-family:tahoma; color:black;">Exporting data </h2>
+<h2 style="text-align:center; vertical-align: middle; font-family:tahoma; color:black;">Exporting Metadata </h2>
 
 
 

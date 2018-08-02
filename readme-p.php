@@ -1,14 +1,16 @@
 <?php
 
-include 'config.php';
+include 'config.php'; //including the configuration file to connect to the database
+
+//passing the values taken from readme.php as '$_POST[]'
 
  $query1 = pg_query("SELECT common_name FROM ReadMe WHERE common_name = '$_POST[common_name]'");  
-      if (pg_num_rows($query1) > 0)
+      if (pg_num_rows($query1) > 0) //checking if the dataset already exsits and prompting to enter a different Common Name
       {
         $message = "Table already exists. Please Enter different name in Common Name!";
         echo "<script type='text/javascript'>alert('$message'); window.location.href = 'readme.php?' </script>";
               }
-      else
+      else //if the dataset record does not exits, then adding the values to the ReadMe file
       {
         $query = "INSERT INTO ReadMe VALUES ('$_POST[common_name]', 
 '$_POST[sde_name]',
@@ -31,7 +33,7 @@ include 'config.php';
 '$_POST[distribution]')";
 
 $result = pg_query($query); 
-      }
+      } 
 
 ?>
 

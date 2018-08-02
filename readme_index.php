@@ -45,6 +45,14 @@ echo $tables;
                             </div>
                    </div>                    
             </form> 
+
+  <form class="form-horizontal" action="expbut_readme.php?selection=<?php echo $selection;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                  <div class="form-group">
+                            <div class="col-md-4 col-md-offset-4">
+                                <input type="submit" name="Export" class="btn btn-success" value="export to csv" style="font-size:65%;color:green"/>
+                            </div>
+                   </div>                    
+            </form> 
             <style>
  form {
   text-align: center;
