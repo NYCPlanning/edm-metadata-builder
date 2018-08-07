@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!-- this php page creates a form for ReadMe where user inserts data to be accepted on submission 
+ --><!DOCTYPE html>
 <head>
 <title>Insert data in ReadMe</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,7 +21,7 @@ list-style: none;
 	</style>
 <form name="readme" action="readme-p.php" method="POST" >
 <li>Common Name:</li><li><input type="text" name="common_name" /></li>
-<li>SDE Name:</li><li><input type="text" name="sde_name" required/></li>
+<li>SDE Name:</li><li><input type="text" name="sde_name" required/></li>  <!-- this field is made mandatory by adding 'required' -->
 <li>Tags:</li><li><input type="text" name="tags" /></li>
 <li>Summary:</li><li><input type="text" name="summary" /></li>
 <li>Description:</li><li><input type="text" name="description" /></li>

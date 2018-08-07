@@ -1,26 +1,23 @@
 <?php  
-include 'config.php';
+include 'config.php'; //including the db connection details
 
 if(isset($_POST['csv_submit'])) {
-// 
+
+//get the csv file 
+
     $file = $_FILES["csv"]["tmp_name"]; 
 
 if ($_FILES["csv"]["size"] > 0) { 
-
-    //get the csv file 
-    //$file = $_FILES[csv][tmp_name]; 
-    $handle = fopen($file,"r"); 
-     
-    //loop through the csv file and insert into database 
+  
+    $handle = fopen($file,"r");    
     $flag = true;
-  while (($data = fgetcsv($handle,10000,",")) !== FALSE) { 
-        //if ($data[0]) { 
+
+    //loop through the csv file and insert into database 
+
+  while (($data = fgetcsv($handle,10000,",")) !== FALSE) {   
      if($flag) { $flag = false; continue; }
            $query="INSERT INTO ReadMe VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]','$data[11]','$data[12]','$data[13]','$data[14]','$data[15]','$data[16]','$data[17]','$data[18]')";
       $res = pg_query($db, $query);    
-
-
-        //} 
     } 
 fclose($handle);
 
@@ -28,9 +25,6 @@ fclose($handle);
  }
 ?>
  
-
-
-
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
@@ -49,20 +43,23 @@ fclose($handle);
         <div class="container">
             <div class="row">
 <br>
-                  <form class="form-horizontal" action="template.php" method="post" name="download_template" enctype="multipart/form-data">
+
+                <!-- code for downloading template  -->
+
+                <form class="form-horizontal" action="template.php" method="post" name="download_template" enctype="multipart/form-data">
                          <div class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton">Template</label>
                             <div class="col-md-4">
                                 <input type="submit" name="template_submit" class="btn btn-success" value="Download"/>
                             </div>
-                        </div>  
-                    </form>
+                         </div>  
+                </form>
+
+                <!-- code for selecting a file and uploading it on submission -->
  
                 <form class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
                     <fieldset>
  
-                  
-                        <!-- File Button -->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="filebutton">Select File</label>
                             <div class="col-md-4">
@@ -70,7 +67,6 @@ fclose($handle);
                             </div>
                         </div>
  
-                        <!-- Button -->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton">Submit data</label>
                             <div class="col-md-4">
@@ -93,6 +89,9 @@ fclose($handle);
 
 
 <?php
+
+//the following php code is for displaying the table contents on the same page
+
 include 'config.php';
 
 $query = "select * from ReadMe";
@@ -100,6 +99,9 @@ $query = "select * from ReadMe";
 $result = pg_query($query);
 
 $i = 0;
+
+// code for creating a table structure using css
+
 echo '<html><body><style>
 table, td, th {    
     border: 0.5px solid #ddd;
@@ -109,6 +111,9 @@ table, td, th {
 th, td {
     padding: 10px;
 } </style><table><tr>';
+
+//fetching the column names of the db table
+
 while ($i < pg_num_fields($result))
 {
     $fieldName = pg_field_name($result, $i);
@@ -117,6 +122,8 @@ while ($i < pg_num_fields($result))
 }
 echo '</tr>';
 $i = 0;
+
+//fetching and displaying the contents of the db table
 
 while ($row = pg_fetch_row($result)) 
 {
@@ -138,6 +145,7 @@ pg_free_result($result);
 echo '</table></body></html>';
 ?> 
 
+<!-- html code for the export to excel button with form action -->
 
 <html>
     <div id="wrap">
@@ -153,13 +161,7 @@ echo '</table></body></html>';
                    </div>                    
             </form>           
 
-            <form class="form-horizontal" action="expxml.php" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <div class="form-group">
-                            <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Expor2xml" class="btn btn-success" value="export to xml"/>
-                            </div>
-                   </div>                    
-            </form>           
+                  
  </div>
 </div>
 </div>

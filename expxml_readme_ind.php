@@ -1,11 +1,18 @@
 <?php
-include 'config.php';
+
+//this code exports the table into the Esri accepted xml format
+
+include 'config.php'; //connect to database
 $tbname = $_GET['selection'];
+
+//the file extension to be downloaded and the file name is passed through the header 
 header('content-type: text/xml');
 header('Content-Disposition: attachment; filename='.$tbname.'.xml');
 $tbname = $_GET['selection'];
 
 if (isset($_POST["Expor2xml"])) {
+
+//creating a temporary table temp so as to get the xml in the Esri accepatble format
 
 $r = "CREATE TABLE temp AS 
 		(SELECT common_name AS \"resTitle\", tags AS \"keyword\", summary AS \"idPurp\", description AS \"idAbs\", credits AS \"idCredit\", use_limitations AS \"useLimit\", date_underlying_data AS \"otherCitDet\", version AS \"idVersion\", '2018'::text AS \"CreaDate\", '00:00'::text AS \"CreaTime\", '1.0'::text AS \"ArcGISFormat\", 'TRUE'::text AS \"SyncOnce\", 'ISO 19139 Metadata Implementation Specification'::text AS \"ArcGISstyle\", '150000000'::text AS \"minScale\", '5000'::text AS \"maxScale\"
@@ -13,7 +20,10 @@ $r = "CREATE TABLE temp AS
 				WHERE sde_name = '".$tbname."')";
 $table = pg_query($r);
 
-$fp = fopen("php://output", 'w');
+$fp = fopen("php://output", 'w'); //opening the xml fille to be downloaded
+
+//the following query uses Postgres XML functions. '\' is added to maintain Mixed Case.
+
 $q = "SELECT xmlelement(name metadata, 
 XMLELEMENT(name \"Esri\", XMLAGG (XMLFOREST (\"CreaDate\", \"CreaTime\",\"ArcGISFormat\", \"SyncOnce\", \"ArcGISstyle\" )),
        xmlelement(
@@ -59,11 +69,15 @@ XMLELEMENT(name \"Esri\", XMLAGG (XMLFOREST (\"CreaDate\", \"CreaTime\",\"ArcGIS
 FROM temp";
 $query = pg_query($q);
 
+//fetching the results and writing it into the xml file opened
+
 while($row = pg_fetch_row($query)) {
     echo $row[0];
 }
 
 fclose($fp);
+
+//dropping the temporary table
 
 $d = "DROP TABLE temp";
 

@@ -1,21 +1,25 @@
 <?php
 
-include 'config.php';
-$tableName = $_POST['nameid'];
+include 'config.php'; //inluding the db connection 
+$tableName = $_POST['nameid']; //accepting the table name entered in the html form below as $tableName variable
 
-if (!empty($_POST['dictname-submit'])) {
+if (!empty($_POST['dictname-submit']))  { //condition only if submit button is clicked
+//creating table with the table name inputted
 $query = "CREATE TABLE $tableName (
 column_name text,
 column_description text,
 code_def text,
 add_notes text
 )";
-$result = pg_query($query);
+$result = pg_query($query); //executing the query
 if ($result) {
-        header("Location: dict_name-p2.php?tableName=".$tableName);
+        header("Location: dict_name-p2.php?tableName=".$tableName); //if there is no error in query execution it passes the table name in the header as a variable to the next php page 
     }
     else{
-        $message = "Table already exits. Do you want to insert data into the existing Table?";
+        //if the query fails, it means it threw an error that the table already exits 
+        $message = "Table already exits. Do you want to insert data into the existing Table?"; //popup for error
+        //checking if the user wants to insert data in the same table by clicking ok or going back to change the table name by clicking cancel
+        //if the user wants to insert in the same table then the table name is passed as a variable value in the header to the next php page else it stays on the same page to enter new table name.
         echo "<script type='text/javascript'>var r = confirm('$message');
         if(r == true)
         {
@@ -23,7 +27,7 @@ if ($result) {
         }
         else
         {
-          window.location.href = 'dict_name.php';
+          window.location.href = 'dict_name.php'; 
         }
          </script>";
     }
@@ -31,14 +35,14 @@ if ($result) {
 
 ?>
 
-<!DOCTYPE html>
+<!-- html form to enter the data dictionary table name to be created
+ --><!DOCTYPE html>
 <body style="background-color:ivory;"> 
 <h2>Enter table name to be created</h2>
 <ul>
 <form name="dict_name" method="POST" >
 <li>Name:</li><li><input type="text" name="nameid" required/></li>
-<!-- <li>Address:</li><li><input type="text" name="addressid" /></li>
- --><br>
+ <br>
  <li><input type="submit" name="dictname-submit" value="Create Table" /></li>
  <style>
 li {
@@ -49,17 +53,6 @@ list-style: none;
 </ul>
 
 
-
-
-
-
-<!-- // if (empty($_POST['dictname-submit'])) {
-// if (!empty($_POST['submit'])) {
-// $db = pg_connect("host=localhost port=5432 dbname=postgres user=amolivani");
-// $query = "INSERT INTO $_POST[nameid] VALUES ('$_POST[col_name]','$_POST[col_des]','$_POST[cd]','$_POST[add_notes]')";
-// $result = pg_query($query); 
-// }
-// } -->
 
 
 

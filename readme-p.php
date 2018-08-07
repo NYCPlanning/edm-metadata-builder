@@ -1,6 +1,6 @@
 <?php
 
-include 'config.php'; //including the configuration file to connect to the database
+include 'config.php'; //including the configuration file that has the db connection details
 
 //passing the values taken from readme.php as '$_POST[]'
 
@@ -32,7 +32,7 @@ include 'config.php'; //including the configuration file to connect to the datab
 '$_POST[future_plans]',
 '$_POST[distribution]')";
 
-$result = pg_query($query); 
+$result = pg_query($query); //executing the query
       } 
 
 ?>
@@ -40,13 +40,19 @@ $result = pg_query($query);
 
 <?php
 
+//the following php code is for displaying the table contents on the same page
+
 include 'config.php';
 
 $query = 'select * from ReadMe';
 
 $result = pg_query($query);
 
+
 $i = 0;
+
+// code for creating a table structure using css
+
 echo '<html><body><style>
 table, td, th {    
     border: 0.5px solid #ddd;
@@ -56,35 +62,44 @@ table, td, th {
 th, td {
     padding: 10px;
 } </style><table><tr>';
+
+
+//fetching the column names of the db table
+
 while ($i < pg_num_fields($result))
 {
-	$fieldName = pg_field_name($result, $i);
-	echo '<th>' . $fieldName . '</th>';
-	$i = $i + 1;
+  $fieldName = pg_field_name($result, $i);
+  echo '<th>' . $fieldName . '</th>';
+  $i = $i + 1;
 }
 echo '</tr>';
 $i = 0;
 
+
+//fetching and displaying the contents of the db table
+
+
 while ($row = pg_fetch_row($result)) 
 {
-	echo '<tr>';
-	$count = count($row);
-	$y = 0;
-	while ($y < $count)
-	{
-		$c_row = current($row);
-		echo '<td>' . $c_row . '</td>';
-		next($row);
-		$y = $y + 1;
-	}
-	echo '</tr>';
-	$i = $i + 1;
+  echo '<tr>';
+  $count = count($row);
+  $y = 0;
+  while ($y < $count)
+  {
+    $c_row = current($row);
+    echo '<td>' . $c_row . '</td>';
+    next($row);
+    $y = $y + 1;
+  }
+  echo '</tr>';
+  $i = $i + 1;
 }
 pg_free_result($result);
 
 echo '</table></body></html>';
 ?>
 
+<!-- html code for the export to excel button with form action -->
 
 
 <html>
@@ -92,7 +107,7 @@ echo '</table></body></html>';
     <div id="wrap">
         <div class="container">
             <div class="row">
-	<br>
+  <br>
             <form class="form-horizontal" action="expbut.php" method="post" name="upload_excel"   
                       enctype="multipart/form-data">
                   <div class="form-group">

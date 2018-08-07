@@ -1,3 +1,5 @@
+<!-- code for getting the dropdown list of all the data dictionary tables in the database that begin with dd_
+ -->
 <?php
 include 'config.php';
 

@@ -1,6 +1,6 @@
 <?php 
 
-include_once 'dict_dropdown.php'; 
+include_once 'dict_dropdown.php'; //inlcuding the dropdown list php file from where the user will select the data dictionary table to be exported from the dropdown menu. 
 
 ?> 
 <body style="background-color:ivory;"> 
@@ -38,6 +38,8 @@ echo $tables;
  $tableName = $_POST["Tables"];
  ?>
 
+<!-- code to export the data dictionary table as an xml or csv file
+ -->
  <form class="form-horizontal" action="expxml_dict.php?tableName=<?php echo $tableName;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">

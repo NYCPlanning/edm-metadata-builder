@@ -6,15 +6,16 @@ $tbname = $_GET['tableName'];
 if (isset($_POST["Export"])) {
 //get records from database
 header('Content-Type: text/csv;');
-header('Content-Disposition: attachment; filename='.$tbname.'.csv');
+header('Content-Disposition: attachment; filename='.$tbname.'.csv'); //this dowloads the csv file with the given name
+
+//opening the csv file to be downloaded
 $fp = fopen("php://output", "w");
 fputcsv($fp, array('common_name','column_description','code_def','add_notes'));
 
 $q = 'select * from '.$tbname;
 $query = pg_query($q);
 
-//$filename = "ReadMe_" . date('Y-m-d') . ".csv";
-
+//fetching values to write into the csv file
 while($row = pg_fetch_assoc($query)) {
     fputcsv($fp, $row);
 }

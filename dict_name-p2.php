@@ -1,13 +1,14 @@
 <?php
 
-$tbname = $_GET['tableName'];
-include 'config.php';
+$tbname = $_GET['tableName']; //getting the variable value of the table name that was created and passed through the header by the previous php page 
+include 'config.php'; //including the db connection details
 if (!empty($_POST['submit'])) {
 $query = "INSERT INTO ".$tbname." VALUES ('$_POST[col_name]','$_POST[col_des]','$_POST[cd]','$_POST[add_notes]')";
 $result = pg_query($query); 
 }
 ?>
 
+<!-- the following html code creates a form for Data Dictionary -->
 
 <!DOCTYPE html>
 <head>
@@ -40,7 +41,10 @@ input, label {
 
 
 <?php
-$tbname = $_GET['tableName'];
+
+//the following php code is for displaying the table contents on the same page
+
+$tbname = $_GET['tableName']; //getting the variable value of the table name that was created and passed through the header by the previous php page 
 include 'config.php';
 
 $query = "select * from ".$tbname;
@@ -48,6 +52,9 @@ $query = "select * from ".$tbname;
 $result = pg_query($query);
 
 $i = 0;
+
+// code for creating a table structure using css
+
 echo '<html><body><style>
 table, td, th {    
     border: 0.5px solid #ddd;
@@ -57,6 +64,9 @@ table, td, th {
 th, td {
     padding: 10px;
 } </style><table align="center"><tr>';
+
+//fetching the column names of the db table
+
 while ($i < pg_num_fields($result))
 {
 	$fieldName = pg_field_name($result, $i);
@@ -65,6 +75,8 @@ while ($i < pg_num_fields($result))
 }
 echo '</tr>';
 $i = 0;
+
+//fetching and displaying the contents of the db table
 
 while ($row = pg_fetch_row($result)) 
 {
@@ -85,6 +97,9 @@ pg_free_result($result);
 
 echo '</table></body></html>';
 ?> 
+
+
+<!-- html code for the export to excel and xml button with form action -->
 
 
 <html>

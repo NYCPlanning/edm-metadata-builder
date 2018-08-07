@@ -1,6 +1,6 @@
 <?php 
 
-include ('readme_dropdown.php'); 
+include ('readme_dropdown.php'); //this includes the php file that has the code for the dropdown menu of sde_names of the individual records of the readme
 
 ?> 
 <body style="background-color:ivory;"> 
@@ -25,7 +25,9 @@ include ('readme_dropdown.php');
   font-size:150%;
 }
 </style>
-<?php 
+<?php
+
+//displaying the dropdown list 
 
 echo $tables;
 ?>
@@ -38,6 +40,8 @@ echo $tables;
  $selection = $_POST["Tables"];
  ?>
 
+<!-- code for exporting the readme data as xml and csv files
+ -->
  <form class="form-horizontal" action="expxml_readme_ind.php?selection=<?php echo $selection;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">

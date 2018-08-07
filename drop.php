@@ -1,4 +1,7 @@
 <?php
+
+//this code is to drop the table while uploading data through a csv file and it already exists. If the user clicks ok on the popup of dict_csv, it redirects to this page to drop the table
+
 include 'config.php';
 $tbname = $_GET['tableName'];
 $query = "DROP TABLE ".$tbname;

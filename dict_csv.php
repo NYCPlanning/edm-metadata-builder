@@ -2,42 +2,37 @@
 include 'config.php';
 session_start();
 if(isset($_POST['csv_submit'])) {
+
 // storing the file name and getting rid of the extension to use it as the table name 
+
    $namewithEx = $_FILES["csv"]["name"];
    $tableName = preg_replace('/.csv/', '', $namewithEx);
    $_SESSION['tableName'] = $tableName;
-// 
+
+   //get the csv file 
+
     $file = $_FILES["csv"]["tmp_name"]; 
 
 if ($_FILES["csv"]["size"] > 0) { 
 
-    //get the csv file 
-    //$file = $_FILES[csv][tmp_name]; 
     $handle = fopen($file,"r"); 
      
-    //loop through the csv file and insert into database 
+    //loop through the csv file and create table with 
+
     $flag = true;
     $query="CREATE TABLE $tableName (
-column_name text,
-column_description text,
-code_def text,
-add_notes text
-)";
+            column_name text,
+            column_description text,
+            code_def text,
+            add_notes text
+          )";
       $res = pg_query($query); 
       if ($res)
-      {  
-  while (($data = fgetcsv($handle,10000,",")) !== FALSE) { 
-        //if ($data[0]) { 
+      { 
+
+      //if the query executes without any errors then insert data into the table created else throw an error that the table already exists and you can either drop it or upload the csv with a different name 
+     while (($data = fgetcsv($handle,10000,",")) !== FALSE) { 
      if($flag) { $flag = false; continue; }
-//            $query="CREATE TABLE $tableName (
-// column_name text,
-// column_description text,
-// code_def text,
-// add_notes text
-// )";
-//       $res = pg_query($query); 
-//       if ($res)
-//       {  
       $query2 = "INSERT INTO ".$tableName." VALUES ('$data[0]','$data[1]','$data[2]','$data[3]')";
       $res2 = pg_query($db, $query2);  
     }
@@ -58,7 +53,6 @@ add_notes text
 
 
       }
-        //}  
 
 
 fclose($handle);
@@ -85,6 +79,7 @@ fclose($handle);
         <div class="container">
             <div class="row">
 <br>
+                  <!-- code for downloading the template  -->
 
                   <form class="form-horizontal" action="template_dict.php" method="post" name="download_template" enctype="multipart/form-data">
                          <div class="form-group">
@@ -95,11 +90,12 @@ fclose($handle);
                         </div>  
                     </form>
  
+                
+                <!-- code for selecting a file and uploading it on submission -->
+
                 <form class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
                     <fieldset>
  
-                  
-                        <!-- File Button -->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="filebutton">Select File</label>
                             <div class="col-md-4">
@@ -107,7 +103,7 @@ fclose($handle);
                             </div>
                         </div>
  
-                        <!-- Button -->
+                        
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton">Submit data</label>
                             <div class="col-md-4">
@@ -129,16 +125,22 @@ fclose($handle);
 
 
 <?php
-include 'config.php';
-session_start();
 
-$query = "select * from ".$_SESSION['tableName'];
+//the following php code is for displaying the table contents on the same page
+
+include 'config.php';
+session_start(); //getting the variable value of the table name that was created and passed through the header by the previous php page 
+
+$query = "select * from ".$_SESSION['tableName']; 
 
 if(isset($_POST['csv_submit'])) 
 {
 
 $result = pg_query($query);
 $i = 0;
+
+// code for creating a table structure using css
+
 echo '<html><body><style>
 table, td, th {    
     border: 0.5px solid #ddd;
@@ -148,6 +150,9 @@ table, td, th {
 th, td {
     padding: 10px;
 } </style><table align="center"><tr>';
+
+//fetching the column names of the db table
+
 while ($i < pg_num_fields($result))
 {
     $fieldName = pg_field_name($result, $i);
@@ -156,6 +161,8 @@ while ($i < pg_num_fields($result))
 }
 echo '</tr>';
 $i = 0;
+
+//fetching and displaying the contents of the db table
 
 while ($row = pg_fetch_row($result)) 
 {
@@ -178,6 +185,9 @@ echo '</table></body></html>';
 
 }
 ?> 
+
+
+<!-- html code for the export to excel and xml button with form action -->
 
 
 <html>
