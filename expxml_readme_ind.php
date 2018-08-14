@@ -15,7 +15,7 @@ if (isset($_POST["Expor2xml"])) {
 //creating a temporary table temp so as to get the xml in the Esri accepatble format
 
 $r = "CREATE TABLE temp AS 
-		(SELECT common_name AS \"resTitle\", tags AS \"keyword\", summary AS \"idPurp\", description AS \"idAbs\", credits AS \"idCredit\", use_limitations AS \"useLimit\", date_underlying_data AS \"otherCitDet\", version AS \"idVersion\", '2018'::text AS \"CreaDate\", '00:00'::text AS \"CreaTime\", '1.0'::text AS \"ArcGISFormat\", 'TRUE'::text AS \"SyncOnce\", 'ISO 19139 Metadata Implementation Specification'::text AS \"ArcGISstyle\", '150000000'::text AS \"minScale\", '5000'::text AS \"maxScale\"
+		(SELECT common_name AS \"resTitle\", tags AS \"keyword\", summary AS \"idPurp\", description AS \"idAbs\", credits AS \"idCredit\", use_limitations AS \"useLimit\", date_underlying_data AS \"otherCitDet\", version AS \"idVersion\", (SELECT b.tag FROM readme a, maintfreq b WHERE a.update_freq = b.maintfreq AND a.sde_name = '".$tbname."')::text AS \"MaintFreq\",'2018'::text AS \"CreaDate\", '00:00'::text AS \"CreaTime\", '1.0'::text AS \"ArcGISFormat\", 'TRUE'::text AS \"SyncOnce\", 'ISO 19139 Metadata Implementation Specification'::text AS \"ArcGISstyle\", '150000000'::text AS \"minScale\", '5000'::text AS \"maxScale\"
 				FROM readme
 				WHERE sde_name = '".$tbname."')";
 $table = pg_query($r);
@@ -47,7 +47,7 @@ XMLELEMENT(name \"Esri\", XMLAGG (XMLFOREST (\"CreaDate\", \"CreaTime\",\"ArcGIS
        name \"resMaint\",
        xmlelement(
        name \"maintFreq\",
-       xmlelement(name \"MaintFreqCd\", xmlattributes('005' AS value))))),
+       xmlelement(name \"MaintFreqCd\", xmlattributes(\"MaintFreq\" AS value))))),
        xmlelement(
        name \"mdHrLv\",
        xmlelement(name \"ScopeCd\", xmlattributes('005' AS value))),
@@ -62,11 +62,12 @@ XMLELEMENT(name \"Esri\", XMLAGG (XMLFOREST (\"CreaDate\", \"CreaTime\",\"ArcGIS
        name \"mdMaint\",
        xmlelement(
        name \"maintFreq\",
-       xmlelement(name \"MaintFreqCd\", xmlattributes('005' AS value))))
+       xmlelement(name \"MaintFreqCd\", xmlattributes(\"MaintFreq\" AS value))))
 
 )
 
-FROM temp";
+FROM temp
+GROUP BY \"MaintFreq\" ";
 $query = pg_query($q);
 
 //fetching the results and writing it into the xml file opened

@@ -1,7 +1,6 @@
 <?php
 
 include 'config.php'; //including the configuration file that has the db connection details
-
 //passing the values taken from readme.php as '$_POST[]'
 
  $query1 = pg_query("SELECT common_name FROM ReadMe WHERE common_name = '$_POST[common_name]'");  
@@ -12,6 +11,7 @@ include 'config.php'; //including the configuration file that has the db connect
               }
       else //if the dataset record does not exits, then adding the values to the ReadMe file
       {
+        $selection = $_POST['update_freq']; //accepting the update frequency selection from the dropdown on previous php page as a variable
         $query = "INSERT INTO ReadMe VALUES ('$_POST[common_name]', 
 '$_POST[sde_name]',
 '$_POST[tags]',
@@ -21,7 +21,7 @@ include 'config.php'; //including the configuration file that has the db connect
 '$_POST[data_engineer]',
 '$_POST[credits]',
 '$_POST[use_limitations]',
-'$_POST[update_freq]',
+'$selection',
 '$_POST[date_last_update]',
 '$_POST[date_underlying_data]',
 '$_POST[data_source]',
