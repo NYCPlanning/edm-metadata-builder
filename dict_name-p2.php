@@ -3,7 +3,7 @@
 $tbname = $_GET['tableName']; //getting the variable value of the table name that was created and passed through the header by the previous php page 
 include 'config.php'; //including the db connection details
 if (!empty($_POST['submit'])) {
-$query = "INSERT INTO ".$tbname." VALUES ('$_POST[col_name]','$_POST[col_des]','$_POST[cd]','$_POST[add_notes]')";
+$query = "INSERT INTO ".$tbname." VALUES ('$_POST[col_name]','$_POST[col_des]','$_POST[cd]','$_POST[add_notes]', '$_POST[internal_notes]')";
 $result = pg_query($query); 
 }
 ?>
@@ -23,12 +23,15 @@ $result = pg_query($query);
 <input type="text" name="cd" maxlength="500" value="" />
 <label>Additional Notes:</label> 
 <input type="text" name="add_notes" maxlength="1000" value="" />
+<label>Internal Notes:</label> 
+<input type="text" name="internal_notes" maxlength="1000" value="" />
 
 <input type="submit" name="submit" value="Insert Data" />
 <style type="text/css">
-input, label {
+input, label{
     float:left;
     margin:5px;
+    width: 90px;
 }
 </style>
 </form>
@@ -101,7 +104,8 @@ echo '</table></body></html>';
 
 <!-- html code for the export to excel and xml button with form action -->
 
-
+<br>
+<br>
 <html>
 <body>
     <div id="wrap">

@@ -13,7 +13,7 @@ include_once 'dict_dropdown.php'; //inlcuding the dropdown list php file from wh
 <br>
 <br>
 <h2 style="text-align:center; vertical-align: middle; font-family:tahoma; color:black;">Select Table to be exported </h2>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" onchange="this.form.submit();">
 <select name="Tables" id="ddTables" style="width:200px;font-size:65%;">
 	 <option selected>Select</option>
  <style>
@@ -31,15 +31,17 @@ echo $tables;
 ?>
      </select>
 
-     <input type="submit" id="tableSubmit" value="Submit" style="font-size:65%;"/>
+    <!--  <input type="submit" id="tableSubmit" value="Submit" style="font-size:65%;"/>
      </form>
-
+ -->
 <?php
  $tableName = $_POST["Tables"];
  ?>
 
 <!-- code to export the data dictionary table as an xml or csv file
  -->
+ <br>
+ <br>
  <form class="form-horizontal" action="expxml_dict.php?tableName=<?php echo $tableName;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">

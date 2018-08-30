@@ -9,7 +9,8 @@ $query = "CREATE TABLE $tableName (
 column_name text,
 column_description text,
 code_def text,
-add_notes text
+add_notes text,
+internal_notes text
 )";
 $result = pg_query($query); //executing the query
 if ($result) {

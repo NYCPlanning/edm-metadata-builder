@@ -14,10 +14,12 @@ if (isset($_POST["Expor2xml"])) {
 
 //creating a temporary table temp so as to get the xml in the Esri accepatble format
 
-$r = "CREATE TABLE temp AS 
-		(SELECT common_name AS \"resTitle\", tags AS \"keyword\", summary AS \"idPurp\", description AS \"idAbs\", credits AS \"idCredit\", use_limitations AS \"useLimit\", date_underlying_data AS \"otherCitDet\", version AS \"idVersion\", (SELECT b.tag FROM readme a, maintfreq b WHERE a.update_freq = b.maintfreq AND a.sde_name = '".$tbname."')::text AS \"MaintFreq\",'2018'::text AS \"CreaDate\", '00:00'::text AS \"CreaTime\", '1.0'::text AS \"ArcGISFormat\", 'TRUE'::text AS \"SyncOnce\", 'ISO 19139 Metadata Implementation Specification'::text AS \"ArcGISstyle\", '150000000'::text AS \"minScale\", '5000'::text AS \"maxScale\"
-				FROM readme
-				WHERE sde_name = '".$tbname."')";
+$r = "CREATE TABLE temp AS
+       (
+       SELECT common_name AS title, tags_guide||tags_sde AS themekey , summary||summary_update_date AS purpose, description||description_data_loc AS abstract, credits AS datacred, genconst AS useconst, legconst AS distliab, update_freq AS update, version AS edition
+              FROM readme
+		WHERE sde_name = '".$tbname."')";
+
 $table = pg_query($r);
 
 $fp = fopen("php://output", 'w'); //opening the xml fille to be downloaded
@@ -25,49 +27,50 @@ $fp = fopen("php://output", 'w'); //opening the xml fille to be downloaded
 //the following query uses Postgres XML functions. '\' is added to maintain Mixed Case.
 
 $q = "SELECT xmlelement(name metadata, 
-XMLELEMENT(name \"Esri\", XMLAGG (XMLFOREST (\"CreaDate\", \"CreaTime\",\"ArcGISFormat\", \"SyncOnce\", \"ArcGISstyle\" )),
+xmlelement(
+       name idinfo,
+       XMLELEMENT (name descript,
+       XMLAGG (XMLFOREST (purpose, abstract ))),
        xmlelement(
-       name \"scaleRange\",
-       XMLAGG (XMLFOREST (\"minScale\",\"maxScale\")))),
+       name keywords,
+       XMLELEMENT (name theme,
+       XMLAGG (XMLFOREST (themekey)))),
        xmlelement(
-       name \"dataIdInfo\",
-       XMLAGG (XMLFOREST (\"idPurp\", \"idAbs\" )),
-       xmlelement(
-       name \"searchKeys\",
-       XMLAGG (XMLFOREST (keyword))),
-       xmlelement(
-       name \"idCitation\",
-       XMLAGG (XMLFOREST (\"resTitle\"))),
-       xmlelement(
-       name \"resConst\",
-       xmlelement(
-       name \"Consts\",
-       XMLAGG (XMLFOREST (\"useLimit\")))),
-       xmlelement(
-       name \"resMaint\",
-       xmlelement(
-       name \"maintFreq\",
-       xmlelement(name \"MaintFreqCd\", xmlattributes(\"MaintFreq\" AS value))))),
-       xmlelement(
-       name \"mdHrLv\",
-       xmlelement(name \"ScopeCd\", xmlattributes('005' AS value))),
-       xmlelement(
-       name \"refSysInfo\",
-       xmlelement(
-       name \"RefSystem\",
-       xmlelement(
-       name \"refSysID\",
-       XMLAGG (XMLFOREST (\"idVersion\"))))),
-       xmlelement(
-       name \"mdMaint\",
-       xmlelement(
-       name \"maintFreq\",
-       xmlelement(name \"MaintFreqCd\", xmlattributes(\"MaintFreq\" AS value))))
-
-)
-
-FROM temp
-GROUP BY \"MaintFreq\" ";
+       name citation,
+       XMLELEMENT (name citeinfo,
+       XMLAGG (XMLFOREST (title, edition)))),
+       XMLAGG (XMLFOREST (datacred)),
+       XMLAGG (XMLFOREST (useconst)),
+       XMLELEMENT (name ptcontac,
+       XMLELEMENT (name cntinfo, 
+       XMLELEMENT (name cntorgp,
+       XMLAGG (XMLFOREST ('NYC Department of City Planning' AS cntorg))),
+       XMLELEMENT (name cntaddr,
+       XMLAGG (XMLFOREST ('mailing and physical' AS addrtype)),
+       XMLAGG (XMLFOREST ('120 Broadway, 31st Floor' AS address)),
+       XMLAGG (XMLFOREST ('New York' AS city)),
+       XMLAGG (XMLFOREST ('New York' AS state)),
+       XMLAGG (XMLFOREST ('10271' AS postal))),
+       XMLAGG (XMLFOREST ('DCPopendata@planning.nyc.gov' AS cntemail)))),
+       XMLELEMENT (name status,
+       XMLAGG (XMLFOREST (update)))
+       ),
+XMLELEMENT (name metc,
+       XMLELEMENT (name cntinfo, 
+       XMLELEMENT (name cntorgp,
+       XMLAGG (XMLFOREST ('NYC Department of City Planning' AS cntorg))),
+       XMLELEMENT (name cntaddr,
+       XMLAGG (XMLFOREST ('mailing and physical' AS addrtype)),
+       XMLAGG (XMLFOREST ('120 Broadway, 31st Floor' AS address)),
+       XMLAGG (XMLFOREST ('New York' AS city)),
+       XMLAGG (XMLFOREST ('New York' AS state)),
+       XMLAGG (XMLFOREST ('10271' AS postal))),
+       XMLAGG (XMLFOREST ('DCPopendata@planning.nyc.gov' AS cntemail)))
+),
+XMLELEMENT (name distinfo, 
+XMLAGG (XMLFOREST (distliab))
+))
+FROM temp";
 $query = pg_query($q);
 
 //fetching the results and writing it into the xml file opened

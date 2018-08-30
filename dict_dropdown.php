@@ -3,6 +3,9 @@
 <?php
 include 'config.php';
 
+//this is the reference link for the code below 
+//https://stackoverflow.com/questions/21136065/how-to-programmatically-find-out-which-queries-the-psql-command-d-does
+
     $sql = "SELECT c.relname AS Tables_in FROM pg_catalog.pg_class c
         LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
 WHERE pg_catalog.pg_table_is_visible(c.oid)
