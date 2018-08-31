@@ -38,13 +38,57 @@ if ($result) {
 
 <!-- html form to enter the data dictionary table name to be created
  --><!DOCTYPE html>
-<body style="background-color:ivory;"> 
-<h2>Enter table name to be created</h2>
+<body style="background-color:white;"> 
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+/* Style the header */
+  .header {
+    background-color: #D96B27;
+    padding: 15px;
+    text-align: center;
+    font-size: 15px;
+    color: #fff;
+    display: block;
+
+  }
+
+  .clearfix {
+    overflow: auto;
+}
+
+  .img {
+  background-color: #fff; 
+  width: 50px;
+  height: 50px;
+  display: block;
+  vertical-align: middle;
+  }
+
+</style>
+<body style="background-color: white; background-repeat: no-repeat; height: 100%; background-position: center;
+  background-size: cover;
+  position: relative; "> 
+  <div class="header">  
+<div class="clearfix">
+<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;">Data Dictionary</h1>
+</div>
+</div>
+<br> 
+
 <ul>
 <form name="dict_name" method="POST" >
-<li>Name:</li><li><input type="text" name="nameid" required/></li>
+<li>Enter name of the table to be created:</li><li><input type="text" name="nameid" style="height: 50px; width: 300px;border: 1px solid #D96B27" required/></li>
  <br>
- <li><input type="submit" name="dictname-submit" value="Create Table" /></li>
+ <br>
+
+ <li><input type="submit" name="dictname-submit" value="Create Table" style="border: 1px solid #D96B27; color: #D96B27" /></li>
  <style>
 li {
 list-style: none;

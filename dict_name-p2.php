@@ -12,8 +12,52 @@ $result = pg_query($query);
 
 <!DOCTYPE html>
 <head>
-<body style="background-color:ivory;"> 
-<h2>Enter values</h2>
+<body style="background-color:white;"> 
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+/* Style the header */
+  .header {
+    background-color: #D96B27;
+    padding: 15px;
+    text-align: center;
+    font-size: 15px;
+    color: #fff;
+    display: block;
+
+  }
+
+  .clearfix {
+    overflow: auto;
+}
+
+  .img {
+  background-color: #fff; 
+  width: 50px;
+  height: 50px;
+  display: block;
+  vertical-align: middle;
+  }
+
+</style>
+<body style="background-color: white; background-repeat: no-repeat; height: 100%; background-position: center;
+  background-size: cover;
+  position: relative; "> 
+  <div class="header">  
+<div class="clearfix">
+<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;"></h1>
+</div>
+</div>
+<br> 
+ <!-- just indenting -->
+
+<h4>Insert values:</h4>
 <form name="dict_data" action="dict_name-p2.php?tableName=<?php echo $tbname;?>" method="POST">
 <label>Column Name:</label>
 <input type="text" name="col_name" maxlength="50" value="" required />
@@ -28,10 +72,19 @@ $result = pg_query($query);
 
 <input type="submit" name="submit" value="Insert Data" />
 <style type="text/css">
-input, label{
+input{
     float:left;
-    margin:5px;
+    margin:2px;
     width: 90px;
+    color: #D96B27;
+    border: 1px solid #D96B27;
+    height: 20px;
+}
+
+label{
+    float:left;
+    margin:6px;
+    color: #D96B27;
 }
 </style>
 </form>
@@ -60,7 +113,7 @@ $i = 0;
 
 echo '<html><body><style>
 table, td, th {    
-    border: 0.5px solid #ddd;
+    border: 0.5px solid #D96B27;
     text-align: left;
 }
 

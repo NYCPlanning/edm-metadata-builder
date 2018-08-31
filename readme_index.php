@@ -3,7 +3,50 @@
 include ('readme_dropdown.php'); //this includes the php file that has the code for the dropdown menu of sde_names of the individual records of the readme
 
 ?> 
-<body style="background-color:ivory;"> 
+<body style="background-color:white;"> 
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+/* Style the header */
+  .header {
+    background-color: #D96B27;
+    padding: 15px;
+    text-align: center;
+    font-size: 15px;
+    color: #fff;
+    display: block;
+
+  }
+
+  .clearfix {
+    overflow: auto;
+}
+
+  .img {
+  background-color: #fff; 
+  width: 50px;
+  height: 50px;
+  display: block;
+  vertical-align: middle;
+  }
+
+</style>
+<body style="background-color: white; background-repeat: no-repeat; height: 100%; background-position: center;
+  background-size: cover;
+  position: relative; "> 
+  <div class="header">  
+<div class="clearfix">
+<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;">Select table to be exported</h1>
+</div>
+</div>
+<br> 
+<br> <!-- just indenting -->
 <br>
 <br>
 <br>
@@ -11,10 +54,9 @@ include ('readme_dropdown.php'); //this includes the php file that has the code 
 <br>
 <br>
 <br>
-<br>
-<h2 style="text-align:center; vertical-align: middle; font-family:tahoma; color:black;">Select Table to be exported </h2>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" onchange="this.form.submit();">
-<select name="Tables" id="ddTables" style="width:200px;font-size:65%;">
+
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" >
+<select name="Tables" id="ddTables" style="height: 30px;width:300px;font-size:65%; border: 1px solid #D96B27">
 	<option selected>Select</option>
  <style>
  form {
@@ -33,8 +75,8 @@ echo $tables;
 ?>
      </select>
 
-    <!--  <input type="submit" id="tableSubmit" value="Submit" style="font-size:65%;"/>
-     </form> -->
+  <input type="submit" id="tableSubmit" value="Submit" style="font-size:65%;"/>
+     </form> 
 
 <?php
  $selection = $_POST["Tables"];
@@ -44,11 +86,12 @@ echo $tables;
  -->
  <br>
  <br>
+ <br>
 
   <form class="form-horizontal" action="expbut_readme.php?selection=<?php echo $selection;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Export" class="btn btn-success" value="export to csv" style="font-size:65%;color:green"/>
+                                <input type="submit" name="Export" class="btn btn-success" value="export to csv" style="font-size:65%;color: #D96B27;border: 1px solid #D96B27 "/>
                             </div>
                    </div>                    
             </form> 
@@ -56,7 +99,7 @@ echo $tables;
    <form class="form-horizontal" action="expxml_readme_ind.php?selection=<?php echo $selection;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Expor2xml" class="btn btn-success" value="export to xml" style="font-size:65%;color:green"/>
+                                <input type="submit" name="Expor2xml" class="btn btn-success" value="export to xml" style="font-size:65%;color: #D96B27;border: 1px solid #D96B27 "/>
                             </div>
                    </div>                    
             </form> 

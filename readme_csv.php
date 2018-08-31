@@ -38,7 +38,48 @@ fclose($handle);
  
 </head>
  
-<body style="background-color:ivory;"> 
+<body style="background-color:white;"> 
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+/* Style the header */
+  .header {
+    background-color: #D96B27;
+    padding: 15px;
+    text-align: center;
+    font-size: 15px;
+    color: #fff;
+    display: block;
+
+  }
+
+  .clearfix {
+    overflow: auto;
+}
+
+  .img {
+  background-color: #fff; 
+  width: 50px;
+  height: 50px;
+  display: block;
+  vertical-align: middle;
+  }
+
+</style>
+<body style="background-color: white; background-repeat: no-repeat; height: 100%; background-position: center;
+  background-size: cover;
+  position: relative; "> 
+  <div class="header">  
+<div class="clearfix">
+<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;"></h1>
+</div>
+</div>
     <div id="wrap">
         <div class="container">
             <div class="row">
@@ -50,7 +91,7 @@ fclose($handle);
                          <div class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton">Template</label>
                             <div class="col-md-4">
-                                <input type="submit" name="template_submit" class="btn btn-success" value="Download"/>
+                                <input type="submit" name="template_submit" value="Download" style="color: #D96B27;border: 1px solid #D96B27" />
                             </div>
                          </div>  
                 </form>
@@ -63,14 +104,14 @@ fclose($handle);
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="filebutton">Select File</label>
                             <div class="col-md-4">
-                                <input type="file" name="csv" id="csv" class="input-large">
+                                <input type="file" name="csv" id="csv" class="input-large" >
                             </div>
                         </div>
  
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton">Submit data</label>
                             <div class="col-md-4">
-                                <button type="submit" id="submit" name="csv_submit" class="btn btn-primary button-loading" data-loading-text="Loading...">Submit</button>
+                                <button type="submit" id="submit" name="csv_submit" style="color: #D96B27;border: 1px solid #D96B27" data-loading-text="Loading...">Submit</button>
                             </div>
                         </div>
  
@@ -104,7 +145,7 @@ $i = 0;
 
 echo '<html><body><style>
 table, td, th {    
-    border: 0.5px solid #ddd;
+    border: 0.5px solid #D96B27;
     text-align: left;
 }
 
@@ -156,7 +197,7 @@ echo '</table></body></html>';
                       enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Export" class="btn btn-success" value="export to excel"/>
+                                <input type="submit" name="Export" style="color: #D96B27;border: 1px solid #D96B27" value="export to excel" />
                             </div>
                    </div>                    
             </form>           

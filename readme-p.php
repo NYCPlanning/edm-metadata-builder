@@ -41,6 +41,10 @@ $result = pg_query($query); //executing the query
 
 ?>
 
+<html>
+<br> 
+<br>
+</html> 
 
 <?php
 
@@ -59,7 +63,7 @@ $i = 0;
 
 echo '<html><body><style>
 table, td, th {    
-    border: 0.5px solid #ddd;
+    border: 0.5px solid #D96B27;
     text-align: left;
 }
 
@@ -107,16 +111,18 @@ echo '</table></body></html>';
 
 
 <html>
-<body style="background-color:ivory;"> 
+
     <div id="wrap">
         <div class="container">
             <div class="row">
   <br>
+  <br>
+  
             <form class="form-horizontal" action="expbut.php" method="post" name="upload_excel"   
-                      enctype="multipart/form-data">
+                      enctype="multipart/form-data" >
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Export" class="btn btn-success" value="export to excel"/>
+                                <input type="submit" name="Export" class="btn btn-success" value="export to excel" style="color: #D96B27;border: 1px solid #D96B27"/>
                             </div>
                    </div>                    
             </form>           

@@ -10,7 +10,7 @@ header('Content-Disposition: attachment; filename='.$tbname.'.csv'); //this dowl
 
 //opening the csv file to be downloaded
 $fp = fopen("php://output", "w");
-fputcsv($fp, array('common_name','column_description','code_def','add_notes'));
+fputcsv($fp, array('common_name','column_description','code_def','add_notes','internal_notes'));
 
 $q = 'select * from '.$tbname;
 $query = pg_query($q);

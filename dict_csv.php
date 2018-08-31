@@ -24,7 +24,8 @@ if ($_FILES["csv"]["size"] > 0) {
             column_name text,
             column_description text,
             code_def text,
-            add_notes text
+            add_notes text,
+            internal_notes text
           )";
       $res = pg_query($query); 
       if ($res)
@@ -33,7 +34,7 @@ if ($_FILES["csv"]["size"] > 0) {
       //if the query executes without any errors then insert data into the table created else throw an error that the table already exists and you can either drop it or upload the csv with a different name 
      while (($data = fgetcsv($handle,10000,",")) !== FALSE) { 
      if($flag) { $flag = false; continue; }
-      $query2 = "INSERT INTO ".$tableName." VALUES ('$data[0]','$data[1]','$data[2]','$data[3]')";
+      $query2 = "INSERT INTO ".$tableName." VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]')";
       $res2 = pg_query($db, $query2);  
     }
   }
@@ -74,7 +75,48 @@ fclose($handle);
  
 </head>
  
-<body style="background-color:ivory;"> 
+<body style="background-color:white;"> 
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+/* Style the header */
+  .header {
+    background-color: #D96B27;
+    padding: 15px;
+    text-align: center;
+    font-size: 15px;
+    color: #fff;
+    display: block;
+
+  }
+
+  .clearfix {
+    overflow: auto;
+}
+
+  .img {
+  background-color: #fff; 
+  width: 50px;
+  height: 50px;
+  display: block;
+  vertical-align: middle;
+  }
+
+</style>
+<body style="background-color: white; background-repeat: no-repeat; height: 100%; background-position: center;
+  background-size: cover;
+  position: relative; "> 
+  <div class="header">  
+<div class="clearfix">
+<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;"></h1>
+</div>
+</div>
     <div id="wrap">
         <div class="container">
             <div class="row">
@@ -85,7 +127,7 @@ fclose($handle);
                          <div class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton">Template</label>
                             <div class="col-md-4">
-                                <input type="submit" name="template_submit" class="btn btn-success" value="Download"/>
+                                <input type="submit" name="template_submit" style="color: #D96B27;border: 1px solid #D96B27" value="Download"/>
                             </div>
                         </div>  
                     </form>
@@ -107,7 +149,7 @@ fclose($handle);
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton">Submit data</label>
                             <div class="col-md-4">
-                                <button type="submit" id="submit" name="csv_submit" class="btn btn-primary button-loading" data-loading-text="Loading...">Submit</button>
+                                <button type="submit" id="submit" name="csv_submit" style="color: #D96B27;border: 1px solid #D96B27" data-loading-text="Loading...">Submit</button>
                             </div>
                         </div>
  
@@ -143,7 +185,7 @@ $i = 0;
 
 echo '<html><body><style>
 table, td, th {    
-    border: 0.5px solid #ddd;
+    border: 0.5px solid #D96B27;
     text-align: left;
 }
 
@@ -200,7 +242,7 @@ echo '</table></body></html>';
                       enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Export" class="btn btn-success" value="export to excel"/>
+                                <input type="submit" name="Export" style="color: #D96B27;border: 1px solid #D96B27" value="export to excel"/>
                             </div>
                    </div>                    
             </form>           
@@ -208,7 +250,7 @@ echo '</table></body></html>';
             <form class="form-horizontal" action="expxml_dict.php?tableName=<?php echo $tableName;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Expor2xml" class="btn btn-success" value="export to xml"/>
+                                <input type="submit" name="Expor2xml" value="export to xml" style="color: #D96B27;border: 1px solid #D96B27"/>
                             </div>
                    </div>                    
             </form>           
