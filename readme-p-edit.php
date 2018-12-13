@@ -137,6 +137,8 @@ list-style: none;
 <br>
 <li>Distribution:</li><li><input type="text" name="distribution" style="width:550px;"/></li>
 <br>
+<li>Contact:</li><li><input type="text" name="contact" style="width:550px;"/></li>
+<br>
 <br>
 <input type="submit" id="tableSubmit" value="Save" style="width:auto; color: black; background-color: lightgray"/>
 </form>

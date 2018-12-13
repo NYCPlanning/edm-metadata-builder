@@ -24,7 +24,8 @@ include 'config.php';
                data_quality = '$_POST[data_quality]',
                caveats = '$_POST[caveats]',
                future_plans = '$_POST[future_plans]',
-               distribution = '$_POST[distribution]'
+               distribution = '$_POST[distribution]',
+               contact = '$_POST[contact]',
                WHERE uid = $id";
     $result = pg_query($sql);
 

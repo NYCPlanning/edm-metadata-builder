@@ -14,7 +14,7 @@ include 'config.php'; //including the configuration file that has the db connect
         $selection = $_POST['update_freq']; //accepting the update frequency selection from the dropdown on previous php page as a variable
         $query = "INSERT INTO ReadMe(common_name, sde_name, tags_guide, tags_sde, summary, summary_update_date, description, description_data_loc,
         data_steward, data_engineer, credits, genconst, legconst, update_freq, date_last_update, date_underlying_data, data_source, version,
-        common_uses, data_quality, caveats, future_plans, distribution)
+        common_uses, data_quality, caveats, future_plans, distribution, contact)
                   VALUES (
                     '$_POST[common_name]',
                     '$_POST[sde_name]',
@@ -38,7 +38,8 @@ include 'config.php'; //including the configuration file that has the db connect
                     '$_POST[data_quality]',
                     '$_POST[caveats]',
                     '$_POST[future_plans]',
-                    '$_POST[distribution]'
+                    '$_POST[distribution]',
+                    '$_POST[contact]'
                   )";
 
 $result = pg_query($query); //executing the query
@@ -236,6 +237,8 @@ pre + p {
     <br>
     <li>Distribution:</li><li><input type="text" name="distribution"/></li>
     <br>
+    <li>Contact:</li><li><input type="text" name="contact"/></li>
+    <br>
     <br>
     <input type="submit" id="tableSubmit" value="Submit" style="width:auto; color: black; background-color: lightgray"/>
     </form>
@@ -303,7 +306,7 @@ $i = 0;
 
 $table_name = array("","common_name", "sde_name", "tags_guide", "tags_sde", "summary", "summary_update_date", "description", "description_data_loc",
 "data_steward", "data_engineer", "credits", "genconst", "legconst", "update_freq", "date_last_update", "date_underlying_data", "data_source", "version",
-"common_uses", "data_quality", "caveats", "future_plans", "distribution");
+"common_uses", "data_quality", "caveats", "future_plans", "distribution", "contact");
 
 while ($row = pg_fetch_row($result))
 {

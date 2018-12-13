@@ -22,5 +22,6 @@ common_uses text,
 data_quality text,
 caveats text,
 future_plans text,
-distribution text
+distribution text,
+contact text
 );
