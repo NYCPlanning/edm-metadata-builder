@@ -1,44 +1,44 @@
-<?php  
+<?php
 include 'config.php'; //including the db connection details
 
 if(isset($_POST['csv_submit'])) {
 
-//get the csv file 
+//get the csv file
 
-    $file = $_FILES["csv"]["tmp_name"]; 
+    $file = $_FILES["csv"]["tmp_name"];
 
-if ($_FILES["csv"]["size"] > 0) { 
-  
-    $handle = fopen($file,"r");    
+if ($_FILES["csv"]["size"] > 0) {
+
+    $handle = fopen($file,"r");
     $flag = true;
 
-    //loop through the csv file and insert into database 
+    //loop through the csv file and insert into database
 
-  while (($data = fgetcsv($handle,10000,",")) !== FALSE) {   
+  while (($data = fgetcsv($handle,10000,",")) !== FALSE) {
      if($flag) { $flag = false; continue; }
            $query="INSERT INTO ReadMe VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]','$data[11]','$data[12]','$data[13]','$data[14]','$data[15]','$data[16]','$data[17]','$data[18]', '$data[19]','$data[20]', '$data[21]', '$data[22]')";
-      $res = pg_query($db, $query);    
-    } 
+      $res = pg_query($db, $query);
+    }
 fclose($handle);
 
- } 
+ }
  }
 ?>
- 
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html lang="en">
- 
+
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
- 
+
 </head>
- 
-<body style="background-color:white;"> 
+
+<body style="background-color:white;">
 <style>
   * {
     box-sizing: border-box;
@@ -64,7 +64,7 @@ fclose($handle);
 }
 
   .img {
-  background-color: #fff; 
+  background-color: #fff;
   width: 50px;
   height: 50px;
   display: block;
@@ -74,8 +74,8 @@ fclose($handle);
 </style>
 <body style="background-color: white; background-repeat: no-repeat; height: 100%; background-position: center;
   background-size: cover;
-  position: relative; "> 
-  <div class="header">  
+  position: relative; ">
+  <div class="header">
 <div class="clearfix">
 <img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;"></h1>
 </div>
@@ -93,38 +93,38 @@ fclose($handle);
                             <div class="col-md-4">
                                 <input type="submit" name="template_submit" value="Download" style="color: #D96B27;border: 1px solid #D96B27" />
                             </div>
-                         </div>  
+                         </div>
                 </form>
 
                 <!-- code for selecting a file and uploading it on submission -->
- 
+
                 <form class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
                     <fieldset>
- 
+
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="filebutton">Select File</label>
                             <div class="col-md-4">
                                 <input type="file" name="csv" id="csv" class="input-large" >
                             </div>
                         </div>
- 
+
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton">Submit data</label>
                             <div class="col-md-4">
                                 <button type="submit" id="submit" name="csv_submit" style="color: #D96B27;border: 1px solid #D96B27" data-loading-text="Loading...">Submit</button>
                             </div>
                         </div>
- 
+
                     </fieldset>
                 </form>
- 
+
             </div>
-           
+
         </div>
     </div>
     <br>
 </body>
- 
+
 </html>
 
 
@@ -144,7 +144,7 @@ $i = 0;
 // code for creating a table structure using css
 
 echo '<html><body><style>
-table, td, th {    
+table, td, th {
     border: 0.5px solid #D96B27;
     text-align: left;
 }
@@ -166,7 +166,7 @@ $i = 0;
 
 //fetching and displaying the contents of the db table
 
-while ($row = pg_fetch_row($result)) 
+while ($row = pg_fetch_row($result))
 {
     echo '<tr>';
     $count = count($row);
@@ -184,7 +184,7 @@ while ($row = pg_fetch_row($result))
 pg_free_result($result);
 
 echo '</table></body></html>';
-?> 
+?>
 
 <!-- html code for the export to excel button with form action -->
 
@@ -193,24 +193,17 @@ echo '</table></body></html>';
         <div class="container">
             <div class="row">
     <br>
-            <form class="form-horizontal" action="expbut.php" method="post" name="upload_excel"   
+            <form class="form-horizontal" action="expbut.php" method="post" name="upload_excel"
                       enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
                                 <input type="submit" name="Export" style="color: #D96B27;border: 1px solid #D96B27" value="export to excel" />
                             </div>
-                   </div>                    
-            </form>           
+                   </div>
+            </form>
 
-                  
+
  </div>
 </div>
 </div>
  </html>
-
-
-
-
-
-
-

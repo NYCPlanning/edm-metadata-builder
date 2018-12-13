@@ -20,5 +20,3 @@ include 'config.php';
 
     pg_free_result($result);
     ?>
-
-

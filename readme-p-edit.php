@@ -1,13 +1,20 @@
-<!-- this php page creates a form for ReadMe where user inserts data to be accepted on submission
- -->
 <?php
+include 'config.php';
 include ('MaintFreq_dropdown.php');
+$id = $_GET['id'];
+$sql = "SELECT * FROM readme WHERE uid = $id";
+$result = pg_query($sql);
+// while($row = pg_fetch_row($result))
+// {
+//   echo $row[0];
+// }
+echo $result[0];
 ?>
 
 <!DOCTYPE html>
 <head>
 <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-<title >Insert data in ReadMe</title>
+<title >Edit data in ReadMe</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style>
 li {
@@ -53,7 +60,7 @@ list-style: none;
   position: relative; ">
   <div class="header">
 <div class="clearfix">
-<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;">Enter values into ReadMe</h1>
+<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;">Edit values into ReadMe</h1>
 </div>
 </div>
 <ul>
@@ -131,7 +138,7 @@ list-style: none;
 <li>Distribution:</li><li><input type="text" name="distribution" style="width:550px;"/></li>
 <br>
 <br>
-<input type="submit" id="tableSubmit" value="Submit" style="width:auto; color: black; background-color: lightgray"/>
+<input type="submit" id="tableSubmit" value="Save" style="width:auto; color: black; background-color: lightgray"/>
 </form>
 
 </ul>
