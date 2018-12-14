@@ -1,26 +1,21 @@
 <?php
 include 'config.php'; //including the db connection details
-
 if(isset($_POST['csv_submit'])) {
-
 //get the csv file
-
     $file = $_FILES["csv"]["tmp_name"];
-
 if ($_FILES["csv"]["size"] > 0) {
 
     $handle = fopen($file,"r");
     $flag = true;
-
     //loop through the csv file and insert into database
-
   while (($data = fgetcsv($handle,10000,",")) !== FALSE) {
      if($flag) { $flag = false; continue; }
-           $query="INSERT INTO ReadMe VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]','$data[11]','$data[12]','$data[13]','$data[14]','$data[15]','$data[16]','$data[17]','$data[18]', '$data[19]','$data[20]', '$data[21]', '$data[22]')";
+           $query="INSERT INTO ReadMe(common_name, sde_name, tags_guide, tags_sde, summary, summary_update_date, description, description_data_loc,
+           data_steward, data_engineer, credits, genconst, legconst, update_freq, date_last_update, date_underlying_data, data_source, version,
+           common_uses, data_quality, caveats, future_plans, distribution, contact) VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]','$data[11]','$data[12]','$data[13]','$data[14]','$data[15]','$data[16]','$data[17]','$data[18]', '$data[19]','$data[20]', '$data[21]', '$data[22]','$data[23]')";
       $res = pg_query($db, $query);
     }
 fclose($handle);
-
  }
  }
 ?>
@@ -43,11 +38,9 @@ fclose($handle);
   * {
     box-sizing: border-box;
   }
-
   body {
     font-family: Arial, Helvetica, sans-serif;
   }
-
 /* Style the header */
   .header {
     background-color: #D96B27;
@@ -56,13 +49,10 @@ fclose($handle);
     font-size: 15px;
     color: #fff;
     display: block;
-
   }
-
   .clearfix {
     overflow: auto;
 }
-
   .img {
   background-color: #fff;
   width: 50px;
@@ -70,7 +60,6 @@ fclose($handle);
   display: block;
   vertical-align: middle;
   }
-
 </style>
 <body style="background-color: white; background-repeat: no-repeat; height: 100%; background-position: center;
   background-size: cover;
@@ -130,31 +119,21 @@ fclose($handle);
 
 
 <?php
-
 //the following php code is for displaying the table contents on the same page
-
 include 'config.php';
-
 $query = "select * from ReadMe";
-
 $result = pg_query($query);
-
 $i = 0;
-
 // code for creating a table structure using css
-
 echo '<html><body><style>
 table, td, th {
     border: 0.5px solid #D96B27;
     text-align: left;
 }
-
 th, td {
     padding: 10px;
 } </style><table><tr>';
-
 //fetching the column names of the db table
-
 while ($i < pg_num_fields($result))
 {
     $fieldName = pg_field_name($result, $i);
@@ -163,9 +142,7 @@ while ($i < pg_num_fields($result))
 }
 echo '</tr>';
 $i = 0;
-
 //fetching and displaying the contents of the db table
-
 while ($row = pg_fetch_row($result))
 {
     echo '<tr>';
@@ -182,7 +159,6 @@ while ($row = pg_fetch_row($result))
     $i = $i + 1;
 }
 pg_free_result($result);
-
 echo '</table></body></html>';
 ?>
 
