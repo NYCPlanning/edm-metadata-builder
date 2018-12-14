@@ -1,5 +1,5 @@
 <?php
 
-$db = pg_connect("host=localhost dbname=postgres user=tommywang");
+$db = pg_connect(getenv("DATABASE_URL"));
 
 ?>
