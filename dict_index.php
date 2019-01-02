@@ -55,7 +55,7 @@ include_once 'dict_dropdown.php'; //inlcuding the dropdown list php file from wh
 <br>
 <br>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" >
-<select name="Tables" id="ddTables" style="height: 30px;width:300px;font-size:65%; border: 1px solid #D96B27">
+<select name="Tables" id="ddTables" style="height: 30px;width:300px;font-size:65%; border: 1px solid #D96B27"  onchange="this.form.submit();">
 	 <option disabled selected>Select</option>
  <style>
  form {
@@ -67,12 +67,11 @@ include_once 'dict_dropdown.php'; //inlcuding the dropdown list php file from wh
 }
 </style>
 <?php
-
+//displaying the dropdown list
 echo $tables;
 ?>
      </select>
 
-    <input type="submit" id="tableSubmit" value="Submit" style="font-size:65%;"/>
      </form>
 
 <?php
