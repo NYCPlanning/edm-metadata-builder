@@ -47,7 +47,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="main.php"><img class="img" src="logo.png"></a>
+      <a class="navbar-brand" href="Main.php"><img class="img" src="logo.png"></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav nav-pills">
