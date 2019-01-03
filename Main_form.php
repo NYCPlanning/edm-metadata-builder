@@ -11,6 +11,7 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
       break;
   }
 }
+include ('navbar.php');
 ?>
 
 
@@ -26,11 +27,9 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 
 /* Style the header */
   .header {
-    background-color: #D96B27;
     padding: 15px;
     text-align: center;
     font-size: 15px;
-    color: #fff;
     display: block;
 
   }
@@ -53,7 +52,7 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
   position: relative; ">
   <div class="header">
 <div class="clearfix">
-<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;">Importing Data from Form</h1>
+<h1 align="center" style="display: inline;">Importing Data from Form</h1>
 </div>
 </div>
 <br>

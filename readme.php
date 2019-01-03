@@ -2,6 +2,7 @@
  -->
 <?php
 include ('MaintFreq_dropdown.php');
+include ('navbar.php');
 ?>
 
 <!DOCTYPE html>
@@ -24,11 +25,10 @@ list-style: none;
 
 /* Style the header */
 	.header {
-    background-color: #D96B27;
+
     padding: 15px;
     text-align: center;
     font-size: 15px;
-    color: #fff;
     display: block;
 
 	}
@@ -53,7 +53,7 @@ list-style: none;
   position: relative; ">
   <div class="header">
 <div class="clearfix">
-<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;">Enter values into ReadMe</h1>
+<h1 align="center" style=" display: inline;">Enter values into ReadMe</h1>
 </div>
 </div>
 <ul>

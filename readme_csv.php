@@ -1,5 +1,6 @@
 <?php
-include 'config.php'; //including the db connection details
+include ('config.php'); //including the db connection details
+
 if(isset($_POST['csv_submit'])) {
 //get the csv file
     $file = $_FILES["csv"]["tmp_name"];
@@ -18,6 +19,7 @@ if ($_FILES["csv"]["size"] > 0) {
 fclose($handle);
  }
  }
+include ('navbar.php');
 ?>
 
 
@@ -26,12 +28,7 @@ fclose($handle);
 
 <html lang="en">
 
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-</head>
 
 <body style="background-color:white;">
 <style>
@@ -42,14 +39,7 @@ fclose($handle);
     font-family: Arial, Helvetica, sans-serif;
   }
 /* Style the header */
-  .header {
-    background-color: #D96B27;
-    padding: 15px;
-    text-align: center;
-    font-size: 15px;
-    color: #fff;
-    display: block;
-  }
+
   .clearfix {
     overflow: auto;
 }
@@ -65,9 +55,7 @@ fclose($handle);
   background-size: cover;
   position: relative; ">
   <div class="header">
-<div class="clearfix">
-<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;"></h1>
-</div>
+
 </div>
     <div id="wrap">
         <div class="container">

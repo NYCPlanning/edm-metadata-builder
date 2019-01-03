@@ -45,6 +45,7 @@ include 'config.php'; //including the configuration file that has the db connect
 $result = pg_query($query); //executing the query
       }
 include ('MaintFreq_dropdown.php');
+include ('navbar.php');
 ?>
 
 <html>
@@ -141,6 +142,7 @@ pre + p {
 }
 
 .overlay {
+ z-index: 999;
  position: fixed;
  overflow-y: scroll;
  top: 0; right: 0; bottom: 0; left: 0; }
@@ -172,15 +174,13 @@ pre + p {
   width: 200px;
 }
 
-
-
 </style>
 
 <button type="button" class="open-overlay"><i class="material-icons">add</i></button>
 <!-- Add Form -->
 <section class="overlay" aria-hidden="true">
   <div>
-    <button type="button" class="close-overlay">X</button>
+    <button type="button" class="close-overlay"><i class="material-icons">close</i></button>
     <form name="readme" id= "form-overlay" action="readme-p.php?selection=<?php echo $selection;?>" method="POST" >
     <li>Common Name:</li><li><input type="text" name="common_name" /></li>
     <br>
@@ -240,7 +240,7 @@ pre + p {
     <li>Contact:</li><li><input type="text" name="contact"/></li>
     <br>
     <br>
-    <input type="submit" id="tableSubmit" value="Submit" style="width:auto; color: black; background-color: lightgray"/>
+    <input type="submit" id="tableSubmit" value="Submit" style="color: #D96B27;border: 1px solid #D96B27; width: auto;"/>
     </form>
   </div>
 </section>
@@ -348,7 +348,7 @@ echo '</form></table></body></html>';
                       enctype="multipart/form-data" >
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Export" class="btn btn-success" value="export to excel" style="color: #D96B27;border: 1px solid #D96B27; width: 200px;"/>
+                                <input type="submit" name="Export" class="btn" value="export to excel" style="color: #D96B27;border: 1px solid #D96B27; width: 200px;"/>
                             </div>
                    </div>
             </form>

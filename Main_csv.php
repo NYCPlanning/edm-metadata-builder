@@ -9,11 +9,12 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
       break;
     default:
       break;
-  }    
+  }
 }
+include ('navbar.php');
 ?>
- 
-<body style="background-color:white;"> 
+
+<body style="background-color:white;">
 <style>
   * {
     box-sizing: border-box;
@@ -25,11 +26,9 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 
 /* Style the header */
   .header {
-    background-color: #D96B27;
     padding: 15px;
     text-align: center;
     font-size: 15px;
-    color: #fff;
     display: block;
 
   }
@@ -39,7 +38,7 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 }
 
   .img {
-  background-color: #fff; 
+  background-color: #fff;
   width: 50px;
   height: 50px;
   display: block;
@@ -49,13 +48,13 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
 </style>
 <body style="background-color: white; background-repeat: no-repeat; height: 100%; background-position: center;
   background-size: cover;
-  position: relative; "> 
-  <div class="header">  
+  position: relative; ">
+  <div class="header">
 <div class="clearfix">
-<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;">Importing Data from CSV</h1>
+<h1 align="center" style="display: inline;">Importing Data from CSV</h1>
 </div>
 </div>
-<br> 
+<br>
 <br> <!-- just indenting -->
 <br>
 <br>
@@ -81,7 +80,7 @@ if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
  form {
   text-align: center;
   vertical-align: middle;
-  font-family: tahoma; 
+  font-family: tahoma;
   color: black;
   font-size:150%;
 

@@ -1,18 +1,19 @@
 <?php
 
-$tbname = $_GET['tableName']; //getting the variable value of the table name that was created and passed through the header by the previous php page 
+$tbname = $_GET['tableName']; //getting the variable value of the table name that was created and passed through the header by the previous php page
 include 'config.php'; //including the db connection details
 if (!empty($_POST['submit'])) {
 $query = "INSERT INTO ".$tbname." VALUES ('$_POST[col_name]','$_POST[col_des]','$_POST[cd]','$_POST[add_notes]', '$_POST[internal_notes]')";
-$result = pg_query($query); 
+$result = pg_query($query);
 }
+include ('navbar.php');
 ?>
 
 <!-- the following html code creates a form for Data Dictionary -->
 
 <!DOCTYPE html>
 <head>
-<body style="background-color:white;"> 
+<body style="background-color:white;">
 <style>
   * {
     box-sizing: border-box;
@@ -24,11 +25,9 @@ $result = pg_query($query);
 
 /* Style the header */
   .header {
-    background-color: #D96B27;
     padding: 15px;
     text-align: center;
     font-size: 15px;
-    color: #fff;
     display: block;
 
   }
@@ -38,7 +37,7 @@ $result = pg_query($query);
 }
 
   .img {
-  background-color: #fff; 
+  background-color: #fff;
   width: 50px;
   height: 50px;
   display: block;
@@ -48,26 +47,26 @@ $result = pg_query($query);
 </style>
 <body style="background-color: white; background-repeat: no-repeat; height: 100%; background-position: center;
   background-size: cover;
-  position: relative; "> 
-  <div class="header">  
+  position: relative; ">
+  <div class="header">
 <div class="clearfix">
-<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;"></h1>
+<h1 align="center" style="display: inline;"></h1>
 </div>
 </div>
-<br> 
+<br>
  <!-- just indenting -->
 
 <h4>Insert values:</h4>
 <form name="dict_data" action="dict_name-p2.php?tableName=<?php echo $tbname;?>" method="POST">
 <label>Column Name:</label>
 <input type="text" name="col_name" maxlength="50" value="" required />
-<label>Column Description:</label> 
+<label>Column Description:</label>
 <input type="text" name="col_des" maxlength="1000" value="" />
-<label>Term, Acronym or Code Definition:</label> 
+<label>Term, Acronym or Code Definition:</label>
 <input type="text" name="cd" maxlength="500" value="" />
-<label>Additional Notes:</label> 
+<label>Additional Notes:</label>
 <input type="text" name="add_notes" maxlength="1000" value="" />
-<label>Internal Notes:</label> 
+<label>Internal Notes:</label>
 <input type="text" name="internal_notes" maxlength="1000" value="" />
 
 <input type="submit" name="submit" value="Insert Data" />
@@ -100,7 +99,7 @@ label{
 
 //the following php code is for displaying the table contents on the same page
 
-$tbname = $_GET['tableName']; //getting the variable value of the table name that was created and passed through the header by the previous php page 
+$tbname = $_GET['tableName']; //getting the variable value of the table name that was created and passed through the header by the previous php page
 include 'config.php';
 
 $query = "select * from ".$tbname;
@@ -112,7 +111,7 @@ $i = 0;
 // code for creating a table structure using css
 
 echo '<html><body><style>
-table, td, th {    
+table, td, th {
     border: 0.5px solid #D96B27;
     text-align: left;
 }
@@ -134,7 +133,7 @@ $i = 0;
 
 //fetching and displaying the contents of the db table
 
-while ($row = pg_fetch_row($result)) 
+while ($row = pg_fetch_row($result))
 {
 	echo '<tr>';
 	$count = count($row);
@@ -152,7 +151,7 @@ while ($row = pg_fetch_row($result))
 pg_free_result($result);
 
 echo '</table></body></html>';
-?> 
+?>
 
 
 <!-- html code for the export to excel and xml button with form action -->
@@ -165,27 +164,24 @@ echo '</table></body></html>';
         <div class="container">
             <div class="row">
 	<br>
-            <form class="form-horizontal" action="expbut_dict.php?tableName=<?php echo $tbname;?>" method="post" name="upload_excel"   
+            <form class="form-horizontal" action="expbut_dict.php?tableName=<?php echo $tbname;?>" method="post" name="upload_excel"
                       enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Export" class="btn btn-success" value="export to excel"/>
+                                <input type="submit" name="Export" class="btn" value="export to excel" style="font-size:15px;color: #D96B27;border: 1px solid #D96B27; width: 140px; height: 35px;"/>
                             </div>
-                   </div>                    
-            </form>           
+                   </div>
+            </form>
 
             <form class="form-horizontal" action="expxml_dict.php?tableName=<?php echo $tbname;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Expor2xml" class="btn btn-success" value="export to xml"/>
+                                <input type="submit" name="Expor2xml" class="btn" value="export to xml" style="font-size:15px;color: #D96B27;border: 1px solid #D96B27; width: 140px; height: 35px; "/>
                             </div>
-                   </div>                    
-            </form>           
+                   </div>
+            </form>
  </div>
 </div>
 </div>
 </body>
  </html>
-
-
-

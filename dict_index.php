@@ -1,7 +1,7 @@
 <?php
 
 include_once 'dict_dropdown.php'; //inlcuding the dropdown list php file from where the user will select the data dictionary table to be exported from the dropdown menu.
-
+include ('navbar.php');
 ?>
 <body style="background-color:white;">
 <style>
@@ -15,11 +15,9 @@ include_once 'dict_dropdown.php'; //inlcuding the dropdown list php file from wh
 
 /* Style the header */
   .header {
-    background-color: #D96B27;
     padding: 15px;
     text-align: center;
     font-size: 15px;
-    color: #fff;
     display: block;
 
   }
@@ -42,7 +40,7 @@ include_once 'dict_dropdown.php'; //inlcuding the dropdown list php file from wh
   position: relative; ">
   <div class="header">
 <div class="clearfix">
-<img class="img" src="logo.png" style="display: inline; float: left;"> <h1 align="center" style="color: #fff; display: inline;">Select table to be exported</h1>
+<h1 align="center" style="display: inline;">Select table to be exported</h1>
 </div>
 </div>
 <br>
@@ -85,7 +83,7 @@ echo $tables;
  <form class="form-horizontal" action="expxml_dict.php?tableName=<?php echo $tableName;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Expor2xml" class="btn btn-success" value="export to xml" style="font-size:65%;color: #D96B27;border: 1px solid #D96B27 "/>
+                                <input type="submit" name="Expor2xml" class="btn" value="export to xml" style="font-size:15px;color: #D96B27;border: 1px solid #D96B27; "/>
                             </div>
                    </div>
             </form>
@@ -93,7 +91,7 @@ echo $tables;
   <form class="form-horizontal" action="expbut_dict.php?tableName=<?php echo $tableName;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
-                                <input type="submit" name="Export" class="btn btn-success" value="export to csv" style="font-size:65%;color: #D96B27;border: 1px solid #D96B27 "/>
+                                <input type="submit" name="Export" class="btn" value="export to csv" style="font-size:15px;color: #D96B27;border: 1px solid #D96B27 "/>
                             </div>
                    </div>
             </form>
