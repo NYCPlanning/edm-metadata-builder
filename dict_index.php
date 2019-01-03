@@ -50,8 +50,6 @@ include ('navbar.php');
 <br>
 <br>
 <br>
-<br>
-<br>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" >
 <select name="Tables" id="ddTables" style="height: 30px;width:300px;font-size:65%; border: 1px solid #D96B27"  onchange="this.form.submit();">
 	 <option disabled selected>Select</option>

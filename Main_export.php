@@ -24,6 +24,44 @@ include ('navbar.php');
     font-family: Arial, Helvetica, sans-serif;
   }
 
+  /* Style for buttons */
+
+    .thumbnail {
+      padding: 20px 0 10px;
+      transition-duration: 2s;
+      text-decoration: none !important;
+    }
+
+    .thumbnail-sub-container {
+      border: 2px solid #d86b27;
+      border-radius: 10px;
+      padding: 10px 0;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      cursor: pointer;
+      color:black;
+    }
+
+    .thumbnail-sub-container:hover {
+      color: white;
+      background-color: #d86b27;
+    }
+
+    .thumbnail:hover a{
+      color: white;
+      display: block;
+      text-decoration: none;
+
+    }
+
+    .thumbnail-container {
+      margin: 0 25%;
+    }
+
+    a.thumbnail {
+      border:none;
+    }
+
 /* Style the header */
   .header {
     padding: 15px;
@@ -66,25 +104,20 @@ include ('navbar.php');
 
 
 
-<td align="center" class="bgcolor_03">
-  <form action="" method="POST" >
-    <input type="radio" class="import" name="group" id="group" value="Sec" style="font-size:75%;color:#D96B27" />
-    ReadMe
-    <input type="radio" class="import" name="group" id="group2" value="SSec" style="font-size:75%;color:#D96B27" />
-    Data Dictionary
-    <br />
-    <br>
-    <input type="submit" value="Done" style="font-size:75%;color:#D96B27; border: 1px solid #D96B27" />
-  </form>
- <style>
- form {
-  text-align: center;
-  vertical-align: middle;
-  font-family: tahoma;
-  color: black;
-  font-size:150%;
-
-}
-</style>
-</td>
+<div class="row thumbnail-container" style="text-align: center;">
+  <div class="col-xs-12 col-md-6">
+    <a href="readme_index.php" class="thumbnail">
+      <div class="thumbnail-sub-container">
+        ReadMe
+      </div>
+    </a>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <a href="dict_index.php" class="thumbnail">
+      <div class="thumbnail-sub-container">
+        Data Dictionary
+      </div>
+    </a>
+  </div>
+</div>
 </body>

@@ -133,7 +133,7 @@ list-style: none;
 <li>Contact:</li><li><input type="text" name="contact" style="width:400px;"/></li>
 <br>
 <br>
-<input type="submit" id="tableSubmit" value="Submit" style="width:auto; color: black; background-color: lightgray"/>
+<input type="submit" id="tableSubmit" value="Submit" style="color: #D96B27;border: 1px solid #D96B27; width: 100px;"/>
 </form>
 
 </ul>

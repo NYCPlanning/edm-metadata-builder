@@ -26,6 +26,44 @@ include ('navbar.php');
     font-family: Arial, Helvetica, sans-serif;
   }
 
+
+.thumbnail {
+  padding: 20px 0 10px;
+  transition-duration: 2s;
+  text-decoration: none !important;
+}
+
+.thumbnail-sub-container {
+  border: 2px solid #d86b27;
+  border-radius: 10px;
+  padding: 10px 0;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  color:black;
+}
+
+.thumbnail-sub-container:hover {
+  color: white;
+  background-color: #d86b27;
+}
+
+.thumbnail:hover a{
+  color: white;
+  display: block;
+  text-decoration: none;
+
+}
+
+.thumbnail-container {
+  margin: 0 25%;
+}
+
+a.thumbnail {
+  border:none;
+}
+
+
 /* Style the header */
   .header {
 
@@ -45,7 +83,7 @@ include ('navbar.php');
   width: 50px;
   height: 50px;
   display: block;
-  vertical-align: middle;
+
   }
 
 </style>
@@ -54,7 +92,7 @@ include ('navbar.php');
   position: relative; ">
   <div class="header">
 <div class="clearfix">
-<h1 align="center" style="display: inline;">Metadata Management Web Tool</h1>
+<h1 align="center" style="display: inline; margin-top: 400px;">Metadata Management Web Tool</h1>
 </div>
 </div>
 <br>
@@ -67,28 +105,29 @@ include ('navbar.php');
 <br>
 <br>
 
-<td align="center" class="bgcolor_02">
-  <form action="" method="POST" >
-    <input type="radio" class="import" name="group" id="group" value="Sec" style="font-size:75%;color:#D96B27;" />
-    Import Data from Form
-    <input type="radio" class="import" name="group" id="group2" value="SSec" style="font-size:75%;color:#D96B27" />
-    Import Data from File
-    <input type="radio" class="import" name="group" id="group3" value="SSSec" style="font-size:75%;color:#D96B27" />
-    Export Metadata
-    <br />
-    <br>
-    <input type="submit" value="Done" style="font-size:75%;color:#D96B27; border: 0.5px solid #D96B27" />
-  </form>
-  <style>
- form {
-  text-align: center;
-  vertical-align: middle;
-  font-family: tahoma;
-  color: black;
-  font-size:150%;
+<div class="row thumbnail-container" style="text-align: center;">
+  <div class="col-xs-12 col-md-4">
+    <a href="Main_form.php" class="thumbnail">
+      <div class="thumbnail-sub-container">
+        Import Data from Form
+      </div>
+    </a>
+  </div>
+  <div class="col-xs-12 col-md-4">
+    <a href="Main_csv.php" class="thumbnail">
+      <div class="thumbnail-sub-container">
+        Import Data from File
+      </div>
+    </a>
+  </div>
+  <div class="col-xs-12 col-md-4">
+    <a href="Main_export.php" class="thumbnail">
+      <div class="thumbnail-sub-container">
+        Export Metadata
+      </div>
+    </a>
+  </div>
 
+</div>
 
-}
-</style> <!-- css styling -->
-</td>
 </body>
