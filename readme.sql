@@ -23,5 +23,6 @@ data_quality text,
 caveats text,
 future_plans text,
 distribution text,
-contact text
+contact text,
+date_last_updated date
 );

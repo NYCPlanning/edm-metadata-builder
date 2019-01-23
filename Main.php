@@ -1,133 +1,102 @@
 <?php
-if (isset($_POST['group'])) { // "group" is mutual name of radio buttons
-  switch ($_POST['group']) {
-    case 'Sec':  // Value of first radio button
-      header('Location: Main_form.php'); // the form action is passed as the header
-      break;
-    case 'SSec':  // Value of second radio button
-      header('Location: Main_csv.php');
-      break;
-    case 'SSSec':  // Value of third radio button
-      header('Location: Main_export.php');
-      break;
-    default:
-      break;
-  }
-}
 include ('navbar.php');
+include ('MaintFreq_dropdown.php');
 ?>
-<body style="background-color:white;">
+
 <style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-
-.thumbnail {
-  padding: 20px 0 10px;
-  transition-duration: 2s;
-  text-decoration: none !important;
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
 }
-
-.thumbnail-sub-container {
-  border: 2px solid #d86b27;
-  border-radius: 10px;
-  padding: 10px 0;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  color:black;
+#wrapper {
+    height: 100%;
 }
-
-.thumbnail-sub-container:hover {
-  color: white;
-  background-color: #d86b27;
-}
-
-.thumbnail:hover a{
-  color: white;
-  display: block;
-  text-decoration: none;
-
-}
-
-.thumbnail-container {
-  margin: 0 25%;
-}
-
-a.thumbnail {
-  border:none;
-}
-
-
-/* Style the header */
-  .header {
-
-    padding: 15px;
-    text-align: center;
-    font-size: 15px;
-    display: block;
-
-  }
-
-  .clearfix {
+#left-div {
+    float: left;
+    width: 20%;
+    height: 100%;
+    border-right: 1px solid #DFE0E5;
     overflow: auto;
+    padding: 0.4em;
+}
+#right-div {
+    float: left;
+    width: 80%;
+    height: 100%;
+    overflow: auto;
+    padding: 0.4em;
+    padding-bottom: 50px;
 }
 
-  .img {
-  background-color: #fff;
-  width: 50px;
-  height: 50px;
-  display: block;
-
-  }
 
 </style>
-<body style="background-color: white; background-repeat: no-repeat; height: 100%; background-position: center;
-  background-size: cover;
-  position: relative; ">
-  <div class="header">
-<div class="clearfix">
-<h1 align="center" style="display: inline; margin-top: 400px;">Metadata Management Web Tool</h1>
-</div>
-</div>
-<br>
-<br> <!-- just indenting -->
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-<div class="row thumbnail-container" style="text-align: center;">
-  <div class="col-xs-12 col-md-4">
-    <a href="Main_form.php" class="thumbnail">
-      <div class="thumbnail-sub-container">
-        Import Data from Form
-      </div>
-    </a>
-  </div>
-  <div class="col-xs-12 col-md-4">
-    <a href="Main_csv.php" class="thumbnail">
-      <div class="thumbnail-sub-container">
-        Import Data from File
-      </div>
-    </a>
-  </div>
-  <div class="col-xs-12 col-md-4">
-    <a href="Main_export.php" class="thumbnail">
-      <div class="thumbnail-sub-container">
-        Export Metadata
-      </div>
-    </a>
-  </div>
+<div id="wrapper">
+    <!-- Left Fixed Div -->
+    <div id="left-div">
 
+      <!-- Dataset Name Search -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="input-group">
+            <label for="dataset_name">Dataset Name</label>
+            <input type="text" class="form-control" placeholder="Dataset Name" id="dataset_name">
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-12 -->
+      </div><!-- /.row -->
+
+      <!-- Update Frequency Filter -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="input-group">
+            <label for="update_freq">Update Frequency</label>
+            <div class="">
+              <select required name="update_freq" id="update_freq">
+                <option value="<?php echo $update_freq; ?>" selected><?php echo $update_freq; ?></option>
+                <?php
+                echo $tables;
+                ?>
+              </select>
+            </div>
+
+          </div>
+        </div><!-- /.col-lg-12 -->
+      </div><!-- /.row -->
+
+      <!-- Tags Filter -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="input-group">
+            <label for="tags">Tags</label>
+            <input type="text" class="form-control" placeholder="Tag Names" id="tags">
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-12 -->
+      </div><!-- /.row -->
+
+    </div><!-- /#wrapper -->
+
+
+
+
+    <!-- Right Fixed Div -->
+    <div id="right-div">
+      <!-- Retrieve data from database -->
+      <?php
+      $query1 = 'SELECT uid, common_name, description, date_last_updated FROM readme';
+      $result = pg_query($query1);
+      $row =pg_fetch_all($result);
+
+
+      foreach($row as $r) {
+        echo "<a href='display.php?id=".$r["uid"]."'><h4>" .  $r["common_name"] . "</h4></a>";
+        echo "<p><em>" . $r["description"] . "</em></p>";
+        echo "<h6>Date Last Modified: " . $r["date_last_updated"] . "</h6>";
+        echo "<hr>";
+      }
+
+      ?>
+    </div>
 </div>
 
 </body>

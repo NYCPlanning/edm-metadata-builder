@@ -3,12 +3,12 @@
 //this code exports the table into the Esri accepted xml format
 
 include 'config.php'; //connect to database
-$tbname = $_GET['selection'];
+$uid = $_GET['id'];
+$tbname = $_GET['tbname'];
 
-//the file extension to be downloaded and the file name is passed through the header 
+//the file extension to be downloaded and the file name is passed through the header
 header('content-type: text/xml');
 header('Content-Disposition: attachment; filename='.$tbname.'.xml');
-$tbname = $_GET['selection'];
 
 if (isset($_POST["Expor2xml"])) {
 
@@ -18,7 +18,7 @@ $r = "CREATE TABLE temp AS
        (
        SELECT common_name AS title, tags_guide||tags_sde AS themekey , summary||summary_update_date AS purpose, description||description_data_loc AS abstract, credits AS datacred, genconst AS useconst, legconst AS distliab, update_freq AS update, version AS edition
               FROM readme
-		WHERE sde_name = '".$tbname."')";
+		WHERE uid = '".$uid."')";
 
 $table = pg_query($r);
 
@@ -26,7 +26,7 @@ $fp = fopen("php://output", 'w'); //opening the xml fille to be downloaded
 
 //the following query uses Postgres XML functions. '\' is added to maintain Mixed Case.
 
-$q = "SELECT xmlelement(name metadata, 
+$q = "SELECT xmlelement(name metadata,
 xmlelement(
        name idinfo,
        XMLELEMENT (name descript,
@@ -42,7 +42,7 @@ xmlelement(
        XMLAGG (XMLFOREST (datacred)),
        XMLAGG (XMLFOREST (useconst)),
        XMLELEMENT (name ptcontac,
-       XMLELEMENT (name cntinfo, 
+       XMLELEMENT (name cntinfo,
        XMLELEMENT (name cntorgp,
        XMLAGG (XMLFOREST ('NYC Department of City Planning' AS cntorg))),
        XMLELEMENT (name cntaddr,
@@ -56,7 +56,7 @@ xmlelement(
        XMLAGG (XMLFOREST (update)))
        ),
 XMLELEMENT (name metc,
-       XMLELEMENT (name cntinfo, 
+       XMLELEMENT (name cntinfo,
        XMLELEMENT (name cntorgp,
        XMLAGG (XMLFOREST ('NYC Department of City Planning' AS cntorg))),
        XMLELEMENT (name cntaddr,
@@ -67,7 +67,7 @@ XMLELEMENT (name metc,
        XMLAGG (XMLFOREST ('10271' AS postal))),
        XMLAGG (XMLFOREST ('DCPopendata@planning.nyc.gov' AS cntemail)))
 ),
-XMLELEMENT (name distinfo, 
+XMLELEMENT (name distinfo,
 XMLAGG (XMLFOREST (distliab))
 ))
 FROM temp";
@@ -93,6 +93,3 @@ $drop = pg_query($d);
 
 
 ?>
-
-
-

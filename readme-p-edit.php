@@ -68,6 +68,7 @@ list-style: none;
     overflow: auto;
 }
 
+
 	.img {
 	background-color: #fff;
 	width: 50px;

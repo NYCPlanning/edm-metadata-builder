@@ -1,10 +1,11 @@
 <?php
 include ('config.php'); //including the db connection details
 
-if(isset($_POST['csv_submit'])) {
-//get the csv file
-    $file = $_FILES["csv"]["tmp_name"];
-if ($_FILES["csv"]["size"] > 0) {
+if(isset($_POST['file_submit'])) {
+    //get the file
+    $file = $_FILES["file"]["tmp_name"];
+
+    if ($_FILES["file"]["size"] > 0) {
 
     $handle = fopen($file,"r");
     $flag = true;
@@ -81,14 +82,14 @@ include ('navbar.php');
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="filebutton">Select File</label>
                             <div class="col-md-4">
-                                <input type="file" name="csv" id="csv" class="input-large" >
+                                <input type="file" name="file" id="file" class="input-large" >
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton">Submit data</label>
                             <div class="col-md-4">
-                                <button type="submit" id="submit" name="csv_submit" style="color: #D96B27;border: 1px solid #D96B27" data-loading-text="Loading...">Submit</button>
+                                <button type="submit" id="submit" name="file_submit" style="color: #D96B27;border: 1px solid #D96B27" data-loading-text="Loading...">Submit</button>
                             </div>
                         </div>
 
