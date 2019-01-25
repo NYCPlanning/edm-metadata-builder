@@ -2,8 +2,8 @@
 include ('navbar.php');
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
+include ('dd_upload.php');
 include ('readme-p-edit-submission.php');
-$id = $_GET['id'];
 
 // Trim white spaces
 $common_name_normalize = trim($_POST['common_name']);
@@ -14,22 +14,30 @@ $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
 $query = "INSERT INTO ReadMe(common_name, sde_name) VALUES ('$common_name_normalize','$sde_name_normalize');";
 $query .= "CREATE TABLE $sde_name_underscore (
                   uid serial PRIMARY key NOT NULL,
-                  column_name text,
-                  column_description text,
-                  code_def text,
-                  add_notes text,
-                  internal_notes text
+                  \"order\" int,
+                  field_name text,
+                  longform_name text,
+                  description text,
+                  geocoded boolean,
+                  required boolean,
+                  data_type text,
+                  expected_allowed_values text,
+                  last_modified_date text,
+                  no_longer_in_use text,
+                  notes text
                 );";
 pg_query($query);
 
-// $uid_query = "SELECT uid FROM readme WHERE sde_name = $sde_name_normalize";
-// echo $sde_name_normalize;
-// $id = pg_query($db, "SELECT uid FROM readme WHERE sde_name = $sde_name_normalize");
-// $id_row = pg_fetch_assoc($id);
-// if (!$id) {
-//   echo "An error occurred.\n";
-//   exit;
-// }
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+} else if (isset($_POST['id'])){
+  $id = $_POST['id'];
+} else{
+  $id_query = "SELECT uid FROM readme WHERE sde_name = '$sde_name_underscore'";
+  $id_results = pg_query($id_query);
+  $id_row = pg_fetch_assoc($id_results);
+  $id = $id_row['uid'];
+}
 
 $readme_query = "SELECT * FROM readme WHERE uid = $id";
 
@@ -61,16 +69,11 @@ $readme_row = pg_fetch_assoc($readme_results);
     $distribution = $readme_row['distribution'];
     $contact = $readme_row['contact'];
 
-
-
-
-
-
-
-
-
+    $sde_name_normalize = trim($sde_name);
+    $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
 
 ?>
+
 
 <style>
 li {
@@ -107,14 +110,18 @@ li {
 }
 
 .readme-header-container button{
-  margin: -12px 0 0 0;
+  margin: -12px 10px 0 0;
 }
+
 
 .dd-header-container h4{
   margin: 10px 0 0 0;
 }
+.dd-header-container a {
+  margin: 10px 10px 0 0;
+}
 .dd-header-container button{
-  margin: 9px 0 0 0;
+  margin: 9px 10px 0 0;
 }
 .left-container {
   float: left;
@@ -179,12 +186,13 @@ li {
 .dd-header-container a {
   margin: 10px 10px 0 0;
 }
-/* Readme Overlay */
-#modalLoginForm {
+/* upload Overlay */
+.upload-modal{
   margin-top: 20%;
 }
 
 </style>
+
 <div class="common-name-header border-bottom">
   <h3><?php echo $common_name; ?></h3>
 </div>
@@ -197,7 +205,7 @@ li {
       <h4>Readme</h4>
     </div>
     <div class="upload-readme container right-container">
-      <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      <div class="modal fade upload-modal" id="readme-upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -207,7 +215,7 @@ li {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form action="display.php" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
+            <form action="display.php?id=<?php echo $id;?>" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
                 <fieldset>
 
                     <div class="form-group">
@@ -232,7 +240,7 @@ li {
       </div>
 
       <div class="text-right">
-        <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Upload From File</a>
+        <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#readme-upload">Upload From File</a>
       </div>
 
     </div>
@@ -242,7 +250,7 @@ li {
 
     <!-- Top Div -->
     <div id="top-div" class="border-bottom">
-      <form name="readme" action="display.php?selection=<?php echo $selection;?>" method="POST" >
+      <form name="readme" action="display.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" method="POST" >
       <input type="hidden" name="id" value="<?php echo $id; ?>"/>
       <li>Common Name:</li><li><input type="text" name="common_name" style="width:400px;" value="<?php echo $common_name; ?>"/></li>
       <br>
@@ -299,7 +307,7 @@ li {
       <li>Contact:</li><li><input type="text" name="contact" style="width:550px;" value="<?php echo $contact; ?>"/></li>
       <br>
       <br>
-      <input type="submit" id="tableSubmit" value="Save" name=""/>
+      <input type="submit" id="tableSubmit" value="Save" name="readme_save_button"/>
       </form>
     </div><!-- /Top Div -->
 
@@ -309,7 +317,34 @@ li {
       </div>
       <div class="text-right dd-header-container">
         <a href= "edit.php?id=<?php echo $id; ?>"  class="btn btn-default btn-rounded mb-4">Edit</a>
-        <a href="" class="btn btn-default btn-rounded mb-4">Export</a>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-rounded mb-4 export-file" data-toggle="modal" data-target="#exportDD">Export</button>
+
+        <!-- Modal -->
+        <div id="exportDD" class="modal fade" role="dialog" style="margin-top: 200px;">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-left" style="">Data Dictionary Export</h4>
+              </div>
+              <div class="modal-body text-center">
+                <form class="form-horizontal" action="expbut_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&$sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                  <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value="CSV"/>
+                </form>
+                <form class="form-horizontal" action="expxml_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&$sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                  <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value="XML"/>
+                </form>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
 
@@ -320,7 +355,7 @@ li {
       <!-- Display Data Dictionary Table -->
       <?php
 
-      $data_dict_query = "SELECT * FROM $sde_name";
+      $data_dict_query = "SELECT * FROM $sde_name_underscore";
       $data_dict = pg_query($data_dict_query);
 
 

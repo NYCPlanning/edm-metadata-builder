@@ -1,7 +1,6 @@
 <?php
 if (isset($_POST['readme_save_button'])) {
   $id = $_POST['id'];
-  $selection = $_POST['update_freq'];
   $sql = "UPDATE readme
           SET common_name = '" . $_POST['common_name'] . "',
               sde_name    = '" . $_POST['sde_name'] . "',
@@ -16,7 +15,7 @@ if (isset($_POST['readme_save_button'])) {
               credits = '" . $_POST['credits'] . "',
               genconst = '" . $_POST['genconst'] . "',
               legconst = '" . $_POST['legconst'] . "',
-              update_freq = '$selection',
+              update_freq = '" . $_POST['update_freq'] . "',
               date_last_update = '" . $_POST['date_last_update'] . "',
               date_underlying_data = '" . $_POST['date_underlying_data'] . "',
               data_source = '" . $_POST['data_source'] . "',

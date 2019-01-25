@@ -2,30 +2,43 @@
 include ('navbar.php');
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
+include ('readme-p-edit-submission.php');
+
 
 // Trim white spaces
-$common_name_normalize = trim($_POST['common_name']);
-$sde_name_normalize = trim($_POST['sde_name']);
-// Replace space with underscore
-$sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
-
-$query = "INSERT INTO ReadMe(common_name, sde_name) VALUES ('$common_name_normalize','$sde_name_normalize');";
-$query .= "CREATE TABLE $sde_name_underscore (
-                  uid serial PRIMARY key NOT NULL,
-                  column_name text,
-                  column_description text,
-                  code_def text,
-                  add_notes text,
-                  internal_notes text
-                );";
-pg_query($query);
+if (isset($_POST['common_name'])) {
+  $current_date = date("m-d-Y");
+  $common_name_normalize = trim($_POST['common_name']);
+  $sde_name_normalize = trim($_POST['sde_name']);
+  // Replace space with underscore
+  $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
+  $query = "INSERT INTO ReadMe(common_name, sde_name, date_last_updated) VALUES ('$common_name_normalize','$sde_name_normalize', '$current_date');";
+  $query .= "CREATE TABLE $sde_name_underscore (
+                    uid serial PRIMARY key NOT NULL,
+                    \"order\" int,
+                    field_name text,
+                    longform_name text,
+                    description text,
+                    geocoded boolean,
+                    required boolean,
+                    data_type text,
+                    expected_allowed_values text,
+                    last_modified_date text,
+                    no_longer_in_use text,
+                    notes text
+                  );";
+  pg_query($query);
+}
 
 
 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
+} else if (isset($_POST['id'])){
+  $id = $_POST['id'];
 } else {
-  $id_query = "SELECT uid FROM readme WHERE sde_name = '$sde_name_underscore'";
+
+  $id_query = "SELECT uid FROM readme WHERE sde_name = '$sde_name_normalize'";
   $id_results = pg_query($id_query);
   $id_row = pg_fetch_assoc($id_results);
   $id = $id_row['uid'];
@@ -63,6 +76,17 @@ $readme_row = pg_fetch_assoc($readme_results);
     $future_plans = $readme_row['future_plans'];
     $distribution = $readme_row['distribution'];
     $contact = $readme_row['contact'];
+
+    $sde_name_normalize = trim($sde_name);
+    $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
+
+
+    if (isset($_POST['delete-id'])) {
+      $delete_id = $_POST['delete-id'];
+      $table = $_POST['tbname'];
+      $delete_sql = "DELETE FROM $table WHERE uid = $delete_id";
+      pg_query($delete_sql);
+    }
 
 
 
@@ -182,8 +206,7 @@ li {
 .dd-header-container a {
   margin: 10px 0 0 0;
 }
-/* Readme Overlay */
-#modalLoginForm {
+.upload-modal {
   margin-top: 20%;
 }
 
@@ -200,7 +223,7 @@ li {
       <h4>Readme</h4>
     </div>
     <div class="upload-readme container right-container">
-      <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      <div class="modal fade upload-modal" id="readme-upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -210,7 +233,7 @@ li {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form action="display.php" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
+            <form action="edit-dd.php?id=<?php echo $id;?>" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
                 <fieldset>
 
                     <div class="form-group">
@@ -235,7 +258,7 @@ li {
       </div>
 
       <div class="text-right">
-        <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Upload From File</a>
+        <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#readme-upload">Upload From File</a>
       </div>
 
     </div>
@@ -245,7 +268,7 @@ li {
 
     <!-- Top Div -->
     <div id="top-div" class="border-bottom">
-      <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>" method="POST" >
+      <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" method="POST" >
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <li>Common Name:</li><li><input type="text" name="common_name" style="width:400px;" value="<?php echo $common_name; ?>"/></li>
         <br>
@@ -311,9 +334,48 @@ li {
       <div class="container left-container">
         <h4>Data Dictionary</h4>
       </div>
+
+
+      <div class="upload-dd container right-container">
+        <div class="modal fade upload-modal" id="dd-upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Data Dictionary</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="edit-readme.php?tbname=<?php echo $sde_name_underscore;?>&id=<?php echo $id;?>" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
+                  <fieldset>
+
+                      <div class="form-group">
+                          <label class="col-md-4 control-label" for="filebutton">Select File</label>
+                          <div class="col-md-4">
+                              <input type="file" name="file" id="dd-file" class="input-large" accept=".xml,.csv">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <div class="col-md-4 col-md-offset-5">
+                              <button type="submit" id="dd_submit_append" name="dd_submit_append" data-loading-text="Loading...">Append</button>
+                          </div>
+                          <div class="col-md-4 col-md-offset-5">
+                              <button type="submit" id="dd_submit_overwrite" name="dd_submit_overwrite" data-loading-text="Loading...">Overwrite</button>
+                          </div>
+                      </div>
+
+                  </fieldset>
+              </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
       <div class="upload-readme container right-container">
         <div class="text-right">
-          <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Upload From File</a>
+          <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#dd-upload">Upload From File</a>
         </div>
       </div>
     </div>
@@ -325,7 +387,7 @@ li {
     <!-- Display Data Dictionary Table -->
     <?php
 
-    $data_dict_query = "SELECT * FROM $sde_name";
+    $data_dict_query = "SELECT * FROM $sde_name_underscore";
     $data_dict = pg_query($data_dict_query);
 
 
@@ -350,7 +412,7 @@ li {
         $count = count($row);
         //Adds the Edit and Delete buttons to every row
         echo "<td style='text-align: center'><a href='readme-p-edit.php?id=".$row[0]."'><i class='far fa-edit'></i></a></td>";
-        echo "<td style='text-align: center'><a href='readme-p-delete.php?id=".$row[0]."'><i class='far fa-trash-alt'></i></a></td>";
+        echo "<td style='text-align: center'><a href='edit.php?delete-id=".$row[0]."&tbname=". $sde_name_underscore ."&id=".$id."'><i class='far fa-trash-alt'></i></a></td>";
         for ($y = 0; $y < $count; $y+=1)
         {
           $c_row = current($row);

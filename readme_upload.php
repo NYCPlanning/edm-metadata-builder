@@ -1,8 +1,7 @@
 <?php
-include ('config.php'); //including the db connection details
-
 if(isset($_POST['readme_submit'])) {
     // Get the file
+    $id = $_GET['id'];
     $file = $_FILES["file"]["tmp_name"];
     // Get contents of the file
     $file_contents = file_get_contents($file);
@@ -49,8 +48,19 @@ if(isset($_POST['readme_submit'])) {
       $date_last_update = $json_decoded["Esri"]["ModDate"];
       $date_underlying_data = preg_replace("/T00:00:00$ /i", "", $json_decoded["dataIdInfo"]["idCitation"]["date"]["createDate"]);
 
-      $query="INSERT INTO ReadMe(tags_guide,summary,description,credits,update_freq,date_last_update, date_underlying_data) VALUES ('$tags_guide','$summary','$descript','$credits','$update_freq','$date_last_update','$date_underlying_data')";
+      $query = "UPDATE ReadMe
+                SET tags_guide = '$tags_guide',
+                    summary = '$summary',
+                    description = '$descript',
+                    credits = '$credits',
+                    update_freq = '$update_freq',
+                    date_last_update = '$date_last_update',
+                    date_underlying_data = '$date_underlying_data'
+                WHERE uid = $id";
+
+      // $query="INSERT INTO ReadMe(tags_guide,summary,description,credits,update_freq,date_last_update, date_underlying_data) VALUES ('$tags_guide','$summary','$descript','$credits','$update_freq','$date_last_update','$date_underlying_data')";
       $res = pg_query($db, $query);
+
     }
     // CSV file upload
     else if($ext === 'csv') {
@@ -60,9 +70,35 @@ if(isset($_POST['readme_submit'])) {
           //loop through the csv file and insert into database
         while (($data = fgetcsv($handle,10000,",")) !== FALSE) {
            if($flag) { $flag = false; continue; }
-                 $query="INSERT INTO ReadMe(common_name, sde_name, tags_guide, tags_sde, summary, summary_update_date, description, description_data_loc,
-                 data_steward, data_engineer, credits, genconst, legconst, update_freq, date_last_update, date_underlying_data, data_source, version,
-                 common_uses, data_quality, caveats, future_plans, distribution, contact) VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]','$data[11]','$data[12]','$data[13]','$data[14]','$data[15]','$data[16]','$data[17]','$data[18]', '$data[19]','$data[20]', '$data[21]', '$data[22]','$data[23]')";
+
+            $query = "UPDATE ReadMe
+                      SET tags_guide = '$data[2]',
+                      tags_sde = '$data[3]',
+                      summary = '$data[4]',
+                      summary_update_date = '$data[5]',
+                      description = '$data[6]',
+                      description_data_loc = '$data[7]',
+                      data_steward = '$data[8]',
+                      data_engineer = '$data[9]',
+                      credits = '$data[10]',
+                      genconst = '$data[11]',
+                      legconst = '$data[12]',
+                      update_freq = '$data[13]',
+                      date_last_update = '$data[14]',
+                      date_underlying_data = '$data[15]',
+                      data_source = '$data[16]',
+                      version = '$data[17]',
+                      common_uses = '$data[18]',
+                      data_quality = '$data[19]',
+                      caveats = '$data[20]',
+                      future_plans = '$data[21]',
+                      distribution = '$data[22]',
+                      contact = '$data[23]'
+                      WHERE uid = $id";
+
+                 // $query="INSERT INTO ReadMe(common_name, sde_name, tags_guide, tags_sde, summary, summary_update_date, description, description_data_loc,
+                 // data_steward, data_engineer, credits, genconst, legconst, update_freq, date_last_update, date_underlying_data, data_source, version,
+                 // common_uses, data_quality, caveats, future_plans, distribution, contact) VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]','$data[11]','$data[12]','$data[13]','$data[14]','$data[15]','$data[16]','$data[17]','$data[18]', '$data[19]','$data[20]', '$data[21]', '$data[22]','$data[23]')";
             $res = pg_query($db, $query);
           }
       fclose($handle);

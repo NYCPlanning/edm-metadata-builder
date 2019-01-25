@@ -24,5 +24,5 @@ caveats text,
 future_plans text,
 distribution text,
 contact text,
-date_last_updated date
+date_last_updated text
 );

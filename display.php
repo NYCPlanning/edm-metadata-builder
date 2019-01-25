@@ -2,9 +2,9 @@
 include ('navbar.php');
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
+include ('dd_upload.php');
 include ('readme-p-edit-submission.php');
 // Trim white spaces
-$id = $_GET['id'];
 
 
 $common_name_normalize = trim($_POST['common_name']);
@@ -12,26 +12,33 @@ $sde_name_normalize = trim($_POST['sde_name']);
 // Replace space with underscore
 $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
 $sde_name_normalize = trim($sde_name);
-$sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
 $query = "INSERT INTO ReadMe(common_name, sde_name) VALUES ('$common_name_normalize','$sde_name_normalize');";
 $query .= "CREATE TABLE $sde_name_underscore (
                   uid serial PRIMARY key NOT NULL,
-                  column_name text,
-                  column_description text,
-                  code_def text,
-                  add_notes text,
-                  internal_notes text
+                  \"order\" int,
+                  field_name text,
+                  longform_name text,
+                  description text,
+                  geocoded boolean,
+                  required boolean,
+                  data_type text,
+                  expected_allowed_values text,
+                  last_modified_date text,
+                  no_longer_in_use text,
+                  notes text
                 );";
 pg_query($query);
 
-// $uid_query = "SELECT uid FROM readme WHERE sde_name = $sde_name_normalize";
-// echo $sde_name_normalize;
-// $id = pg_query($db, "SELECT uid FROM readme WHERE sde_name = $sde_name_normalize");
-// $id_row = pg_fetch_assoc($id);
-// if (!$id) {
-//   echo "An error occurred.\n";
-//   exit;
-// }
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+} else if (isset($_POST['id'])){
+  $id = $_POST['id'];
+} else{
+  $id_query = "SELECT uid FROM readme WHERE sde_name = '$sde_name_underscore'";
+  $id_results = pg_query($id_query);
+  $id_row = pg_fetch_assoc($id_results);
+  $id = $id_row['uid'];
+}
 
 $readme_query = "SELECT * FROM readme WHERE uid = $id";
 
@@ -373,10 +380,10 @@ li {
                 <h4 class="modal-title text-left" style="">Data Dictionary Export</h4>
               </div>
               <div class="modal-body text-center">
-                <form class="form-horizontal" action="expbut_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&$sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                <form class="form-horizontal" action="expbut_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value="CSV"/>
                 </form>
-                <form class="form-horizontal" action="expxml_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&$sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                <form class="form-horizontal" action="expxml_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value="XML"/>
                 </form>
 
@@ -396,7 +403,7 @@ li {
     <!-- Display Data Dictionary Table -->
     <?php
 
-    $data_dict_query = "SELECT * FROM $sde_name";
+    $data_dict_query = "SELECT * FROM $sde_name_underscore";
     $data_dict = pg_query($data_dict_query);
 
 
