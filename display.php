@@ -6,6 +6,11 @@ include ('dd_upload.php');
 include ('readme-p-edit-submission.php');
 // Trim white spaces
 
+$common_name_search = $_GET['search'];
+$id_query = "SELECT uid FROM readme WHERE common_name = '$common_name_search'";
+$id_results = pg_query($id_query);
+$id_row = pg_fetch_assoc($id_results);
+$id = $id_row['uid'];
 
 $common_name_normalize = trim($_POST['common_name']);
 $sde_name_normalize = trim($_POST['sde_name']);
@@ -29,10 +34,16 @@ $query .= "CREATE TABLE $sde_name_underscore (
                 );";
 pg_query($query);
 
-if (isset($_GET['id'])) {
+
+  if (isset($_GET['id'])) {
   $id = $_GET['id'];
 } else if (isset($_POST['id'])){
   $id = $_POST['id'];
+} else if (isset($_GET['search'])) {
+  $id_query = "SELECT uid FROM readme WHERE common_name = '$common_name_search'";
+  $id_results = pg_query($id_query);
+  $id_row = pg_fetch_assoc($id_results);
+  $id = $id_row['uid'];
 } else{
   $id_query = "SELECT uid FROM readme WHERE sde_name = '$sde_name_underscore'";
   $id_results = pg_query($id_query);

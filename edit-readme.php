@@ -279,7 +279,7 @@ li {
       <li>Legal Constraints Use Limitations:</li><li><input type="text" name="legconst" style="width:450px;" value="<?php echo $legconst; ?>"/></li>
       <br>
       <li>Update Frequency:</li>
-      <select required name="update_freq" id="ddTables" style="font-size:12pt; height:45px; width:400px; border: 1px solid #D96B27;">
+      <select required name="update_freq" id="ddTables" style="font-size:12pt; height:45px; width:400px;">
       	<option value="<?php echo $update_freq; ?>" selected><?php echo $update_freq; ?></option>
       	<?php
       	echo $tables;
@@ -332,10 +332,10 @@ li {
                 <h4 class="modal-title text-left" style="">Data Dictionary Export</h4>
               </div>
               <div class="modal-body text-center">
-                <form class="form-horizontal" action="expbut_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&$sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                <form class="form-horizontal" action="expbut_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value="CSV"/>
                 </form>
-                <form class="form-horizontal" action="expxml_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&$sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                <form class="form-horizontal" action="expxml_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value="XML"/>
                 </form>
 

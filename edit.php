@@ -298,7 +298,7 @@ li {
         <br>
         <!-- <li>Update Frequency:</li><li><input type="text" name="update_freq" /></li> -->
         <li>Update Frequency:</li>
-        <select required name="update_freq" id="ddTables" style="font-size:12pt; height:45px; width:400px; border: 1px solid #D96B27;">
+        <select required name="update_freq" id="ddTables" style="font-size:12pt; height:45px; width:400px;">
           <option value="<?php echo $update_freq; ?>" selected><?php echo $update_freq; ?></option>
           <?php
           echo $tables;

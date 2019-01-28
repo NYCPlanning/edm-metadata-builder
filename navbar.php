@@ -13,6 +13,7 @@ $selection = $_POST['update_freq'];
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
 </head>
 
 <style>
@@ -40,14 +41,10 @@ $selection = $_POST['update_freq'];
   .spacing {
       margin-bottom: 100px;
   }
-  .searchbar {
-    width: 200px;
-    transition: width 2s;
+  #searchbar {
+    width: 250px;
   }
 
-  #searchbar:focus {
-    width: 300px;
-  }
   .img {
   background-color: #fff;
   width: 50px;
@@ -76,6 +73,24 @@ $selection = $_POST['update_freq'];
   #top-div h5 {
     font-weight: bold;
   }
+  #display {
+    position: fixed;
+    background-color: white;
+    border-bottom: 1px solid #DFE0E5;
+    box-shadow: 0 5px 5px -3px #DFE0E5;
+    width: 250px;
+
+  }
+  #display ul{
+    list-style-type: none;
+    padding-left: 13px;
+    padding-bottom: 6px;
+
+  }
+  #display a {
+
+    cursor: pointer;
+  }
 
 </style>
 
@@ -101,12 +116,13 @@ $selection = $_POST['update_freq'];
         <ul class="nav navbar-nav navbar-right">
           <li><a href="import_metadata.php">Import Metadata</a></li>
           <li><a href="export_metadata.php">Export Metadata</a></li>
-          <form class="navbar-form navbar-left">
+          <form class="navbar-form navbar-left" id="searchbar-form" autocomplete="off" action="display.php">
             <div class="form-group">
-              <input type="text" id="searchbar" class="form-control" placeholder="Search Dataset">
+              <input type="text" id="searchbar" class="form-control" placeholder="Search Dataset" name="search">
             </div>
-            <button type="submit" class="btn btn-default">Search</button>
+            <div id="display"></div>
           </form>
+
         </ul>
 
       </div><!-- /.navbar-collapse -->
