@@ -13,7 +13,7 @@ $selection = $_POST['update_freq'];
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?newversion"></script>
 </head>
 
 <style>
@@ -27,6 +27,7 @@ $selection = $_POST['update_freq'];
     font-family: Arial, Helvetica, sans-serif;
     background-color: white;
   }
+
   .navbar-default {
     padding: 12px 0 10px;
     background-color: white;
@@ -92,6 +93,15 @@ $selection = $_POST['update_freq'];
     cursor: pointer;
   }
 
+  .error {
+    border-color: #ff0000 !important;
+    box-shadow: 0px 1.5px rgba(255, 0, 0, 0.8) !important;
+  }
+  .success {
+    border-color: #4BB543 !important;
+    box-shadow: 0px 1.5px rgba(75, 181, 67, 0.8) !important;
+  }
+
 </style>
 
 <body>
@@ -118,12 +128,14 @@ $selection = $_POST['update_freq'];
           <li><a href="export_metadata.php">Export Metadata</a></li>
           <form class="navbar-form navbar-left" id="searchbar-form" autocomplete="off" action="display.php">
             <div class="form-group">
-              <input type="text" id="searchbar" class="form-control" placeholder="Search Dataset" name="search">
+              <input type="text" id="searchbar" class="form-control" placeholder="Search Dataset" name="search" list="display" required >
+              <datalist id="display"></datalist>
             </div>
-            <div id="display"></div>
+
           </form>
 
         </ul>
+
 
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

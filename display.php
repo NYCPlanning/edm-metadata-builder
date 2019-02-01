@@ -7,7 +7,7 @@ include ('readme-p-edit-submission.php');
 // Trim white spaces
 
 $common_name_search = $_GET['search'];
-$id_query = "SELECT uid FROM readme WHERE common_name = '$common_name_search'";
+$id_query = "SELECT uid FROM readme WHERE LOWER(common_name) = LOWER('$common_name_search')";
 $id_results = pg_query($id_query);
 $id_row = pg_fetch_assoc($id_results);
 $id = $id_row['uid'];
@@ -90,8 +90,10 @@ $readme_row = pg_fetch_assoc($readme_results);
 
 
 
-
-
+// If dataset name doesn't exist in database send user back to Main.php
+if (!isset($id)) {
+  header('location: Main.php');
+}
 ?>
 
 <style>
