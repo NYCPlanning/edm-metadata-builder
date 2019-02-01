@@ -29,6 +29,16 @@ html, body {
     padding-bottom: 50px;
 }
 
+#update_freq {
+  height: 34px;
+  width: 100%;
+  background-color: white !important;
+}
+
+#searchbar-form {
+
+  display: none;
+}
 
 </style>
 
@@ -79,11 +89,13 @@ html, body {
 
 
 
+
     <!-- Right Fixed Div -->
     <div id="right-div">
       <!-- Retrieve data from database -->
       <?php
-      $query1 = 'SELECT uid, common_name, description, date_last_updated FROM readme';
+
+      $query1 = 'SELECT uid, common_name, description, date_last_updated FROM readme ORDER BY date_last_updated DESC';
       $result = pg_query($query1);
       $row =pg_fetch_all($result);
 
@@ -94,6 +106,8 @@ html, body {
         echo "<h6>Date Last Modified: " . $r["date_last_updated"] . "</h6>";
         echo "<hr>";
       }
+
+
 
       ?>
     </div>

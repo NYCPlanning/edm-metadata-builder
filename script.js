@@ -22,7 +22,6 @@ function create_button() {
 }
 
 $(document).ready(function() {
-  // disable
   $(window).keydown(function(event){
     if(event.keyCode == 13 && (common_status === false || sde_status === false)) {
       event.preventDefault();
@@ -64,6 +63,59 @@ $(document).ready(function() {
 
 
 
+   //On pressing a key on "Search" in "Main.php" file. This function will be called.
+   $("#dataset_name").keyup(function() {
+       //Assigning search box value to javascript variable named as "name".
+       var name = $('#dataset_name').val();
+       //Validating, if "name" is empty.
+       if (name == "") {
+         //AJAX is called.
+         $.ajax({
+             //AJAX type is "Post".
+             type: "POST",
+             //Data will be sent to "ajax.php".
+             url: "ajax.php",
+             //Data, that will be sent to "ajax.php".
+             data: {
+                 //Assigning value of "name" into "search" variable.
+                 filter_search_blank: name
+             },
+             //If result found, this funtion will be called.
+             success: function(html) {
+                 //Assigning result to "right-div" div in "Main.php" file.
+                 $("#right-div").html(html).show();
+             }
+         });
+       }
+
+       //If name is not empty.
+       else {
+           //AJAX is called.
+           $.ajax({
+               //AJAX type is "Post".
+               type: "POST",
+               //Data will be sent to "ajax.php".
+               url: "ajax.php",
+               //Data, that will be sent to "ajax.php".
+               data: {
+                   //Assigning value of "name" into "search" variable.
+                   filter_search: name
+               },
+               //If result found, this funtion will be called.
+               success: function(html) {
+                   //Assigning result to "right-div" div in "Main.php" file.
+                   $("#right-div").html(html).show();
+               }
+           });
+       }
+   });
+
+
+
+
+
+
+
    //On pressing a key on "common name" in "import_metadata.php" file. This function will be called.
    $("#commonName").keyup(function() {
        //Assigning search box value to javascript variable named as "name".
@@ -92,8 +144,8 @@ $(document).ready(function() {
                }
            }).done(function(common) {
                common_normalize = (JSON.stringify(common)).toLowerCase();
-               name_normalize = (JSON.stringify("\n\n" + name)).toLowerCase();
-                 if ($.trim(common_normalize) === $.trim(name_normalize)) {
+               name_normalize = (JSON.stringify(name)).toLowerCase();
+                 if ((common_normalize).trim() === (name_normalize).trim()) {
                    document.getElementById("commonName").classList.add("error");
                    document.getElementById("commonName").classList.remove("success");
                    common_status = false;
@@ -144,9 +196,8 @@ $(document).ready(function() {
                }
            }).done(function(sde) {
                common_normalize = (JSON.stringify(sde)).toLowerCase();
-               name_normalize = (JSON.stringify("\n\n" + name)).toLowerCase();
-
-                 if ($.trim(common_normalize) === $.trim(name_normalize)) {
+               name_normalize = (JSON.stringify(name)).toLowerCase();
+                 if ((common_normalize).trim() === (name_normalize).trim()) {
                    document.getElementById("sdeName").classList.add("error");
                    document.getElementById("sdeName").classList.remove("success");
                    sde_status = false;

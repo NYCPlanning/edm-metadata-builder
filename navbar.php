@@ -19,6 +19,8 @@ $selection = $_POST['update_freq'];
 <style>
   * {
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
   }
 
   body {
@@ -131,9 +133,7 @@ $selection = $_POST['update_freq'];
               <input type="text" id="searchbar" class="form-control" placeholder="Search Dataset" name="search" list="display" required >
               <datalist id="display"></datalist>
             </div>
-
           </form>
-
         </ul>
 
 
