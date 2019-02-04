@@ -165,18 +165,21 @@ li {
 
 #wrapper {
     width: 100%;
+    max-height: 100vh;
 }
 #top-div {
     float: left;
     width: 100%;
     height: 45%;
+    max-height: 45vh;
     overflow: auto;
     padding: 0.4em;
 }
 #bottom-div {
     float: left;
     width: 100%;
-    height: 25.5%;
+    height: 50%;
+    max-height: 34vh;
     overflow: auto;
     padding: 0.4em;
 }

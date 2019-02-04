@@ -8,7 +8,7 @@ $selection = $_POST['update_freq'];
 <head>
   <title>Metadata Management Tool</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -22,7 +22,10 @@ $selection = $_POST['update_freq'];
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
   }
-
+  html, body {
+      height:100%;
+      width:100%;
+  }
   body {
     margin: 0;
     padding: 0;

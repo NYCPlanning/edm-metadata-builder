@@ -62,11 +62,13 @@ html, body {
           <div class="input-group">
             <label for="update_freq">Update Frequency</label>
             <div class="">
-              <select required name="update_freq" id="update_freq">
+              <select required name="update_freq" id="update_freq" disabled>
+
                 <option value="<?php echo $update_freq; ?>" selected><?php echo $update_freq; ?></option>
                 <?php
                 echo $tables;
                 ?>
+                <option disabled selected>Under development</option>
               </select>
             </div>
 
@@ -79,7 +81,7 @@ html, body {
         <div class="col-lg-12">
           <div class="input-group">
             <label for="tags">Tags</label>
-            <input type="text" class="form-control" placeholder="Tag Names" id="tags">
+            <input type="text" class="form-control" placeholder="Under development" id="tags" disabled>
           </div><!-- /input-group -->
         </div><!-- /.col-lg-12 -->
       </div><!-- /.row -->

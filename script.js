@@ -21,6 +21,12 @@ function create_button() {
   }
 }
 
+// Data dictionary Edit event listener
+function editFunc(s) {
+  console.log(s);
+}
+
+
 $(document).ready(function() {
   $(window).keydown(function(event){
     if(event.keyCode == 13 && (common_status === false || sde_status === false)) {
@@ -215,5 +221,15 @@ $(document).ready(function() {
            })
        }
    });
+
+
+
+
+
+
+
+
+
+
 
 });

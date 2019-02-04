@@ -2,7 +2,7 @@
 include ('navbar.php');
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
-
+include ('dd-delete.php');
 include ('readme-p-edit-submission.php');
 
 
@@ -158,18 +158,21 @@ li {
 
 #wrapper {
     width: 100%;
+    max-height: 100vh;
 }
 #top-div {
     float: left;
     width: 100%;
     height: 45%;
+    max-height: 45vh;
     overflow: auto;
     padding: 0.4em;
 }
 #bottom-div {
     float: left;
     width: 100%;
-    height: 25.5%;
+    height: 50%;
+    max-height: 34vh;
     overflow: auto;
     padding: 0.4em;
 }
@@ -390,7 +393,7 @@ li {
 
 
     //fetching the column names of the dd table
-      echo '<table class="form-table"> <tr>';
+      echo '<div id="dd-wrapper"><table class="form-table"> <tr>';
       echo '<th> Edit </th> <th> Delete </th> ';
       $i = 0;
       while ($i < pg_num_fields($data_dict))
@@ -405,12 +408,23 @@ li {
       //fetching and displaying the contents of the db table
       while ($row = pg_fetch_row($data_dict))
       {
-        echo "<form action=readme-p-update.php?id=".$row[0]." method='post'>";
+        // echo "<form action=readme-p-update.php?id=".$row[0]." method='post'>";
         echo "<tr>";
         $count = count($row);
         //Adds the Edit and Delete buttons to every row
-        echo "<td style='text-align: center'><a href='readme-p-edit.php?id=".$row[0]."'><i class='far fa-edit'></i></a></td>";
-        echo "<td style='text-align: center'><a href='edit-dd.php?delete-id=".$row[0]."&tbname=". $sde_name_underscore ."&id=".$id."'><i class='far fa-trash-alt'></i></a></td>";
+        echo "<td style='text-align: center'>
+                <a href='readme-p-edit.php?id=".$row[0]."'>
+                  <i class='far fa-edit'></i>
+                </a>
+              </td>";
+
+        echo "<td style='text-align: center'>
+                <form action=edit-dd.php?delete-id=".$row[0]."&tbname=". $sde_name_underscore ."&id=".$id." " . " method='post' enctype='multipart/form-data'>
+                  <button class='btn' type='submit'>
+                    <i class='far fa-trash-alt'></i>
+                  </button>
+                </form>
+              </td>";
         for ($y = 0; $y < $count; $y+=1)
         {
           $c_row = current($row);
@@ -422,7 +436,7 @@ li {
       }
       pg_free_result($data_dict);
 
-      echo '</form></table>';
+      echo '</table></div>';
     ?>
 
 

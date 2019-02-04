@@ -7,7 +7,7 @@ include ('navbar.php');
   .wrapper {
     max-width: 400px;
     width: 50%;
-    margin: 0 auto;
+    margin: 10% auto;
   }
   .create-searchbar {
     width: 400px;
