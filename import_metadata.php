@@ -5,11 +5,12 @@ include ('navbar.php');
 
 <style>
   .wrapper {
+    max-width: 400px;
     width: 50%;
     margin: 0 auto;
   }
   .create-searchbar {
-    width: 500px;
+    width: 400px;
   }
   textarea:focus, input:focus{
       outline: none;
