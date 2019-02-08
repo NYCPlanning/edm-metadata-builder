@@ -214,7 +214,19 @@ li {
 .save-btn {
   border: none;
 }
+#dd_add_row {
+  padding: 13px 0 0 8px;
+}
 
+#dd_add_row button{
+  border: none;
+  background-color: white;
+}
+
+#dd_add_row .fa-plus-circle {
+  font-size: 24px;
+  background-color:white;
+}
 </style>
 
 <div class="common-name-header border-bottom">
@@ -428,15 +440,15 @@ li {
                   </form>
 
               </td>";
-              echo "<td style='text-align: center'>
-                      <form action=edit.php?delete-id=".$row[0]."&tbname=". $sde_name_underscore ."&id=".$id." " . " method='post' enctype='multipart/form-data'>
-                        <button class='btn' type='submit'>
-                          <i class='far fa-trash-alt'></i>
-                        </button>
-                      </form>
-                    </td>";
-              echo "<input type='hidden' name='id' form='form".$row[0]."' value='".$id."'>";
-              echo "<input type='hidden' name='sde_table' form='form".$row[0]."' value='".$sde_name_underscore."'>";
+        echo "<td style='text-align: center'>
+                <form action=edit.php?delete-id=".$row[0]."&tbname=". $sde_name_underscore ."&id=".$id." " . " method='post' enctype='multipart/form-data'>
+                  <button class='btn' type='submit'>
+                    <i class='far fa-trash-alt'></i>
+                  </button>
+                </form>
+              </td>";
+        echo "<input type='hidden' name='id' form='form".$row[0]."' value='".$id."'>";
+        echo "<input type='hidden' name='sde_table' form='form".$row[0]."' value='".$sde_name_underscore."'>";
         for ($y = 0; $y < $count; $y+=1)
         {
           $c_row = current($row);
@@ -450,6 +462,15 @@ li {
       pg_free_result($data_dict);
 
       echo '</table></div>';
+      echo '<div id="dd_add_row">
+              <form action="edit.php" id="add_row_form">
+                <button type="submit" name="add_row">
+                  <i class="fas fa-plus-circle"></i>
+                </button>
+              </form>
+            </div>';
+      echo "<input type='hidden' name='id' form='add_row_form' value='".$id."'>";
+      echo "<input type='hidden' name='sde_table' form='add_row_form' value='".$sde_name_underscore."'>";
     ?>
 
 

@@ -19,4 +19,15 @@ if(isset($_GET['save-submit'])) {
   pg_query($sql);
 
 }
+
+
+if(isset($_GET['add_row'])) {
+  $sde = $_GET['sde_table'];
+  $sql_add = "INSERT INTO $sde (orders,field_name,longform_name,description,geocoded,required,data_type,expected_allowed_values,last_modified_date,no_longer_in_use,notes)
+          VALUES ('','','','','','','','','','','')";
+
+  pg_query($sql_add);
+}
+
+
 ?>
