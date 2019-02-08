@@ -14,7 +14,7 @@ $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
 $query = "INSERT INTO ReadMe(common_name, sde_name) VALUES ('$common_name_normalize','$sde_name_normalize');";
 $query .= "CREATE TABLE $sde_name_underscore (
                   uid serial PRIMARY key NOT NULL,
-                  \"order\" int,
+                  orders int,
                   field_name text,
                   longform_name text,
                   description text,
@@ -358,7 +358,7 @@ li {
       <!-- Display Data Dictionary Table -->
       <?php
 
-      $data_dict_query = "SELECT * FROM $sde_name_underscore";
+      $data_dict_query = "SELECT * FROM $sde_name_underscore ORDER BY uid";
       $data_dict = pg_query($data_dict_query);
 
 

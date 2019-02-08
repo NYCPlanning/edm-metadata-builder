@@ -37,7 +37,7 @@ if (isset($_POST['dd_submit_append'])) {
         $handle = fopen($file,"r");
          while (($data = fgetcsv($handle,10000,",")) !== FALSE) {
          if($flag) { $flag = false; continue; }
-          $query2 = "INSERT INTO ".$tbname."(\"order\", field_name, longform_name, description, geocoded, required, data_type, expected_allowed_values, last_modified_date, no_longer_in_use, notes) VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]')";
+          $query2 = "INSERT INTO ".$tbname."(orders, field_name, longform_name, description, geocoded, required, data_type, expected_allowed_values, last_modified_date, no_longer_in_use, notes) VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]')";
           $res2 = pg_query($query2);
       }
 
@@ -69,7 +69,7 @@ else if (isset($_POST['dd_submit_overwrite'])) {
         $handle = fopen($file,"r");
          while (($data = fgetcsv($handle,10000,",")) !== FALSE) {
          if($flag) { $flag = false; continue; }
-          $query4 = "INSERT INTO ".$tbname."(\"order\", field_name, longform_name, description, geocoded, required, data_type, expected_allowed_values, last_modified_date, no_longer_in_use, notes) VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]')";
+          $query4 = "INSERT INTO ".$tbname."(orders, field_name, longform_name, description, geocoded, required, data_type, expected_allowed_values, last_modified_date, no_longer_in_use, notes) VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]')";
           $res4 = pg_query($query4);
       }
 

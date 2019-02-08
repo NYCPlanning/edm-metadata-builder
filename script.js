@@ -21,10 +21,6 @@ function create_button() {
   }
 }
 
-// Data dictionary Edit event listener
-function editFunc(s) {
-  console.log(s);
-}
 
 
 $(document).ready(function() {

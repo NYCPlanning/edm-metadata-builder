@@ -3,6 +3,7 @@ include ('navbar.php');
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
 include ('dd-delete.php');
+include ('dd-edit-submission.php');
 include ('readme-p-edit-submission.php');
 
 
@@ -16,12 +17,12 @@ if (isset($_POST['common_name'])) {
   $query = "INSERT INTO ReadMe(common_name, sde_name, date_last_updated) VALUES ('$common_name_normalize','$sde_name_normalize', '$current_date');";
   $query .= "CREATE TABLE $sde_name_underscore (
                     uid serial PRIMARY key NOT NULL,
-                    \"order\" int,
+                    orders text,
                     field_name text,
                     longform_name text,
                     description text,
-                    geocoded boolean,
-                    required boolean,
+                    geocoded text,
+                    required text,
                     data_type text,
                     expected_allowed_values text,
                     last_modified_date text,
@@ -81,13 +82,6 @@ $readme_row = pg_fetch_assoc($readme_results);
     $sde_name_normalize = trim($sde_name);
     $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
 
-
-    if (isset($_POST['delete-id'])) {
-      $delete_id = $_POST['delete-id'];
-      $table = $_POST['tbname'];
-      $delete_sql = "DELETE FROM $table WHERE uid = $delete_id";
-      pg_query($delete_sql);
-    }
 
 
 
@@ -217,8 +211,12 @@ li {
 .form-table form{
   margin-bottom: 0;
 }
+.save-btn {
+  border: none;
+}
 
 </style>
+
 <div class="common-name-header border-bottom">
   <h3><?php echo $common_name; ?></h3>
 </div>
@@ -395,7 +393,7 @@ li {
     <!-- Display Data Dictionary Table -->
     <?php
 
-    $data_dict_query = "SELECT * FROM $sde_name_underscore";
+    $data_dict_query = "SELECT * FROM $sde_name_underscore ORDER BY uid";
     $data_dict = pg_query($data_dict_query);
 
 
@@ -420,24 +418,33 @@ li {
         $count = count($row);
         //Adds the Edit and Delete buttons to every row
         echo "<td style='text-align: center'>
-                  <button class='btn edit-btn' id='edit".$row[0]. "' onclick='editFunc()' >
+                  <button class='btn edit-btn' id='edit".$row[0]. "' onClick='editFunc(this.id)' >
                     <i class='far fa-edit'></i>
                   </button>
-              </td>";
-        echo "<td style='text-align: center'>
-                <form action=edit.php?delete-id=".$row[0]."&tbname=". $sde_name_underscore ."&id=".$id." " . " method='post' enctype='multipart/form-data'>
-                  <button class='btn' type='submit'>
-                    <i class='far fa-trash-alt'></i>
+                  <form action='edit.php' id='form".$row[0]."'>
+                  <button class='save-btn' id='saveedit" .$row[0]."' type='submit' name='save-submit' form='form".$row[0]."' style=display:none;'>
+                    <i class='far fa-save' ></i>
                   </button>
-                </form>
+                  </form>
+
               </td>";
+              echo "<td style='text-align: center'>
+                      <form action=edit.php?delete-id=".$row[0]."&tbname=". $sde_name_underscore ."&id=".$id." " . " method='post' enctype='multipart/form-data'>
+                        <button class='btn' type='submit'>
+                          <i class='far fa-trash-alt'></i>
+                        </button>
+                      </form>
+                    </td>";
+              echo "<input type='hidden' name='id' form='form".$row[0]."' value='".$id."'>";
+              echo "<input type='hidden' name='sde_table' form='form".$row[0]."' value='".$sde_name_underscore."'>";
         for ($y = 0; $y < $count; $y+=1)
         {
           $c_row = current($row);
-          echo "<td class=uid" . $y . "><textarea disabled style='border: none' class=edit" .$row[0]. ">" . $c_row . "</textarea></td>";
+          echo "<td class=uid" . $y . "><textarea disabled style='border: none' name='s" .$y. "' form='form".$row[0]."' class=textedit" .$row[0]. ">" . $c_row . "</textarea></td>";
           next($row);
         }
 
+        echo "</form>";
         $i = $i + 1;
       }
       pg_free_result($data_dict);
@@ -451,11 +458,29 @@ li {
   </div> <!-- /wrapper -->
 
   <script>
-  // Data dictionary Edit event listener
-  function editFunc() {
-    var editID = $(this).attr("id");
-    console.log(editID);
-  }
+    var counter = 0;
+    // Data dictionary Edit event listener
+    function editFunc(clicked_id) {
+
+      var editbtn = document.getElementById(clicked_id);
+      var savebtn = document.getElementById("save" + clicked_id);
+      var allClasses = document.getElementsByClassName("text" + clicked_id);
+      if(counter < 1) {
+        for (var i = 0; i < allClasses.length; i++) {
+          allClasses[i].disabled = false;
+          allClasses[i].style.border = "0.8px solid #bababa";
+        }
+        editbtn.style.display = "none";
+        savebtn.style.display = "inline-block";
+        counter++;
+      }
+      else {
+        alert("Please save the other row first");
+      }
+
+    }
+
   </script>
 </body>
+
 </html>
