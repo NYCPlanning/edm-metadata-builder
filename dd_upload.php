@@ -8,28 +8,29 @@ if (isset($_POST['dd_submit_append'])) {
   $file_contents = file_get_contents($file);
   // Get the file extension
   $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+
   // XML file upload
   if($ext === 'xml') {
-    // $file_string = simplexml_load_string($file_contents);
-    // $json = json_encode($file_string);
-    // $json_decoded = json_decode($json, true);
-    // $common_name = $json_decoded["dataIdInfo"]["idCitation"]["resTitle"];
+    $xml = simplexml_load_file($file);
 
-    //Loop thru
-    // $query = "UPDATE $tbname
-    //           SET tags_guide = '$tags_guide',
-    //               summary = '$summary',
-    //               description = '$descript',
-    //               credits = '$credits',
-    //               update_freq = '$update_freq',
-    //               date_last_update = '$date_last_update',
-    //               date_underlying_data = '$date_underlying_data'
-    //
-    //
-    // // $query="INSERT INTO ReadMe(tags_guide,summary,description,credits,update_freq,date_last_update, date_underlying_data) VALUES ('$tags_guide','$summary','$descript','$credits','$update_freq','$date_last_update','$date_underlying_data')";
-    // $res = pg_query($db, $query);
+    $results = $xml->xpath("//attr");
+    $order = 1;
 
-  }
+    foreach ($results as $result) {
+      $attrlabl = $result->attrlabl. " ";
+      $attrdef = $result->attrdef. " " .$result->attrdomv->udom. " ";
+
+      foreach($result->attrdomv->edom as $e) {
+        $edom .= $e->edomv . " - " . $e->edomvd . ", ";
+      }
+      $query = "INSERT INTO ".$tbname."(orders, field_name, description, expected_allowed_values) VALUES ('$order','$attrlabl','$attrdef','$edom')";
+      pg_query($query);
+      $order += 1;
+      $edom ="";
+    }
+}
+
+
   // CSV file upload
   else if($ext === 'csv') {
     if ($_FILES["file"]["size"] > 0) {
@@ -57,10 +58,32 @@ else if (isset($_POST['dd_submit_overwrite'])) {
   $file_contents = file_get_contents($file);
   // Get the file extension
   $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+
+
   // XML file upload
   if($ext === 'xml') {
+    $query2 = "DELETE FROM " .$tbname;
+    pg_query($query2);
+    $xml = simplexml_load_file($file);
+
+    $results = $xml->xpath("//attr");
+    $order = 1;
+
+    foreach ($results as $result) {
+      $attrlabl = $result->attrlabl. " ";
+      $attrdef = $result->attrdef. " " .$result->attrdomv->udom. " ";
+
+      foreach($result->attrdomv->edom as $e) {
+        $edom .= $e->edomv . " - " . $e->edomvd . ", ";
+      }
+      $query = "INSERT INTO ".$tbname."(orders, field_name, description, expected_allowed_values) VALUES ('$order','$attrlabl','$attrdef','$edom')";
+      pg_query($query);
+      $order += 1;
+      $edom ="";
 
   }
+}
+
   // CSV file upload
   else if($ext === 'csv') {
     $query3 = "DELETE FROM " .$tbname;
