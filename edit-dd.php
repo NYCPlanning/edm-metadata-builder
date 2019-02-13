@@ -159,17 +159,18 @@ li {
     float: left;
     width: 100%;
     height: 45%;
-    max-height: 45vh;
     overflow: auto;
     padding: 0.4em;
+    resize:vertical;
+
 }
 #bottom-div {
     float: left;
     width: 100%;
-    height: 50%;
-    max-height: 34vh;
+    height: 30%;
     overflow: auto;
     padding: 0.4em;
+    resize:vertical;
 }
 
 /* code for creating a table structure using css */
@@ -225,7 +226,11 @@ li {
 </style>
 <div class="common-name-header border-bottom">
   <h3><?php echo $common_name; ?></h3>
+
 </div>
+
+
+
 
 
 
@@ -454,17 +459,26 @@ li {
               for ($y = 0; $y < $count; $y+=1)
               {
                 $c_row = current($row);
-                if ($y == 7) {
+
+                if($y == 5 || $y == 6 || $y == 10) {
                   echo "<td class='uid" . $y . "' >
                           <select name='s" .$y. "' style='font-size:12pt; height:40px; width:200px;border:none; border: 0;' class='textedit" .$row[0]. "' disabled form='form".$row[0]."'>
                             <option value='". $c_row ."' selected>" . $c_row . "</option>
+                            <option value='True'>True</option>
+                            <option value='False'>False</option>
+                          </select>
+                       </td>";
+                } else if ($y == 7) {
+                  echo "<td class='uid" . $y . "' >
+                          <select name='s" .$y. "' style='font-size:12pt; height:40px; width:200px;border:none; border: 0;' class='textedit" .$row[0]. "' disabled form='form".$row[0]."'>
+                    	      <option value='". $c_row ."' selected>" . $c_row . "</option>
                             <option value='String'>String</option>
                             <option value='OID'>OID</option>
                             <option value='Geometry'>Geometry</option>
                             <option value='Double'>Double</option>
                           </select>
                        </td>";
-                } else if ($y != 7) {
+                } else {
 
                   echo "<td class='uid" . $y . "' id='uid" . $y . "edit" .$row[0]. "' ><textarea disabled style='border: none' name='s" .$y. "' form='form".$row[0]."' class='textedit" .$row[0]. "' id='uid" . $y . "textedit" .$row[0]. "'>" . $c_row . "</textarea></td>";
 

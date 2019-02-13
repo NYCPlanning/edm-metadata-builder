@@ -171,7 +171,6 @@ li {
     float: left;
     width: 100%;
     height: 45%;
-
     overflow: auto;
     padding: 0.4em;
     resize:vertical;
@@ -181,7 +180,6 @@ li {
     float: left;
     width: 100%;
     height: 30%;
-
     overflow: auto;
     padding: 0.4em;
     resize:vertical;
@@ -219,6 +217,7 @@ li {
 }
 
 </style>
+
 <div class="common-name-header border-bottom">
   <h3><?php echo $common_name; ?></h3>
 </div>

@@ -150,17 +150,18 @@ li {
     float: left;
     width: 100%;
     height: 45%;
-    max-height: 45vh;
     overflow: auto;
     padding: 0.4em;
+    resize:vertical;
+
 }
 #bottom-div {
     float: left;
     width: 100%;
-    height: 50%;
-    max-height: 34vh;
+    height: 30%;
     overflow: auto;
     padding: 0.4em;
+    resize:vertical;
 }
 
 /* code for creating a table structure using css */
@@ -253,64 +254,65 @@ li {
 
     <!-- Top Div -->
     <div id="top-div" class="border-bottom">
-      <form name="readme" action="display.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" method="POST" >
-      <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-      <li>Common Name:</li><li><input type="text" name="common_name" style="width:400px;" value="<?php echo $common_name; ?>"/></li>
-      <br>
-      <li>SDE Name:</li><li><input type="text" name="sde_name" style="width:400px;" value="<?php echo $sde_name; ?>" required/></li>  <!-- this field is made mandatory by adding 'required' -->
-      <br>
-      <li>Tags for Guide:</li><li><input type="text" name="tags_guide" style="width:500px;" value="<?php echo $tags_guide; ?>"/></li>
-      <br>
-      <li>Tags for SDE:</li><li><input type="text" name="tags_sde" style="width:500px;" value="<?php echo $tags_sde; ?>"/></li>
-      <br>
-      <li>Summary:</li><li><input type="text" name="summary" style="height:90px;width:800px;" value="<?php echo $summary; ?>"/></li>
-      <br>
-      <li>Summary - Update Date:</li><li><input type="text" name="summary_update_date" style="height:40px;width:800px;" value="<?php echo $summary_update_date; ?>"/></li>
-      <br>
-      <li>Description:</li><li><input type="text" name="description" style="height:90px;width:900px;" value="<?php echo $description; ?>"/></li>
-      <br>
-      <li>Description - Data Location:</li><li><input type="text" name="description_data_loc" style="width:500px;" value="<?php echo $description_data_loc; ?>"/></li>
-      <br>
-      <li>Data Steward:</li><li><input type="text" name="data_steward" style="width:400px;" value="<?php echo $data_steward; ?>"/></li>
-      <br>
-      <li>Data Engineer:</li><li><input type="text" name="data_engineer" style="width:400px;" value="<?php echo $data_engineer; ?>"/></li>
-      <br>
-      <li>Credits:</li><li><input type="text" name="credits" style="width:400px;" value="<?php echo $credits; ?>"/></li>
-      <br>
-      <li>General Constraints Use Limitations:</li><li><input type="text" name="genconst" style="width:450px;"value="<?php echo $genconst; ?>"/></li>
-      <br>
-      <li>Legal Constraints Use Limitations:</li><li><input type="text" name="legconst" style="width:450px;" value="<?php echo $legconst; ?>"/></li>
-      <br>
-      <li>Update Frequency:</li>
-      <select required name="update_freq" id="ddTables" style="font-size:12pt; height:45px; width:400px;">
-      	<option value="<?php echo $update_freq; ?>" selected><?php echo $update_freq; ?></option>
-      	<?php
-      	echo $tables;
-      	?>
-      </select>
-      <br>
-      <br><li>Date of Last Update:</li><li><input type="text" name="date_last_update" style="width:400px;" value="<?php echo $date_last_update; ?>"/></li>
-      <br>
-      <li>Date of Underlying Data:</li><li><input type="text" name="date_underlying_data" style="width:400px;" value="<?php echo $date_underlying_data; ?>"/></li>
-      <br>
-      <li>Data Source:</li><li><input type="text" name="data_source" style="width:400px;" value="<?php echo $data_source; ?>"/></li>
-      <br>
-      <li>Version:</li><li><input type="text" name="version" style="width:400px;" value="<?php echo $version; ?>"/></li>
-      <br>
-      <li>Common Uses:</li><li><input type="text" name="common_uses" style="width:450px;" value="<?php echo $common_uses; ?>"/></li>
-      <br>
-      <li>Data Quality:</li><li><input type="text" name="data_quality" style="width:400px;" value="<?php echo $data_quality; ?>"/></li>
-      <br>
-      <li>Caveats:</li><li><input type="text" name="caveats" style="width:400px;" value="<?php echo $caveats; ?>"/></li>
-      <br>
-      <li>Future Plans:</li><li><input type="text" name="future_plans" style="width:450px;" value="<?php echo $future_plans; ?>"/></li>
-      <br>
-      <li>Distribution:</li><li><input type="text" name="distribution" style="width:550px;" value="<?php echo $distribution; ?>"/></li>
-      <br>
-      <li>Contact:</li><li><input type="text" name="contact" style="width:550px;" value="<?php echo $contact; ?>"/></li>
-      <br>
-      <br>
-      <input type="submit" id="tableSubmit" value="Save" name="readme_save_button"/>
+      <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" method="POST" >
+        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+        <li>Common Name:</li><li><input type="text" name="common_name" style="width:500px;" value="<?php echo $common_name; ?>"/></li>
+        <br>
+        <li>SDE Name:</li><li><input type="text" name="sde_name" style="width:500px;" value="<?php echo $sde_name; ?>" required/></li>  <!-- this field is made mandatory by adding 'required' -->
+        <br>
+        <li>Tags for Guide:</li><li><input type="text" name="tags_guide" style="width:500px;" value="<?php echo $tags_guide; ?>"/></li>
+        <br>
+        <li>Tags for SDE:</li><li><input type="text" name="tags_sde" style="width:500px;" value="<?php echo $tags_sde; ?>"/></li>
+        <br>
+        <li>Summary:</li><li><textarea name="summary" style="height:90px;width:500px;" ><?php echo $summary; ?> </textarea></li>
+        <br>
+        <li>Summary - Update Date:</li><li><input type="text" name="summary_update_date" style="height:40px;width:500px;" value="<?php echo $summary_update_date; ?>"/></li>
+        <br>
+        <li>Description:</li><li><textarea name="description" style="height:90px;width:500px;"> <?php echo $description; ?> </textarea></li>
+        <br>
+        <li>Description - Data Location:</li><li><input type="text" name="description_data_loc" style="width:500px;" value="<?php echo $description_data_loc; ?>"/></li>
+        <br>
+        <li>Data Steward:</li><li><input type="text" name="data_steward" style="width:500px;" value="<?php echo $data_steward; ?>"/></li>
+        <br>
+        <li>Data Engineer:</li><li><input type="text" name="data_engineer" style="width:500px;" value="<?php echo $data_engineer; ?>"/></li>
+        <br>
+        <li>Credits:</li><li><input type="text" name="credits" style="width:500px;" value="<?php echo $credits; ?>"/></li>
+        <br>
+        <li>General Constraints Use Limitations:</li><li><input type="text" name="genconst" style="width:500px;"value="<?php echo $genconst; ?>"/></li>
+        <br>
+        <li>Legal Constraints Use Limitations:</li><li><input type="text" name="legconst" style="width:500px;" value="<?php echo $legconst; ?>"/></li>
+        <br>
+        <!-- <li>Update Frequency:</li><li><input type="text" name="update_freq" /></li> -->
+        <li>Update Frequency:</li>
+        <select required name="update_freq" id="ddTables" style="font-size:12pt; height:45px; width:500px;">
+          <option value="<?php echo $update_freq; ?>" selected><?php echo $update_freq; ?></option>
+          <?php
+          echo $tables;
+          ?>
+        </select>
+        <br>
+        <br><li>Date of Last Update:</li><li><input type="text" name="date_last_update" style="width:500px;" value="<?php echo $date_last_update; ?>"/></li>
+        <br>
+        <li>Date of Underlying Data:</li><li><input type="text" name="date_underlying_data" style="width:500px;" value="<?php echo $date_underlying_data; ?>"/></li>
+        <br>
+        <li>Data Source:</li><li><input type="text" name="data_source" style="width:500px;" value="<?php echo $data_source; ?>"/></li>
+        <br>
+        <li>Version:</li><li><input type="text" name="version" style="width:500px;" value="<?php echo $version; ?>"/></li>
+        <br>
+        <li>Common Uses:</li><li><input type="text" name="common_uses" style="width:500px;" value="<?php echo $common_uses; ?>"/></li>
+        <br>
+        <li>Data Quality:</li><li><input type="text" name="data_quality" style="width:500px;" value="<?php echo $data_quality; ?>"/></li>
+        <br>
+        <li>Caveats:</li><li><input type="text" name="caveats" style="width:500px;" value="<?php echo $caveats; ?>"/></li>
+        <br>
+        <li>Future Plans:</li><li><input type="text" name="future_plans" style="width:500px;" value="<?php echo $future_plans; ?>"/></li>
+        <br>
+        <li>Distribution:</li><li><input type="text" name="distribution" style="width:500px;" value="<?php echo $distribution; ?>"/></li>
+        <br>
+        <li>Contact:</li><li><input type="text" name="contact" style="width:500px;" value="<?php echo $contact; ?>"/></li>
+        <br>
+        <br>
+        <input type="submit" id="tableSubmit" value="Save" name="readme_save_button"/>
       </form>
     </div><!-- /Top Div -->
 
