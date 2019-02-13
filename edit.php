@@ -5,6 +5,7 @@ include ('readme_upload.php');
 include ('dd-delete.php');
 include ('dd-edit-submission.php');
 include ('readme-p-edit-submission.php');
+// include ('datatype_dropdown.php');
 
 
 // Trim white spaces
@@ -452,8 +453,22 @@ li {
         for ($y = 0; $y < $count; $y+=1)
         {
           $c_row = current($row);
-          echo "<td class=uid" . $y . "><textarea disabled style='border: none' name='s" .$y. "' form='form".$row[0]."' class=textedit" .$row[0]. ">" . $c_row . "</textarea></td>";
-          next($row);
+          if ($y == 7) {
+            echo "<td class='uid" . $y . "' >
+                    <select name='s" .$y. "' style='font-size:12pt; height:40px; width:200px;border:none; border: 0;' class='textedit" .$row[0]. "' disabled form='form".$row[0]."'>
+              	      <option value='". $c_row ."' selected>" . $c_row . "</option>
+                      <option value='String'>String</option>
+                      <option value='OID'>OID</option>
+                      <option value='Geometry'>Geometry</option>
+                      <option value='Double'>Double</option>
+                    </select>
+                 </td>";
+          } else if ($y != 7) {
+
+            echo "<td class='uid" . $y . "' id='uid" . $y . "edit" .$row[0]. "' ><textarea disabled style='border: none' name='s" .$y. "' form='form".$row[0]."' class='textedit" .$row[0]. "' id='uid" . $y . "textedit" .$row[0]. "'>" . $c_row . "</textarea></td>";
+
+          }
+        next($row);
         }
 
         echo "</form>";
@@ -479,6 +494,7 @@ li {
   </div> <!-- /wrapper -->
 
   <script>
+    // Counter to limit row that can be edited at a time to 1;
     var counter = 0;
     // Data dictionary Edit event listener
     function editFunc(clicked_id) {
