@@ -171,17 +171,20 @@ li {
     float: left;
     width: 100%;
     height: 45%;
-    max-height: 45vh;
+
     overflow: auto;
     padding: 0.4em;
+    resize:vertical;
+
 }
 #bottom-div {
     float: left;
     width: 100%;
-    height: 50%;
-    max-height: 34vh;
+    height: 30%;
+
     overflow: auto;
     padding: 0.4em;
+    resize:vertical;
 }
 
 /* code for creating a table structure using css */
@@ -429,7 +432,12 @@ li {
       while ($i < pg_num_fields($data_dict))
       {
         $fieldName = pg_field_name($data_dict, $i);
-        echo '<th class=uid' .$i . '>' . $fieldName . '</th>';
+        $fieldName = ucwords(str_replace("_"," ",$fieldName));
+        if($fieldName == 'Orders') {
+          echo '<th class=uid' .$i . '> Order </th>';
+        } else {
+          echo '<th class=uid' .$i . '>' . $fieldName . '</th>';
+        }
         $i = $i + 1;
       }
       echo '</tr>';

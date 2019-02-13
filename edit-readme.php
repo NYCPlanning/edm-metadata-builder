@@ -368,7 +368,12 @@ li {
         while ($i < pg_num_fields($data_dict))
         {
           $fieldName = pg_field_name($data_dict, $i);
-          echo '<th class=uid' .$i . '>' . $fieldName . '</th>';
+          $fieldName = ucwords(str_replace("_"," ",$fieldName));
+          if($fieldName == 'Orders') {
+            echo '<th class=uid' .$i . '> Order </th>';
+          } else {
+            echo '<th class=uid' .$i . '>' . $fieldName . '</th>';
+          }
           $i = $i + 1;
         }
         echo '</tr>';

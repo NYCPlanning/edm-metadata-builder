@@ -412,12 +412,18 @@ li {
 
     //fetching the column names of the dd table
       echo '<div id="dd-wrapper"><table class="form-table"> <tr>';
-      echo '<th> Edit </th> <th> Delete </th> ';
+      echo '<th> Edit </th> <th> Delete </th>';
+
       $i = 0;
       while ($i < pg_num_fields($data_dict))
       {
         $fieldName = pg_field_name($data_dict, $i);
-        echo '<th class=uid' .$i . '>' . $fieldName . '</th>';
+        $fieldName = ucwords(str_replace("_"," ",$fieldName));
+        if($fieldName == 'Orders') {
+          echo '<th class=uid' .$i . '> Order </th>';
+        } else {
+          echo '<th class=uid' .$i . '>' . $fieldName . '</th>';
+        }
         $i = $i + 1;
       }
       echo '</tr>';
