@@ -2,6 +2,7 @@ var common_status, sde_status;
 common_status = false;
 sde_status = false;
 
+
 //Getting value from "ajax.php".
 function fill(Value) {
    //Assigning value to "search" div in "navbar.php" file.
@@ -220,7 +221,33 @@ $(document).ready(function() {
 
 
 
+   $("#deleteData").click(function() {
+     var commonName = $('#common-name-delete').text();
+     var sdeName = $('#sde-name-delete').val();
+     var readmeID = $('#readme-id').val();
+     if(confirm("Are you sure you want to delete this dataset?")) {
+       //AJAX is called.
+       $.ajax({
+           //AJAX type is "Post".
+           type: "POST",
+           //Data will be sent to "ajax.php".
+           url: "ajax.php",
+           //Data, that will be sent to "ajax.php".
+           data: {
+               //Assigning values into variables.
+               deleteCommon: commonName,
+               deleteSde: sdeName,
+               deleteID: readmeID
 
+           },
+           //After query runs redirect to main page.
+           success: function() {
+               window.location.replace("Main.php");
+           }
+       });
+     }
+
+   });
 
 
 

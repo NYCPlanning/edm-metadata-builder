@@ -229,10 +229,17 @@ li {
   font-size: 24px;
   background-color:white;
 }
+.dataset-delete {
+  margin-left: 5px;
+  font-size: 18px;
+}
 </style>
 
 <div class="common-name-header border-bottom">
-  <h3><?php echo $common_name; ?></h3>
+  <h3 id="common-name-delete"><?php echo $common_name; ?></h3>
+  <input type="hidden" id="sde-name-delete" value="<?php echo $sde_name_underscore; ?>">
+  <input type="hidden" id="readme-id" value="<?php echo $id; ?>">
+  <a id="deleteData"><i class="far fa-trash-alt dataset-delete"></i></a>
 </div>
 
 
@@ -290,9 +297,11 @@ li {
     <div id="top-div" class="border-bottom">
       <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" method="POST" >
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+        <input type="hidden" name="sde_old" value="<?php echo $sde_name; ?>">
         <li>Common Name:</li><li><input type="text" name="common_name" style="width:500px;" value="<?php echo $common_name; ?>"/></li>
         <br>
         <li>SDE Name:</li><li><input type="text" name="sde_name" style="width:500px;" value="<?php echo $sde_name; ?>" required/></li>  <!-- this field is made mandatory by adding 'required' -->
+
         <br>
         <li>Tags for Guide:</li><li><input type="text" name="tags_guide" style="width:500px;" value="<?php echo $tags_guide; ?>"/></li>
         <br>

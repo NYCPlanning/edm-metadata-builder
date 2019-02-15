@@ -222,11 +222,17 @@ li {
   font-size: 24px;
   background-color:white;
 }
+.dataset-delete {
+  margin-left: 5px;
+  font-size: 18px;
+}
 
 </style>
 <div class="common-name-header border-bottom">
-  <h3><?php echo $common_name; ?></h3>
-
+  <h3 id="common-name-delete"><?php echo $common_name; ?></h3>
+  <input type="hidden" id="sde-name-delete" value="<?php echo $sde_name_underscore; ?>">
+  <input type="hidden" id="readme-id" value="<?php echo $id; ?>">
+  <a id="deleteData"><i class="far fa-trash-alt dataset-delete"></i></a>
 </div>
 
 

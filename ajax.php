@@ -109,4 +109,22 @@ if (isset($_POST['sde'])) {
    }
  }
 
+
+ //Getting value of "deleteDataset" variable from "script.js".
+ if (isset($_POST['deleteCommon'])) {
+
+    $id = $_POST['deleteID'];
+    $sde = $_POST['deleteSde'];
+    $common = $_POST['deleteCommon'];
+    // Delete row from readme table.
+    $Query1 = "DELETE FROM readme WHERE uid = $id";
+    // Drop data dictionary table associated with that readme record
+    $Query2 = "DROP TABLE $sde";
+    //Query execution
+    pg_query($Query1);
+    pg_query($Query2);
+
+
+}
+
 ?>
