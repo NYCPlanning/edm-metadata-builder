@@ -1,7 +1,10 @@
 <?php
 if (isset($_POST['readme_save_button'])) {
   $id = $_POST['id'];
-  $sql = "UPDATE readme
+  $sde_old = $_POST['sde_old'];
+  $sde = $_POST['sde_name'];
+  $sde_new =  str_replace(' ', '_', $sde);
+  $sql1 = "UPDATE readme
           SET common_name = '" . $_POST['common_name'] . "',
               sde_name    = '" . $_POST['sde_name'] . "',
               tags_guide = '" . $_POST['tags_guide'] . "',
@@ -27,9 +30,9 @@ if (isset($_POST['readme_save_button'])) {
               distribution = '" . $_POST['distribution'] . "',
               contact = '" . $_POST['contact'] . "'
              WHERE uid = $id";
-  // $sql .= "ALTER TABLE table_name RENAME TO new_table_name";
-  $result = pg_query($sql);
-  pg_free_result($result);
+  $sql2 = "ALTER TABLE $sde_old RENAME TO $sde_new";
+  pg_query($sql1);
+  pg_query($sql2);
 }
 
     ?>
