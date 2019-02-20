@@ -173,7 +173,7 @@ li {
     height: 45%;
     overflow: auto;
     padding: 0.4em;
-    resize:vertical;
+
 
 }
 #bottom-div {
@@ -182,7 +182,7 @@ li {
     height: 30%;
     overflow: auto;
     padding: 0.4em;
-    resize:vertical;
+
 }
 
 /* code for creating a table structure using css */

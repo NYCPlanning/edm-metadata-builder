@@ -152,7 +152,7 @@ li {
     height: 45%;
     overflow: auto;
     padding: 0.4em;
-    resize:vertical;
+
 
 }
 #top-div textarea{
@@ -165,7 +165,7 @@ li {
     height: 30%;
     overflow: auto;
     padding: 0.4em;
-    resize:vertical;
+
 }
 
 /* code for creating a table structure using css */
@@ -265,7 +265,7 @@ li {
 
     <!-- Top Div -->
     <div id="top-div" class="border-bottom">
-      <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" id="readme-form" method="POST" >
+      <form name="readme" action="display.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" id="readme-form" method="POST" >
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="hidden" name="sde_old" value="<?php echo $sde_name; ?>">
         <li>Common Name <a data-toggle="tooltip" data-placement="top" title="Descriptive name without underscores or abbreviations"><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="common_name" style="width:500px;" value="<?php echo $common_name; ?>"/></li>
