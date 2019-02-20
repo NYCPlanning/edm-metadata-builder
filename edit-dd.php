@@ -284,78 +284,78 @@ li {
 
     <!-- Top Div -->
     <div id="top-div" class="border-bottom">
-        <h5>Common Name</h5>
-        <p><?php echo $common_name; ?></p>
-        <br>
-        <h5>SDE Name</h5>
-        <p><?php echo $sde_name; ?></p>
-        <br>
-        <h5>Tags for Guide</h5>
-        <p><?php echo $tags_guide; ?></p>
-        <br>
-        <h5>Tags for SDE</h5>
-        <p><?php echo $tags_sde; ?></p>
-        <br>
-        <h5>Summary</h5>
-        <p><?php echo $summary; ?></p>
-        <br>
-        <h5>Summary - Update Date</h5>
-        <p><?php echo $summary_update_date; ?></p>
-        <br>
-        <h5>Description</h5>
-        <p><?php echo $description; ?></p>
-        <br>
-        <h5>Description - Data Location</h5>
-        <p><?php echo $description_data_loc; ?></p>
-        <br>
-        <h5>Data Steward</h5>
-        <p><?php echo $data_steward; ?></p>
-        <br>
-        <h5>Data Engineer</h5>
-        <p><?php echo $data_engineer; ?></p>
-        <br>
-        <h5>Credits</h5>
-        <p><?php echo $credits; ?></p>
-        <br>
-        <h5>General Constraints Use Limitations</h5>
-        <p><?php echo $genconst; ?></p>
-        <br>
-        <h5>Legal Constraints Use Limitations</h5>
-        <p><?php echo $legconst; ?></p>
-        <br>
-        <h5>Update Frequency</h5>
-        <p><?php echo $update_freq; ?></p>
-        <br>
-        <h5>Date of Last Update</h5>
-        <p><?php echo $date_last_update; ?></p>
-        <br>
-        <h5>Date of Underlying Data</h5>
-        <p><?php echo $date_underlying_data; ?></p>
-        <br>
-        <h5>Data Source</h5>
-        <p><?php echo $data_source; ?></p>
-        <br>
-        <h5>Version</h5>
-        <p><?php echo $version; ?></p>
-        <br>
-        <h5>Common Uses</h5>
-        <p><?php echo $common_uses; ?></p>
-        <br>
-        <h5>Data Quality</h5>
-        <p><?php echo $data_quality; ?></p>
-        <br>
-        <h5>Caveats</h5>
-        <p><?php echo $caveats; ?></p>
-        <br>
-        <h5>Future Plans</h5>
-        <p><?php echo $future_plans; ?></p>
-        <br>
-        <h5>Distribution</h5>
-        <p><?php echo $distribution; ?></p>
-        <br>
-        <h5>Contact</h5>
-        <p><?php echo $contact; ?></p>
-        <br>
+      <h5>Common Name <a data-toggle="tooltip" data-placement="top" title="Descriptive name without underscores or abbreviations"><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $common_name; ?></p>
+      <br>
+      <h5>SDE Name <a data-toggle="tooltip" data-placement="top" title="Name of the SDE data set"><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $sde_name; ?></p>
+      <br>
+      <h5>Tags for Guide <a data-toggle="tooltip" data-placement="top" title="Enter search terms for the data set. These will be used to find the data set on the Esri HUB. These tags would be used for the guide."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $tags_guide; ?></p>
+      <br>
+      <h5>Tags for SDE <a data-toggle="tooltip" data-placement="top" title="Enter search terms for the data set. These will be used to find the data set on the Esri HUB. These tags would be used for the SDE."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $tags_sde; ?></p>
+      <br>
+      <h5>Summary <a data-toggle="tooltip" data-placement="top" title="One or two line description of the data set"><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $summary; ?></p>
+      <br>
+      <h5>Summary - Update Date <a data-toggle="tooltip" data-placement="top" title="Date the summary was updated"><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $summary_update_date; ?></p>
+      <br>
+      <h5>Description <a data-toggle="tooltip" data-placement="top" title="Concise, high level summary of the data set (no more than one or two paragraphs)."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $description; ?></p>
+      <br>
+      <h5>Description - Data Location <a data-toggle="tooltip" data-placement="top" title="Data location of the dataset"><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $description_data_loc; ?></p>
+      <br>
+      <h5>Data Steward <a data-toggle="tooltip" data-placement="top" title="The group or division in DCP that is the business owner for the data set."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $data_steward; ?></p>
+      <br>
+      <h5>Data Engineer <a data-toggle="tooltip" data-placement="top" title="The group or division in DCP that is the technical owner for the data set. The data engineer cleans, prepares, and optimizes the data set under the guidance of the data steward."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $data_engineer; ?></p>
+      <br>
+      <h5>Credits <a data-toggle="tooltip" data-placement="top" title="For data sets received from an outside source and not modified by DCP, list the outside source. If DCP added value to the data, list both the outside source and DCP."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $credits; ?></p>
+      <br>
+      <h5>General Constraints Use Limitations <a data-toggle="tooltip" data-placement="top" title="Dataset is being provided by the Department of City Planning (DCP) on DCP's website for informational purposes only. DCP does not warranty the completeness, accuracy, content, or fitness for any particular purpose or use of dataset, nor are any such warranties to be implied or inferred with respect to Dataset as furnished on the website."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $genconst; ?></p>
+      <br>
+      <h5>Legal Constraints Use Limitations <a data-toggle="tooltip" data-placement="top" title="DCP and the City are not liable for any deficiencies in the completeness, accuracy, content, or fitness for any particular purpose or use of the dataset, or applications utilizing Dataset, provided by any third party."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $legconst; ?></p>
+      <br>
+      <h5>Update Frequency <a data-toggle="tooltip" data-placement="top" title="How often will this data set be updated? For data sets with a regular update schedule, this may be Monthly, Quarterly, or Annually. For one-off data sets, such as those created for a particular study, this may be None planned or As needed."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $update_freq; ?></p>
+      <br>
+      <h5>Date of Last Update <a data-toggle="tooltip" data-placement="top" title="When was the data set last updated? This should be the date that any processing and quality assurance was complete. It is the release date of the data set."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $date_last_update; ?></p>
+      <br>
+      <h5>Date of Underlying Data <a data-toggle="tooltip" data-placement="top" title="The “as of” date for the data. For a data set with multiple sources, like MapPLUTO, list each source and the date the data was extracted or received."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $date_underlying_data; ?></p>
+      <br>
+      <h5>Data Sources and Compilation Process <a data-toggle="tooltip" data-placement="top" title="If applicable, include a link to GitHub. Otherwise, describe how the data was sourced and processed."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $data_source; ?></p>
+      <br>
+      <h5>Version <a data-toggle="tooltip" data-placement="top" title="If applicable, include the version number, e.g., 17V1 for MapPLUTO"><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $version; ?></p>
+      <br>
+      <h5>Common Uses <a data-toggle="tooltip" data-placement="top" title="Describe any common applications for the dataset (i.e. soft site or CEQR analyses), including primary users of the dataset."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $common_uses; ?></p>
+      <br>
+      <h5>Data Quality <a data-toggle="tooltip" data-placement="top" title="If known, include information on the overall accuracy and completeness of the data set. (Information on specific fields should be documented in the data dictionary)."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $data_quality; ?></p>
+      <br>
+      <h5>Caveats <a data-toggle="tooltip" data-placement="top" title="Outline any pitfalls, potential misconceptions, and/or misuses of the data. This will help users determine if the data set is applicable to their use case and help them avoid using the data incorrectly."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $caveats; ?></p>
+      <br>
+      <h5>Future Plans <a data-toggle="tooltip" data-placement="top" title="If applicable, describe any enhancements planned for the data set."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $future_plans; ?></p>
+      <br>
+      <h5>Distribution <a data-toggle="tooltip" data-placement="top" title="Who is allowed to use this data set? Specific divisions within DCP, all DCP staff, other city agencies, the public?"><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $distribution; ?></p>
+      <br>
+      <h5>Contact <a data-toggle="tooltip" data-placement="top" title="If known, include contact information for the dataset."><i class="fas fa-info-circle"></i></a></h5>
+      <p><?php echo $contact; ?></p>
+      <br>
     </div><!-- /Top Div -->
 
     <div class="dd-header-container">

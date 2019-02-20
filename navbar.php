@@ -14,6 +14,11 @@ $selection = $_POST['update_freq'];
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="script.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
 </head>
 
 <style>
@@ -32,7 +37,9 @@ $selection = $_POST['update_freq'];
     font-family: Arial, Helvetica, sans-serif;
     background-color: white;
   }
-
+  .tooltip {
+    z-index: 99999;
+  }
   .navbar-default {
     padding: 12px 0 10px;
     background-color: white;

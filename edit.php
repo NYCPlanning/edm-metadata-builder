@@ -304,35 +304,36 @@ li {
       <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" id="readme-form" method="POST" >
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="hidden" name="sde_old" value="<?php echo $sde_name; ?>">
-        <li>Common Name</li><li><input type="text" name="common_name" style="width:500px;" value="<?php echo $common_name; ?>"/></li>
+        <li>Common Name <a data-toggle="tooltip" data-placement="top" title="Descriptive name without underscores or abbreviations"><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="common_name" style="width:500px;" value="<?php echo $common_name; ?>"/></li>
         <br>
-        <li>SDE Name</li><li><input type="text" name="sde_name" style="width:500px;" value="<?php echo $sde_name; ?>" required/></li>  <!-- this field is made mandatory by adding 'required' -->
+
+        <li>SDE Name <a data-toggle="tooltip" data-placement="top" title="Name of the SDE data set"><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="sde_name" style="width:500px;" value="<?php echo $sde_name; ?>" required/></li>  <!-- this field is made mandatory by adding 'required' -->
 
         <br>
-        <li>Tags for Guide</li><li><input type="text" name="tags_guide" style="width:500px;" value="<?php echo $tags_guide; ?>"/></li>
+        <li>Tags for Guide <a data-toggle="tooltip" data-placement="top" title="Enter search terms for the data set. These will be used to find the data set on the Esri HUB. These tags would be used for the guide."><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="tags_guide" style="width:500px;" value="<?php echo $tags_guide; ?>"/></li>
         <br>
-        <li>Tags for SDE</li><li><input type="text" name="tags_sde" style="width:500px;" value="<?php echo $tags_sde; ?>"/></li>
+        <li>Tags for SDE <a data-toggle="tooltip" data-placement="top" title="Enter search terms for the data set. These will be used to find the data set on the Esri HUB. These tags would be used for the SDE."><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="tags_sde" style="width:500px;" value="<?php echo $tags_sde; ?>"/></li>
         <br>
-        <li>Summary</li><li><textarea name="summary" style="height:90px;width:500px;" ><?php echo $summary; ?> </textarea></li>
+        <li>Summary <a data-toggle="tooltip" data-placement="top" title="One or two line description of the data set"><i class="fas fa-info-circle"></i></a></li><li><textarea name="summary" style="height:90px;width:500px;" ><?php echo $summary; ?> </textarea></li>
         <br>
-        <li>Summary - Update Date</li><li><input type="text" name="summary_update_date" style="height:40px;width:500px;" value="<?php echo $summary_update_date; ?>"/></li>
+        <li>Summary - Update Date <a data-toggle="tooltip" data-placement="top" title="Date the summary was updated"><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="summary_update_date" style="height:40px;width:500px;" value="<?php echo $summary_update_date; ?>"/></li>
         <br>
-        <li>Description</li><li><textarea name="description" style="height:90px;width:500px;"> <?php echo $description; ?> </textarea></li>
+        <li>Description <a data-toggle="tooltip" data-placement="top" title="Concise, high level summary of the data set (no more than one or two paragraphs)."><i class="fas fa-info-circle"></i></a></li><li><textarea name="description" style="height:90px;width:500px;"> <?php echo $description; ?> </textarea></li>
         <br>
-        <li>Description - Data Location</li><li><input type="text" name="description_data_loc" style="width:500px;" value="<?php echo $description_data_loc; ?>"/></li>
+        <li>Description - Data Location <a data-toggle="tooltip" data-placement="top" title="Data location of the dataset"><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="description_data_loc" style="width:500px;" value="<?php echo $description_data_loc; ?>"/></li>
         <br>
-        <li>Data Steward</li><li><input type="text" name="data_steward" style="width:500px;" value="<?php echo $data_steward; ?>"/></li>
+        <li>Data Steward <a data-toggle="tooltip" data-placement="top" title="The group or division in DCP that is the business owner for the data set."><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="data_steward" style="width:500px;" value="<?php echo $data_steward; ?>"/></li>
         <br>
-        <li>Data Engineer</li><li><input type="text" name="data_engineer" style="width:500px;" value="<?php echo $data_engineer; ?>"/></li>
+        <li>Data Engineer <a data-toggle="tooltip" data-placement="top" title="The group or division in DCP that is the technical owner for the data set. The data engineer cleans, prepares, and optimizes the data set under the guidance of the data steward."><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="data_engineer" style="width:500px;" value="<?php echo $data_engineer; ?>"/></li>
         <br>
-        <li>Credits</li><li><input type="text" name="credits" style="width:500px;" value="<?php echo $credits; ?>"/></li>
+        <li>Credits <a data-toggle="tooltip" data-placement="top" title="For data sets received from an outside source and not modified by DCP, list the outside source. If DCP added value to the data, list both the outside source and DCP."><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="credits" style="width:500px;" value="<?php echo $credits; ?>"/></li>
         <br>
-        <li>General Constraints Use Limitations</li><li><textarea name="genconst" style="height:90px;width:500px;" ><?php echo $genconst; ?></textarea></li>
+        <li>General Constraints Use Limitations <a data-toggle="tooltip" data-placement="top" title="Dataset is being provided by the Department of City Planning (DCP) on DCP's website for informational purposes only. DCP does not warranty the completeness, accuracy, content, or fitness for any particular purpose or use of dataset, nor are any such warranties to be implied or inferred with respect to Dataset as furnished on the website."><i class="fas fa-info-circle"></i></a></li><li><textarea name="genconst" style="height:90px;width:500px;" ><?php echo $genconst; ?></textarea></li>
         <br>
-        <li>Legal Constraints Use Limitations</li><li><textarea name="legconst" style="height:90px;width:500px;" ><?php echo $legconst; ?></textarea></li>
+        <li>Legal Constraints Use Limitations <a data-toggle="tooltip" data-placement="top" title="DCP and the City are not liable for any deficiencies in the completeness, accuracy, content, or fitness for any particular purpose or use of the dataset, or applications utilizing Dataset, provided by any third party."><i class="fas fa-info-circle"></i></a></li><li><textarea name="legconst" style="height:90px;width:500px;" ><?php echo $legconst; ?></textarea></li>
         <br>
         <!-- <li>Update Frequency:</li><li><input type="text" name="update_freq" /></li> -->
-        <li>Update Frequency</li>
+        <li>Update Frequency <a data-toggle="tooltip" data-placement="top" title="How often will this data set be updated? For data sets with a regular update schedule, this may be Monthly, Quarterly, or Annually. For one-off data sets, such as those created for a particular study, this may be None planned or As needed."><i class="fas fa-info-circle"></i></a></li>
         <select required name="update_freq" id="ddTables" style="font-size:12pt; height:45px; width:500px;">
           <option value="<?php echo $update_freq; ?>" selected><?php echo $update_freq; ?></option>
           <?php
@@ -340,25 +341,25 @@ li {
           ?>
         </select>
         <br>
-        <br><li>Date of Last Update</li><li><input type="text" name="date_last_update" style="width:500px;" value="<?php echo $date_last_update; ?>"/></li>
+        <br><li>Date of Last Update <a data-toggle="tooltip" data-placement="top" title="When was the data set last updated? This should be the date that any processing and quality assurance was complete. It is the release date of the data set."><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="date_last_update" style="width:500px;" value="<?php echo $date_last_update; ?>"/></li>
         <br>
-        <li>Date of Underlying Data</li><li><input type="text" name="date_underlying_data" style="width:500px;" value="<?php echo $date_underlying_data; ?>"/></li>
+        <li>Date of Underlying Data <a data-toggle="tooltip" data-placement="top" title="The “as of” date for the data. For a data set with multiple sources, like MapPLUTO, list each source and the date the data was extracted or received."><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="date_underlying_data" style="width:500px;" value="<?php echo $date_underlying_data; ?>"/></li>
         <br>
-        <li>Data Sources and Compilation Process</li><li><textarea name="data_source" style="height:90px;width:500px;" ><?php echo $data_source; ?></textarea></li>
+        <li>Data Sources and Compilation Process <a data-toggle="tooltip" data-placement="top" title="If applicable, include a link to GitHub. Otherwise, describe how the data was sourced and processed."><i class="fas fa-info-circle"></i></a></li><li><textarea name="data_source" style="height:90px;width:500px;" ><?php echo $data_source; ?></textarea></li>
         <br>
-        <li>Version</li><li><input type="text" name="version" style="width:500px;" value="<?php echo $version; ?>"/></li>
+        <li>Version <a data-toggle="tooltip" data-placement="top" title="If applicable, include the version number, e.g., 17V1 for MapPLUTO"><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="version" style="width:500px;" value="<?php echo $version; ?>"/></li>
         <br>
-        <li>Common Uses</li><li><textarea name="common_uses" style="height:90px;width:500px;" ><?php echo $common_uses; ?></textarea></li>
+        <li>Common Uses <a data-toggle="tooltip" data-placement="top" title="Describe any common applications for the dataset (i.e. soft site or CEQR analyses), including primary users of the dataset."><i class="fas fa-info-circle"></i></a></li><li><textarea name="common_uses" style="height:90px;width:500px;" ><?php echo $common_uses; ?></textarea></li>
         <br>
-        <li>Data Quality</li><li><textarea name="data_quality" style="height:90px;width:500px;"><?php echo $data_quality; ?></textarea></li>
+        <li>Data Quality <a data-toggle="tooltip" data-placement="top" title="If known, include information on the overall accuracy and completeness of the data set. (Information on specific fields should be documented in the data dictionary)."><i class="fas fa-info-circle"></i></a></li><li><textarea name="data_quality" style="height:90px;width:500px;"><?php echo $data_quality; ?></textarea></li>
         <br>
-        <li>Caveats</li><li><textarea name="caveats" style="height:90px;width:500px;"><?php echo $caveats; ?></textarea></li>
+        <li>Caveats <a data-toggle="tooltip" data-placement="top" title="Outline any pitfalls, potential misconceptions, and/or misuses of the data. This will help users determine if the data set is applicable to their use case and help them avoid using the data incorrectly."><i class="fas fa-info-circle"></i></a></li><li><textarea name="caveats" style="height:90px;width:500px;"><?php echo $caveats; ?></textarea></li>
         <br>
-        <li>Future Plans</li><li><textarea name="future_plans" style="height:90px;width:500px;"><?php echo $future_plans; ?></textarea></li>
+        <li>Future Plans <a data-toggle="tooltip" data-placement="top" title="If applicable, describe any enhancements planned for the data set."><i class="fas fa-info-circle"></i></a></li><li><textarea name="future_plans" style="height:90px;width:500px;"><?php echo $future_plans; ?></textarea></li>
         <br>
-        <li>Distribution</li><li><input type="text" name="distribution" style="width:500px;" value="<?php echo $distribution; ?>"/></li>
+        <li>Distribution <a data-toggle="tooltip" data-placement="top" title="Who is allowed to use this data set? Specific divisions within DCP, all DCP staff, other city agencies, the public?"><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="distribution" style="width:500px;" value="<?php echo $distribution; ?>"/></li>
         <br>
-        <li>Contact</li><li><input type="text" name="contact" style="width:500px;" value="<?php echo $contact; ?>"/></li>
+        <li>Contact <a data-toggle="tooltip" data-placement="top" title="If known, include contact information for the dataset."><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="contact" style="width:500px;" value="<?php echo $contact; ?>"/></li>
         <br>
         <br>
       </form>
