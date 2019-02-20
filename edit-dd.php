@@ -1,7 +1,6 @@
 <?php
 include ('navbar.php');
 include ('MaintFreq_dropdown.php');
-include ('datatype_dropdown.php');
 include ('readme_upload.php');
 include ('dd-delete.php');
 include ('dd-edit-submission.php');

@@ -250,6 +250,36 @@ $(document).ready(function() {
    });
 
 
+   // $("#addRow").click(function() {
+   //   var sdeName = $('#sde_name_underscore').val();
+   //
+   //   //AJAX is called.
+   //   $.ajax({
+   //       //AJAX type is "Post".
+   //       type: "POST",
+   //       //Data will be sent to "ajax.php".
+   //       url: "ajax.php",
+   //       //Data, that will be sent to "ajax.php".
+   //       data: {
+   //           //Assigning values into variables.
+   //           addSde: sdeName
+   //       },
+   //       //After query runs redirect to main page.
+   //       success: function(i) {
+   //         // var para = "edit" + i;
+   //         // var editbtn = document.getElementById(para);
+   //         // var savebtn = document.getElementById("save" + para);
+   //         // var allClasses = document.getElementsByClassName("text" + para);
+   //         //
+   //         // console.log(editbtn.value)
+   //
+   //       }
+   //   });
+   //
+   //
+   // });
+
+
 
 
 

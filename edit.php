@@ -122,7 +122,7 @@ li {
 
 .readme-header-container {
   width: 100%;
-  padding: 20px 0 0 0;
+  padding: 15px 0 0 0;
 }
 
 .readme-header-container h4{
@@ -130,7 +130,7 @@ li {
 }
 
 .readme-header-container button{
-  margin: -12px 0 0 0;
+  margin: -12px 10px 0 0;
 }
 
 .dd-header-container h4{
@@ -206,7 +206,7 @@ li {
 }
 
 .text-right a{
-  margin: -10px 10px 0 0;
+  margin-right: 10px;
 }
 .dd-header-container a {
   margin: 10px 0 0 0;
@@ -290,6 +290,7 @@ li {
       </div>
 
       <div class="text-right">
+        <input type="submit" id="tableSubmit" value="Save" name="readme_save_button" form="readme-form" class="btn btn-default btn-rounded mb-4" style="padding-top:-15px;"/>
         <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#readme-upload">Upload From File</a>
       </div>
 
@@ -300,7 +301,7 @@ li {
 
     <!-- Top Div -->
     <div id="top-div" class="border-bottom">
-      <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" method="POST" >
+      <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" id="readme-form" method="POST" >
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="hidden" name="sde_old" value="<?php echo $sde_name; ?>">
         <li>Common Name</li><li><input type="text" name="common_name" style="width:500px;" value="<?php echo $common_name; ?>"/></li>
@@ -360,7 +361,6 @@ li {
         <li>Contact</li><li><input type="text" name="contact" style="width:500px;" value="<?php echo $contact; ?>"/></li>
         <br>
         <br>
-        <input type="submit" id="tableSubmit" value="Save" name="readme_save_button"/>
       </form>
     </div><!-- /Top Div -->
 
@@ -509,13 +509,15 @@ li {
       echo '</table></div>';
       echo '<div id="dd_add_row">
               <form action="edit.php" id="add_row_form">
-                <button type="submit" name="add_row">
+                <button type="submit" name="add_row" id="addRow">
                   <i class="fas fa-plus-circle"></i>
                 </button>
               </form>
             </div>';
       echo "<input type='hidden' name='id' form='add_row_form' value='".$id."'>";
-      echo "<input type='hidden' name='sde_table' form='add_row_form' value='".$sde_name_underscore."'>";
+      echo "<input type='hidden' id='sde_name_underscore' name='sde_table' form='add_row_form' value='".$sde_name_underscore."'>";
+
+
     ?>
 
 
@@ -528,7 +530,6 @@ li {
     var counter = 0;
     // Data dictionary Edit event listener
     function editFunc(clicked_id) {
-
       var editbtn = document.getElementById(clicked_id);
       var savebtn = document.getElementById("save" + clicked_id);
       var allClasses = document.getElementsByClassName("text" + clicked_id);
@@ -548,6 +549,7 @@ li {
     }
 
   </script>
+
 </body>
 
 </html>

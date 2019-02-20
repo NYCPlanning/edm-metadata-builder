@@ -36,6 +36,9 @@ if (isset($_POST['dd_submit_append'])) {
     if ($_FILES["file"]["size"] > 0) {
 
         $handle = fopen($file,"r");
+        // reads the first line (the header) but doesn't output anything
+        fgets($handle);
+
          while (($data = fgetcsv($handle,10000,",")) !== FALSE) {
          if($flag) { $flag = false; continue; }
           $query2 = "INSERT INTO ".$tbname."(orders, field_name, longform_name, description, geocoded, required, data_type, expected_allowed_values, last_modified_date, no_longer_in_use, notes) VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]')";
@@ -90,6 +93,8 @@ else if (isset($_POST['dd_submit_overwrite'])) {
     pg_query($query3);
     if ($_FILES["file"]["size"] > 0) {
         $handle = fopen($file,"r");
+        // reads the first line (the header) but doesn't output anything
+        fgets($handle);
          while (($data = fgetcsv($handle,10000,",")) !== FALSE) {
          if($flag) { $flag = false; continue; }
           $query4 = "INSERT INTO ".$tbname."(orders, field_name, longform_name, description, geocoded, required, data_type, expected_allowed_values, last_modified_date, no_longer_in_use, notes) VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]')";

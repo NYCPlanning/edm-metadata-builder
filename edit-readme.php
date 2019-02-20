@@ -102,7 +102,7 @@ li {
 
 .readme-header-container {
   width: 100%;
-  padding: 20px 0 0 0;
+  padding: 15px 0 0 0;
 }
 
 .readme-header-container h4{
@@ -189,7 +189,7 @@ li {
 }
 
 .text-right a{
-  margin: -10px 10px 0 0;
+  margin-right: 10px;
 }
 .dd-header-container a {
   margin: 10px 10px 0 0;
@@ -254,6 +254,7 @@ li {
       </div>
 
       <div class="text-right">
+        <input type="submit" id="tableSubmit" value="Save" name="readme_save_button" form="readme-form" class="btn btn-default btn-rounded mb-4" style="padding-top:-15px;"/>
         <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#readme-upload">Upload From File</a>
       </div>
 
@@ -264,7 +265,7 @@ li {
 
     <!-- Top Div -->
     <div id="top-div" class="border-bottom">
-      <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" method="POST" >
+      <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" id="readme-form" method="POST" >
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="hidden" name="sde_old" value="<?php echo $sde_name; ?>">
         <li>Common Name</li><li><input type="text" name="common_name" style="width:500px;" value="<?php echo $common_name; ?>"/></li>
@@ -324,7 +325,7 @@ li {
         <li>Contact</li><li><input type="text" name="contact" style="width:500px;" value="<?php echo $contact; ?>"/></li>
         <br>
         <br>
-        <input type="submit" id="tableSubmit" value="Save" name="readme_save_button"/>
+
       </form>
     </div><!-- /Top Div -->
 

@@ -21,12 +21,24 @@ if(isset($_GET['save-submit'])) {
 }
 
 
+// add new row in data dictionary
+$uid_focus;
 if(isset($_GET['add_row'])) {
   $sde = $_GET['sde_table'];
   $sql_add = "INSERT INTO $sde (orders,field_name,longform_name,description,geocoded,required,data_type,expected_allowed_values,last_modified_date,no_longer_in_use,notes)
           VALUES ('','','','','','','','','','','')";
 
   pg_query($sql_add);
+
+  $dd_query = "SELECT uid FROM $sde ORDER BY uid DESC LIMIT 1";
+
+  $dd_results = pg_query($dd_query);
+  $dd_row = pg_fetch_assoc($dd_results);
+  $uid_focus = $dd_row['uid'];
+
+  echo  "<script>
+          editFunc('edit" .$uid_focus . "');
+        </script>";
 }
 
 

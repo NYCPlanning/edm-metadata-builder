@@ -127,4 +127,22 @@ if (isset($_POST['sde'])) {
 
 }
 
+
+//Getting value of "sde table" variable from "script.js".
+// if (isset($_POST['addSde'])) {
+//    $sde = $_POST['addSde'];
+//    $sql_add = "INSERT INTO $sde (orders,field_name,longform_name,description,geocoded,required,data_type,expected_allowed_values,last_modified_date,no_longer_in_use,notes)
+//            VALUES ('','','','','','','','','','','')";
+//    pg_query($sql_add);
+//
+//    $dd_query = "SELECT uid FROM $sde ORDER BY uid DESC LIMIT 1";
+//
+//    $dd_results = pg_query($dd_query);
+//    $dd_row = pg_fetch_assoc($dd_results);
+//    $uid_focus = $dd_row['uid'];
+//    echo $uid_focus;
+//
+//
+// }
+
 ?>
