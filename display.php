@@ -411,7 +411,9 @@ li {
                 <form class="form-horizontal" action="expxml_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value=".XML"/>
                 </form>
-
+                <form class="form-horizontal" action="expmd_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  enctype="multipart/form-data">
+                  <input type="submit" name="Expor2md" class="btn btn-default btn-rounded mb-4" value=".MD"/>
+                </form>
               </div>
 
             </div>

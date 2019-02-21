@@ -38,7 +38,7 @@ echo '<div class="col-md-10 col-md-offset-3">
           <tr>';
 
 //Column names for the table
-echo '<th> Dataset </th> <th> Readme </th> <th> Data Dictionary </th> <th> Readme + Data Dictionary </th>';
+echo '<th> Dataset </th> <th> Readme </th> <th> Data Dictionary </th>';
 
 $i = 0;
 
@@ -55,30 +55,36 @@ while ($row = pg_fetch_row($result))
   echo "<td><a href=display.php?id=".$uid. " > ".$common_name."</a></td>";
   echo "<td>
           <form action=expbut_readme.php?id=" . $uid . "&tbname=" . $common_name . " method='post'  name='upload_excel' enctype='multipart/form-data' class='export-button'>
-            <input type=submit name=Export class='btn btn-default btn-rounded mb-4' value='CSV'/>
+            <input type=submit name=Export class='btn btn-default btn-rounded mb-4' value='.CSV'/>
           </form>
           <form action=expxml_readme_ind.php?id=" . $uid . "&tbname=" . $common_name . " method='post'  name='upload_excel' enctype='multipart/form-data' class='export-button'>
-            <input type=submit name=Expor2xml class='btn btn-default btn-rounded mb-4' value='XML'/>
+            <input type=submit name=Expor2xml class='btn btn-default btn-rounded mb-4' value='.XML'/>
+          </form>
+          <form class='form-horizontal export-button' action=expmd_readme.php?id=" . $uid . "&tbname=". $common_name . " method='post' enctype='multipart/form-data'>
+            <input type=submit name=Expor2md class='btn btn-default btn-rounded mb-4' value='.MD'/>
           </form>
         </td>";
 
 echo "<td>
         <form class='form-horizontal export-button' action=expbut_dict.php?sde_underscore=" . $sde_name_underscore ." method='post'  name='upload_excel' enctype='multipart/form-data'>
-          <input type='submit' name='Export' class='btn btn-default btn-rounded mb-4' value='CSV'/>
+          <input type='submit' name='Export' class='btn btn-default btn-rounded mb-4' value='.CSV'/>
         </form>
         <form class='form-horizontal export-button' action=expxml_dict.php?sde_underscore=" . $sde_name_underscore . " method='post'  name='upload_excel' enctype='multipart/form-data'>
-          <input type='submit' name='Expor2xml' class='btn btn-default btn-rounded mb-4' value='XML'/>
+          <input type='submit' name='Expor2xml' class='btn btn-default btn-rounded mb-4' value='.XML'/>
+        </form>
+        <form class='form-horizontal export-button' action=expmd_dict.php?sde_underscore=" . $sde_name_underscore . " method='post'  enctype='multipart/form-data'>
+          <input type='submit' name='Expor2md' class='btn btn-default btn-rounded mb-4' value='.MD'/>
         </form>
       </td>";
 
-  echo "<td>
-          <form action=expbut_dict.php?sde_normalize=" . $row[2] . "&sde_underscore=" . $sde_name_underscore . " method='post'  name='upload_excel' enctype='multipart/form-data' class='export-button'>
-            <input type=submit name=Export class='btn btn-default btn-rounded mb-4' value='CSV'/>
-          </form>
-          <form action=expxml_dict.php?sde_normalize=" . $row[2] . "&sde_underscore=" . $sde_name_underscore . " method='post'  name='upload_excel' enctype='multipart/form-data' class='export-button'>
-            <input type=submit name=Expor2xml class='btn btn-default btn-rounded mb-4' value='XML'/>
-          </form>
-        </td>";
+  // echo "<td>
+  //         <form action=expbut_dict.php?sde_normalize=" . $row[2] . "&sde_underscore=" . $sde_name_underscore . " method='post'  name='upload_excel' enctype='multipart/form-data' class='export-button'>
+  //           <input type=submit name=Export class='btn btn-default btn-rounded mb-4' value='.CSV'/>
+  //         </form>
+  //         <form action=expxml_dict.php?sde_normalize=" . $row[2] . "&sde_underscore=" . $sde_name_underscore . " method='post'  name='upload_excel' enctype='multipart/form-data' class='export-button'>
+  //           <input type=submit name=Expor2xml class='btn btn-default btn-rounded mb-4' value='.XML'/>
+  //         </form>
+  //       </td>";
 
 
 
