@@ -173,8 +173,6 @@ li {
     height: 45%;
     overflow: auto;
     padding: 0.4em;
-
-
 }
 #bottom-div {
     float: left;
@@ -182,7 +180,6 @@ li {
     height: 30%;
     overflow: auto;
     padding: 0.4em;
-
 }
 
 /* code for creating a table structure using css */
@@ -290,12 +287,14 @@ li {
               </div>
               <div class="modal-body text-center">
                 <form class="form-horizontal" action="expbut_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value="CSV"/>
+                  <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value=".CSV"/>
                 </form>
                 <form class="form-horizontal" action="expxml_readme_ind.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value="XML"/>
+                  <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value=".XML"/>
                 </form>
-
+                <form class="form-horizontal" action="expmd_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
+                  <input type="submit" name="Expor2md" class="btn btn-default btn-rounded mb-4" value=".MD"/>
+                </form>
               </div>
 
             </div>
@@ -407,10 +406,10 @@ li {
               </div>
               <div class="modal-body text-center">
                 <form class="form-horizontal" action="expbut_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value="CSV"/>
+                  <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value=".CSV"/>
                 </form>
                 <form class="form-horizontal" action="expxml_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value="XML"/>
+                  <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value=".XML"/>
                 </form>
 
               </div>

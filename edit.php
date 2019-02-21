@@ -168,7 +168,6 @@ li {
     height: 45%;
     overflow: auto;
     padding: 0.4em;
-
 }
 
 #top-div textarea{

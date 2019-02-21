@@ -1,5 +1,8 @@
 {
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
+  },
+  "require": {
+    "league/html-to-markdown": "^4.8"
   }
 }
