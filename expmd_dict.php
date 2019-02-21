@@ -12,7 +12,7 @@ if (isset($_POST["Expor2md"])) {
   $fp = fopen("php://output", "w");
   $html = '| order | field_name | longform_name | description | geocoded | required | data_type | expected_allowed_values | last_modified_date | no_longer_in_use | notes |<br />';
   $html .= '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |<br />';
-  $q = 'select * from '.$sde_underscore ;
+  $q = 'SELECT * FROM '.$sde_underscore . ' ORDER BY uid';
   $query = pg_query($q);
   //fetching values to write into the md file
   while ($row = pg_fetch_row($query))
@@ -20,8 +20,12 @@ if (isset($_POST["Expor2md"])) {
     $count = count($row);
     for ($y = 0; $y < $count; $y+=1)
     {
-      $c_row = current($row);
-      $html.= "|" . $c_row;
+      if ($y == 0) {
+
+      }else {
+        $c_row = current($row);
+        $html.= "|" . $c_row;
+      }
       next($row);
     }
       $html .= "<br />";
