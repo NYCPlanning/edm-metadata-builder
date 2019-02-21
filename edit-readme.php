@@ -351,10 +351,10 @@ li {
               </div>
               <div class="modal-body text-center">
                 <form class="form-horizontal" action="expbut_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value="CSV"/>
+                  <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value=".CSV"/>
                 </form>
                 <form class="form-horizontal" action="expxml_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value="XML"/>
+                  <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value=".XML"/>
                 </form>
 
               </div>

@@ -263,12 +263,14 @@ li {
               </div>
               <div class="modal-body text-center">
                 <form class="form-horizontal" action="expbut_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value="CSV"/>
+                  <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value=".CSV"/>
                 </form>
                 <form class="form-horizontal" action="expxml_readme_ind.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value="XML"/>
+                  <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value=".XML"/>
                 </form>
-
+                <form class="form-horizontal" action="expmd_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
+                  <input type="submit" name="Expor2md" class="btn btn-default btn-rounded mb-4" value=".MD"/>
+                </form>
               </div>
 
             </div>

@@ -42,76 +42,76 @@ header('Content-Disposition: attachment; filename='.$tbname.'.md'); //
 
 //opening the csv file that is to be downloaded
 $fp = fopen("php://output", "w");
-$html = '<h5>Common Name</h5>
+$html = '<h3>Common Name</h3>
 <p>'. $common_name.'</p>
 <br>
-<h5>SDE Name</h5>
+<h3>SDE Name</h3>
 <p>' . $sde_name . '</p>
 <br>
-<h5>Tags for Guide</h5>
+<h3>Tags for Guide</h3>
 <p>' . $tags_guide .'</p>
 <br>
-<h5>Tags for SDE</h5>
+<h3>Tags for SDE</h3>
 <p>' . $tags_sde . '</p>
 <br>
-<h5>Summary</h5>
+<h3>Summary</h3>
 <p>' .$summary. '</p>
 <br>
-<h5>Summary - Update Date</h5>
+<h3>Summary - Update Date</h3>
 <p>' . $summary_update_date . '</p>
 <br>
-<h5>Description</h5>
+<h3>Description</h3>
 <p>' .$description .'</p>
 <br>
-<h5>Description - Data Location</h5>
+<h3>Description - Data Location</h3>
 <p>' .$description_data_loc .'</p>
 <br>
-<h5>Data Steward</h5>
+<h3>Data Steward</h3>
 <p>'.$data_steward .'</p>
 <br>
-<h5>Data Engineer</h5>
+<h3>Data Engineer</h3>
 <p>' .$data_engineer . '</p>
 <br>
-<h5>Credits</h5>
+<h3>Credits</h3>
 <p>' .$credits .'</p>
 <br>
-<h5>General Constraints Use Limitations</h5>
+<h3>General Constraints Use Limitations</h3>
 <p>' .$genconst .'</p>
 <br>
-<h5>Legal Constraints Use Limitations</h5>
+<h3>Legal Constraints Use Limitations</h3>
 <p>' .$legconst .'</p>
 <br>
-<h5>Update Frequency</h5>
+<h3>Update Frequency</h3>
 <p>' .$update_freq .'</p>
 <br>
-<h5>Date of Last Update</h5>
+<h3>Date of Last Update</h3>
 <p>' .$date_last_update .'</p>
 <br>
-<h5>Date of Underlying Data</h5>
+<h3>Date of Underlying Data</h3>
 <p>' .$date_underlying_data .'</p>
 <br>
-<h5>Data Sources and Compilation Process</h5>
+<h3>Data Sources and Compilation Process</h3>
 <p>' .$data_source .'</p>
 <br>
-<h5>Version</h5>
+<h3>Version</h3>
 <p>' .$version .'</p>
 <br>
-<h5>Common Uses</h5>
+<h3>Common Uses</h3>
 <p>' .$common_uses.'</p>
 <br>
-<h5>Data Quality</h5>
+<h3>Data Quality</h3>
 <p>' .$data_quality.'</p>
 <br>
-<h5>Caveats</h5>
+<h3>Caveats</h3>
 <p>' .$caveats .'</p>
 <br>
-<h5>Future Plans</h5>
+<h3>Future Plans</h3>
 <p>' .$future_plans .'</p>
 <br>
-<h5>Distribution</h5>
+<h3>Distribution</h3>
 <p>' . $distribution .'</p>
 <br>
-<h5>Contact</h5>
+<h3>Contact</h3>
 <p>' .$contact .'</p>
 <br>';
 
