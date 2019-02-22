@@ -20,10 +20,14 @@ if(isset($_POST['readme_submit'])) {
           $tags_guide_string = $tags_guide_string . $p . ', ';
       };
       $tags_guide = rtrim(trim($tags_guide_string), ',');
+      $tags_guide = str_replace("'", "''", $tags_guide);
 
       $summary = preg_replace("/^REQUIRED: /i", "", $json_decoded["idinfo"]["descript"]["purpose"]);
+      $summary = str_replace("'", "''", $summary);
       $descript = preg_replace("/^REQUIRED: /i", "", $json_decoded["idinfo"]["descript"]["abstract"]);
+      $descript = str_replace("'", "''", $descript);
       $credits = $json_decoded["dataIdInfo"]["idCredit"];
+      $credits = str_replace("'", "''", $credits);
 
       $update_freq_code = $json_decoded["mdMaint"]["maintFreq"]["MaintFreqCd"];
       $update_freq = '';
