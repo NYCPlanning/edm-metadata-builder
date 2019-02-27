@@ -14,52 +14,79 @@ if(isset($_POST['readme_submit'])) {
       $json_decoded = json_decode($json, true);
       // $common_name = $json_decoded["dataIdInfo"]["idCitation"]["resTitle"];
 
-      $tags_guide_array = $json_decoded["dataIdInfo"]["searchKeys"];
+      $tags_guide_array_1 = $json_decoded["dataIdInfo"]["searchKeys"];
+      $tags_guide_array_2 = $json_decoded["idinfo"]["keywords"]["theme"][0];
+      $tags_guide_array_3 = $json_decoded["idinfo"]["keywords"]["place"];
       $tags_guide_string = '';
-      foreach ($tags_guide_array['keyword'] as $p) {
-          $tags_guide_string = $tags_guide_string . $p . ', ';
-      };
+
+      if($tags_guide_array_1) {
+        foreach ($tags_guide_array_1['keyword'] as $p) {
+            $tags_guide_string = $tags_guide_string . $p . ', ';
+        }
+      } else if($tags_guide_array_2 || $tags_guide_array_3) {
+
+          foreach ($tags_guide_array_2['themekey'] as $p) {
+            $tags_guide_string = $tags_guide_string . $p . ', ';
+          }
+          foreach($tags_guide_array_3['placekey'] as $p) {
+            $tags_guide_string = $tags_guide_string . $p . ', ';
+          }
+      }
+
       $tags_guide = rtrim(trim($tags_guide_string), ',');
       $tags_guide = str_replace("'", "''", $tags_guide);
-
+      $tags_sde = $tags_guide;
       $summary = preg_replace("/^REQUIRED: /i", "", $json_decoded["idinfo"]["descript"]["purpose"]);
       $summary = str_replace("'", "''", $summary);
       $descript = preg_replace("/^REQUIRED: /i", "", $json_decoded["idinfo"]["descript"]["abstract"]);
       $descript = str_replace("'", "''", $descript);
       $credits = $json_decoded["dataIdInfo"]["idCredit"];
       $credits = str_replace("'", "''", $credits);
-
-      $update_freq_code = $json_decoded["mdMaint"]["maintFreq"]["MaintFreqCd"];
       $update_freq = '';
-      if($update_freq_code['@attributes']['value'] === '009') {
-        $update_freq = 'as-needed';
-      } else if ($update_freq_code['@attributes']['value'] === '008') {
-        $update_freq = 'annually';
-      } else if ($update_freq_code['@attributes']['value'] === '007') {
-        $update_freq = 'biannually';
-      } else if ($update_freq_code['@attributes']['value'] === '006') {
-        $update_freq = 'quarterly';
-      } else if ($update_freq_code['@attributes']['value'] === '005') {
-        $update_freq = 'monthly';
-      } else if ($update_freq_code['@attributes']['value'] === '004') {
-        $update_freq = 'fortnightly';
-      } else if ($update_freq_code['@attributes']['value'] === '003') {
-        $update_freq = 'weekly';
-      } else if ($update_freq_code['@attributes']['value'] === '002') {
-        $update_freq = 'daily';
+      $update_freq = $json_decoded["idinfo"]["status"]["update"];
+      $update_freq = str_replace("'", "''", $update_freq);
+
+      if(!$update_freq) {
+        $update_freq_code = $json_decoded["mdMaint"]["maintFreq"]["MaintFreqCd"];
+        if($update_freq_code['@attributes']['value'] === '009') {
+          $update_freq = 'as-needed';
+        } else if ($update_freq_code['@attributes']['value'] === '008') {
+          $update_freq = 'annually';
+        } else if ($update_freq_code['@attributes']['value'] === '007') {
+          $update_freq = 'biannually';
+        } else if ($update_freq_code['@attributes']['value'] === '006') {
+          $update_freq = 'quarterly';
+        } else if ($update_freq_code['@attributes']['value'] === '005') {
+          $update_freq = 'monthly';
+        } else if ($update_freq_code['@attributes']['value'] === '004') {
+          $update_freq = 'fortnightly';
+        } else if ($update_freq_code['@attributes']['value'] === '003') {
+          $update_freq = 'weekly';
+        } else if ($update_freq_code['@attributes']['value'] === '002') {
+          $update_freq = 'daily';
+        }
       }
+
+      $version = $json_decoded["idinfo"]["citation"]["citeinfo"]["edition"];
+      $version = str_replace("'", "''", $version);
+
+      $contact = $json_decoded["idinfo"]["ptcontac"]["cntinfo"]["cntorgp"]["cntorg"];
+      $contact = str_replace("'", "''", $contact);
 
       $date_last_update = $json_decoded["Esri"]["ModDate"];
       $date_underlying_data = preg_replace("/T00:00:00$ /i", "", $json_decoded["dataIdInfo"]["idCitation"]["date"]["createDate"]);
 
       $query = "UPDATE ReadMe
                 SET tags_guide = '$tags_guide',
+                    tags_sde = '$tags_sde',
                     summary = '$summary',
                     description = '$descript',
                     credits = '$credits',
                     update_freq = '$update_freq',
+                    version = '$version',
                     date_last_update = '$date_last_update',
-                    date_underlying_data = '$date_underlying_data'
+                    date_underlying_data = '$date_underlying_data',
+                    contact = '$contact'
                 WHERE uid = $id";
 
       // $query="INSERT INTO ReadMe(tags_guide,summary,description,credits,update_freq,date_last_update, date_underlying_data) VALUES ('$tags_guide','$summary','$descript','$credits','$update_freq','$date_last_update','$date_underlying_data')";
