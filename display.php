@@ -4,38 +4,17 @@ include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
 include ('dd_upload.php');
 include ('readme-p-edit-submission.php');
-// Trim white spaces
 
+
+// Get search result from the navbar
 $common_name_search = $_GET['search'];
 $id_query = "SELECT uid FROM readme WHERE LOWER(common_name) = LOWER('$common_name_search')";
 $id_results = pg_query($id_query);
 $id_row = pg_fetch_assoc($id_results);
 $id = $id_row['uid'];
 
-$common_name_normalize = trim($_POST['common_name']);
-$sde_name_normalize = trim($_POST['sde_name']);
-// Replace space with underscore
-$sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
-$sde_name_normalize = trim($sde_name);
-$query = "INSERT INTO ReadMe(common_name, sde_name) VALUES ('$common_name_normalize','$sde_name_normalize');";
-$query .= "CREATE TABLE $sde_name_underscore (
-                  uid serial PRIMARY key NOT NULL,
-                  orders int,
-                  field_name text,
-                  longform_name text,
-                  description text,
-                  geocoded boolean,
-                  required boolean,
-                  data_type text,
-                  expected_allowed_values text,
-                  last_modified_date text,
-                  no_longer_in_use text,
-                  notes text
-                );";
-pg_query($query);
 
-
-  if (isset($_GET['id'])) {
+if (isset($_GET['id'])) {
   $id = $_GET['id'];
 } else if (isset($_POST['id'])){
   $id = $_POST['id'];

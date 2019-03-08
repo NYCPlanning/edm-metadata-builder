@@ -40,51 +40,57 @@ html, body {
   display: none;
 }
 
+.inner-div {
+  padding: 0 10px;
+}
 </style>
 
 <div id="wrapper">
     <!-- Left Fixed Div -->
     <div id="left-div">
 
-      <!-- Dataset Name Search -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="input-group">
-            <label for="dataset_name">Dataset Name</label>
-            <input type="text" class="form-control" placeholder="Dataset Name" id="dataset_name">
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-12 -->
-      </div><!-- /.row -->
+      <div class="inner-div">
+        <!-- Dataset Name Search -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="input-group">
+              <label for="dataset_name">Dataset Name</label>
+              <input type="text" class="form-control" placeholder="Dataset Name" id="dataset_name">
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-12 -->
+        </div><!-- /.row -->
 
-      <!-- Update Frequency Filter -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="input-group">
-            <label for="update_freq">Update Frequency</label>
-            <div class="">
-              <select required name="update_freq" id="update_freq" disabled>
+        <!-- Update Frequency Filter -->
+        <!-- <div class="row">
+          <div class="col-lg-12">
+            <div class="input-group">
+              <label for="update_freq">Update Frequency</label>
+              <div class="">
+                <select required name="update_freq" id="update_freq" disabled>
 
-                <option value="<?php echo $update_freq; ?>" selected><?php echo $update_freq; ?></option>
-                <?php
-                echo $tables;
-                ?>
-                <option disabled selected>Under development</option>
-              </select>
+                  <option value="<?php echo $update_freq; ?>" selected><?php echo $update_freq; ?></option>
+                  <?php
+                  echo $tables;
+                  ?>
+                  <option disabled selected>Under development</option>
+                </select>
+              </div>
+
             </div>
+          </div><!-- /.col-lg-12 -->
+        <!--  </div> /.row -->
 
-          </div>
-        </div><!-- /.col-lg-12 -->
-      </div><!-- /.row -->
+        <!-- Tags Filter -->
+        <!-- <div class="row">
+          <div class="col-lg-12">
+            <div class="input-group">
+              <label for="tags">Tags</label>
+              <input type="text" class="form-control" placeholder="Under development" id="tags" disabled>
+            </div> /input-group -->
+          <!--</div> /.col-lg-12 -->
+        <!--</div>/.row -->
+      </div>
 
-      <!-- Tags Filter -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="input-group">
-            <label for="tags">Tags</label>
-            <input type="text" class="form-control" placeholder="Under development" id="tags" disabled>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-12 -->
-      </div><!-- /.row -->
 
     </div><!-- /#wrapper -->
 
@@ -101,7 +107,7 @@ html, body {
       $result = pg_query($query1);
       $row =pg_fetch_all($result);
 
-
+      // Displays all the retrieved data from the database
       foreach($row as $r) {
         echo "<a href='display.php?id=".$r["uid"]."'><h4>" .  $r["common_name"] . "</h4></a>";
         echo "<p><em>" . $r["description"] . "</em></p>";

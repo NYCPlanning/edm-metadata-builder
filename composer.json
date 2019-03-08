@@ -3,6 +3,7 @@
     "heroku/heroku-buildpack-php": "*"
   },
   "require": {
-    "league/html-to-markdown": "^4.8"
+    "league/html-to-markdown": "^4.8",
+    "sendgrid/sendgrid": "^7.2"
   }
 }

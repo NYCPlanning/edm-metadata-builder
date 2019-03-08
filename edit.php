@@ -5,7 +5,6 @@ include ('readme_upload.php');
 include ('dd-delete.php');
 include ('dd-edit-submission.php');
 include ('readme-p-edit-submission.php');
-// include ('datatype_dropdown.php');
 
 
 // Trim white spaces
@@ -146,7 +145,7 @@ li {
 
 .right-container {
   float: right;
-  width: 180px;
+  width: 245px;
 }
 
 .common-name-header h3 {
@@ -208,6 +207,9 @@ li {
 }
 .dd-header-container a {
   margin: 10px 0 0 0;
+}
+.dd-header-container button{
+  margin: 9px 10px 0 0;
 }
 .upload-modal {
   margin-top: 20%;
@@ -407,7 +409,36 @@ li {
           </div>
         </div>
       <div class="upload-readme container right-container">
-        <div class="text-right">
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-rounded mb-4 export-file" data-toggle="modal" data-target="#exportDD"style="display: inline;">Export</button>
+
+        <!-- Modal -->
+        <div id="exportDD" class="modal fade" role="dialog" style="margin-top: 200px;">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-left" style="">Data Dictionary Export</h4>
+              </div>
+              <div class="modal-body text-center">
+                <form class="form-horizontal" action="expbut_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                  <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value=".CSV"/>
+                </form>
+                <form class="form-horizontal" action="expxml_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                  <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value=".XML"/>
+                </form>
+                <form class="form-horizontal" action="expmd_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  enctype="multipart/form-data">
+                  <input type="submit" name="Expor2md" class="btn btn-default btn-rounded mb-4" value=".MD"/>
+                </form>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="text-right"style="display: inline;">
           <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#dd-upload">Upload From File</a>
         </div>
       </div>

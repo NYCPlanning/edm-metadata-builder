@@ -138,6 +138,7 @@ $selection = $_POST['update_freq'];
         <ul class="nav navbar-nav navbar-right">
           <li><a href="import_metadata.php">Import Metadata</a></li>
           <li><a href="export_metadata.php">Export Metadata</a></li>
+          <li><a href="login.php">Login</a></li>
           <form class="navbar-form navbar-left" id="searchbar-form" autocomplete="off" action="display.php">
             <div class="form-group">
               <input type="text" id="searchbar" class="form-control" placeholder="Search Dataset" name="search" list="display" required >
