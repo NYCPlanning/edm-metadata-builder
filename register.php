@@ -40,7 +40,7 @@ if(isset($_POST['submit'])) {
       $SGemail->setSubject("Verification Email For Metadata Management Tool");
       $SGemail->addTo($email);
       $SGemail->addContent(
-          "text/html", "<a href='http://localhost:8888/Metadata/verification.php?vkey=$vkey'>Verify Account</a>"
+          "text/html", "<a href='http://morning-stream-61756.herokuapp.com/verification.php?vkey=$vkey'>Verify Account</a>"
       );
       $sendgrid = new \SendGrid(getenv("SENDGRID_API"));
       try {
