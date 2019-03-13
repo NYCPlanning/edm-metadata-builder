@@ -4,6 +4,7 @@
   },
   "require": {
     "league/html-to-markdown": "^4.8",
-    "sendgrid/sendgrid": "^7.2"
+    "sendgrid/sendgrid": "^7.2",
+    "dompdf/dompdf": "^0.8.3"
   }
 }
