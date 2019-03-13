@@ -42,18 +42,16 @@ if(isset($_POST['submit'])) {
       $SGemail->addContent(
           "text/html", "<a href='http://morning-stream-61756.herokuapp.com/verification.php?vkey=$vkey'>Verify Account</a>"
       );
-      $sendgrid = new \SendGrid(getenv("SENDGRID_API"));
-      try {
-          $response = $sendgrid->send($SGemail);
-          echo '<div class="alert alert-success alert-dismissible fade in">
-                 <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                 <strong>A verification link has been sent to your email account.</strong>
-               </div>';
-      } catch (Exception $e) {
-          echo 'Caught exception: '. $e->getMessage() ."\n";
-      }
+      $apiKey = getenv('SENDGRID_API_KEY');
+      $sg = new \SendGrid($apiKey);
+      $response = $sg->client->mail()->send()->post($SGemail);
+      echo '<div class="alert alert-success alert-dismissible fade in">
+             <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>A verification link has been sent to your email account.</strong>
+           </div>';
     } else {
-      echo pg_last_error($insert);
+      $response = $sg->client->mail()->send()->post($SGemail);
+      echo $response->statusCode();
     }
   }
 
