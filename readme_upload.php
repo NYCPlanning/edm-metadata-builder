@@ -12,7 +12,7 @@ if(isset($_POST['readme_submit'])) {
       $file_string = simplexml_load_string($file_contents);
       $json = json_encode($file_string);
       $json_decoded = json_decode($json, true);
-      // $common_name = $json_decoded["dataIdInfo"]["idCitation"]["resTitle"];
+      // $common_name = $json_decoded["idinfo"]["citation"]["citeinfo"]["title"];
 
       $tags_guide_array_1 = $json_decoded["dataIdInfo"]["searchKeys"];
       $tags_guide_array_2 = $json_decoded["idinfo"]["keywords"]["theme"][0];
@@ -74,7 +74,88 @@ if(isset($_POST['readme_submit'])) {
       $contact = str_replace("'", "''", $contact);
 
       $date_last_update = $json_decoded["Esri"]["ModDate"];
+      if(!$date_last_update) {
+        $date_last_update = $json_decoded["idinfo"]["citation"]["citeinfo"]["pubdate"];
+      }
+      $date_last_update = str_replace("'", "''", $date_last_update);
+
       $date_underlying_data = preg_replace("/T00:00:00$ /i", "", $json_decoded["dataIdInfo"]["idCitation"]["date"]["createDate"]);
+
+      $legconst = $json_decoded["idinfo"]["useconst"];
+      $legconst = str_replace("'", "''", $legconst);
+
+      $genconst = $json_decoded["idinfo"]["accconst"];
+      $genconst = str_replace("'", "''", $genconst);
+
+      $dates_input_dataset = $json_decoded["idinfo"]["descript"]["abstract"];
+      $dates_input_dataset = substr($dates_input_dataset, strpos($dates_input_dataset, 'DATES OF INPUT DATASETS:') + 24);
+      $dates_input_dataset = str_replace("'", "''", $dates_input_dataset);
+
+      $extent = "West Longitude ";
+      $extent .= $json_decoded["idinfo"]["spdom"]["bounding"]["westbc"] . ',';
+      $extent .= "East Longitude ";
+      $extent .= $json_decoded["idinfo"]["spdom"]["bounding"]["eastbc"] . ',';
+      $extent .= "North Latitude ";
+      $extent .= $json_decoded["idinfo"]["spdom"]["bounding"]["northbc"] . ',';
+      $extent .= "South Latitude ";
+      $extent .= $json_decoded["idinfo"]["spdom"]["bounding"]["southbc"];
+      $extent = str_replace("'", "''", $extent);
+
+
+      $fgdc_geo_format = $json_decoded["idinfo"]["citation"]["citeinfo"]["geoform"];
+      $fgdc_geo_format = str_replace("'", "''", $fgdc_geo_format);
+
+      $series_name = $json_decoded["idinfo"]["citation"]["citeinfo"]["serinfo"]["sername"];
+      $series_name = str_replace("'", "''", $series_name);
+
+      $series_issue = $json_decoded["idinfo"]["citation"]["citeinfo"]["serinfo"]["issue"];
+      $series_issue = str_replace("'", "''", $series_issue);
+
+      $spatial_repre_type = $json_decoded["spdoinfo"]["direct"];
+      $spatial_repre_type = str_replace("'", "''", $spatial_repre_type);
+
+      $processing_env = $json_decoded["idinfo"]["native"];
+      $processing_env = str_replace("'", "''", $processing_env);
+
+      $arcgis_item_prop_name = $json_decoded["eainfo"]["detailed"]["enttyp"]["enttypl"];
+      $arcgis_item_prop_name = str_replace("'", "''", $arcgis_item_prop_name);
+
+      $rpoc_contact_position = $json_decoded["idinfo"]["ptcontac"]["cntinfo"]["cntpos"];
+      $rpoc_contact_position = str_replace("'", "''", $rpoc_contact_position);
+
+      $rpoc_address =  $json_decoded["idinfo"]["ptcontac"]["cntinfo"]["cntaddr"]["address"] . ' ';
+      $rpoc_address .=  $json_decoded["idinfo"]["ptcontac"]["cntinfo"]["cntaddr"]["city"] . ', ';
+      $rpoc_address .=  $json_decoded["idinfo"]["ptcontac"]["cntinfo"]["cntaddr"]["state"] . ' ';
+      $rpoc_address .=  $json_decoded["idinfo"]["ptcontac"]["cntinfo"]["cntaddr"]["postal"] . ', ';
+      $rpoc_address .=  $json_decoded["idinfo"]["ptcontac"]["cntinfo"]["cntaddr"]["country"];
+      $rpoc_address = str_replace("'", "''", $rpoc_address);
+
+      $sr_geo_coor_ref = $json_decoded["spref"]["horizsys"]["geodetic"]["horizdn"];
+      $sr_geo_coor_ref = str_replace("'", "''", $sr_geo_coor_ref);
+
+      $sr_projection = $json_decoded["spref"]["horizsys"]["planar"]["mapproj"]["mapprojn"];
+      $sr_projection = str_replace("'", "''", $sr_projection);
+
+      $caveats = $json_decoded["dataqual"]["complete"];
+      $caveats = str_replace("'", "''", $caveats);
+
+      $terms_fees = $json_decoded["distinfo"]["stdorder"]["fees"];
+      $terms_fees = str_replace("'", "''", $terms_fees);
+
+      $dis_transfer_option_location = $json_decoded["idinfo"]["citation"]["citeinfo"]["onlink"];
+      $dis_transfer_option_location = str_replace("'", "''", $dis_transfer_option_location);
+
+      $dis_transfer_option_description = $json_decoded["distinfo"]["resdesc"];
+      $dis_transfer_option_description = str_replace("'", "''", $dis_transfer_option_description);
+
+      $responsible_party_name = $json_decoded["idinfo"]["citation"]["citeinfo"]["pubinfo"]["publish"];
+      $responsible_party_name = str_replace("'", "''", $responsible_party_name);
+
+      $data_source = $json_decoded["idinfo"]["citation"]["citeinfo"]["othercit"];
+      $data_source = str_replace("'", "''", $data_source);
+
+      $sdp_vector_object_count = $json_decoded["spdoinfo"]["ptvctinf"]["sdtsterm"]["ptvctcnt"];
+      $sdp_vector_object_count = str_replace("'", "''", $sdp_vector_object_count);
 
       $query = "UPDATE ReadMe
                 SET tags_guide = '$tags_guide',
@@ -85,8 +166,29 @@ if(isset($_POST['readme_submit'])) {
                     update_freq = '$update_freq',
                     version = '$version',
                     date_last_update = '$date_last_update',
+                    caveats = '$caveats',
                     date_underlying_data = '$date_underlying_data',
-                    contact = '$contact'
+                    contact = '$contact',
+                    legconst = '$legconst',
+                    genconst = '$genconst',
+                    data_source = '$data_source',
+                    dates_input_dataset = '$dates_input_dataset',
+                    extent = '$extent',
+                    fgdc_geo_format = '$fgdc_geo_format',
+                    series_name = '$series_name',
+                    series_issue = '$series_issue',
+                    spatial_repre_type = '$spatial_repre_type',
+                    processing_env = '$processing_env',
+                    arcgis_item_prop_name = '$arcgis_item_prop_name',
+                    rpoc_contact_position = '$rpoc_contact_position',
+                    rpoc_address = '$rpoc_address',
+                    sdp_vector_object_count = '$sdp_vector_object_count',
+                    sr_geo_coor_ref = '$sr_geo_coor_ref',
+                    sr_projection = '$sr_projection',
+                    terms_fees = '$terms_fees',
+                    dis_transfer_option_location = '$dis_transfer_option_location',
+                    dis_transfer_option_description = '$dis_transfer_option_description',
+                    responsible_party_name = '$responsible_party_name'
                 WHERE uid = $id";
 
       // $query="INSERT INTO ReadMe(tags_guide,summary,description,credits,update_freq,date_last_update, date_underlying_data) VALUES ('$tags_guide','$summary','$descript','$credits','$update_freq','$date_last_update','$date_underlying_data')";
