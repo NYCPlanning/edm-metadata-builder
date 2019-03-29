@@ -35,13 +35,23 @@ if(isset($_POST['readme_submit'])) {
 
       $tags_guide = rtrim(trim($tags_guide_string), ',');
       $tags_guide = str_replace("'", "''", $tags_guide);
+
       $tags_sde = $tags_guide;
+
       $summary = preg_replace("/^REQUIRED: /i", "", $json_decoded["idinfo"]["descript"]["purpose"]);
       $summary = str_replace("'", "''", $summary);
+
       $descript = preg_replace("/^REQUIRED: /i", "", $json_decoded["idinfo"]["descript"]["abstract"]);
       $descript = str_replace("'", "''", $descript);
-      $credits = $json_decoded["dataIdInfo"]["idCredit"];
+
+      $credits = $json_decoded["idinfo"]["datacred"];
       $credits = str_replace("'", "''", $credits);
+      if(!$credits) {
+        $credits = $json_decoded["dataIdInfo"]["idCredit"];
+        $credits = str_replace("'", "''", $credits);
+      }
+
+
       $update_freq = '';
       $update_freq = $json_decoded["idinfo"]["status"]["update"];
       $update_freq = str_replace("'", "''", $update_freq);
@@ -70,8 +80,13 @@ if(isset($_POST['readme_submit'])) {
       $version = $json_decoded["idinfo"]["citation"]["citeinfo"]["edition"];
       $version = str_replace("'", "''", $version);
 
-      $contact = $json_decoded["idinfo"]["ptcontac"]["cntinfo"]["cntorgp"]["cntorg"];
+      $contact = $json_decoded["idinfo"]["citation"]["citeinfo"]["pubinfo"]["publish"];
       $contact = str_replace("'", "''", $contact);
+      // If publish tag doesn't exist fall back to this
+      if(!$contact){
+        $contact = $json_decoded["idinfo"]["ptcontac"]["cntinfo"]["cntorgp"]["cntorg"];
+        $contact = str_replace("'", "''", $contact);
+      }
 
       $date_last_update = $json_decoded["Esri"]["ModDate"];
       if(!$date_last_update) {
@@ -81,10 +96,10 @@ if(isset($_POST['readme_submit'])) {
 
       $date_underlying_data = preg_replace("/T00:00:00$ /i", "", $json_decoded["dataIdInfo"]["idCitation"]["date"]["createDate"]);
 
-      $legconst = $json_decoded["idinfo"]["useconst"];
+      $legconst .= $json_decoded["idinfo"]["accconst"];
       $legconst = str_replace("'", "''", $legconst);
 
-      $genconst = $json_decoded["idinfo"]["accconst"];
+      $genconst = $json_decoded["idinfo"]["useconst"];
       $genconst = str_replace("'", "''", $genconst);
 
       $dates_input_dataset = $json_decoded["idinfo"]["descript"]["abstract"];

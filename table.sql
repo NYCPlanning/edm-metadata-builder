@@ -25,7 +25,24 @@ caveats text,
 future_plans text,
 distribution text,
 contact text,
-date_last_updated text
+date_last_updated text,
+dates_input_dataset text,
+extent text,
+fgdc_geo_format text,
+series_name text,
+series_issue text,
+spatial_repre_type text,
+processing_env text,
+arcgis_item_prop_name text,
+rpoc_contact_position text,
+rpoc_address text,
+sr_geo_coor_ref text,
+sr_projection text,
+terms_fees text,
+dis_transfer_option_location text,
+dis_transfer_option_description text,
+responsible_party_name text,
+sdp_vector_object_count text
 );
 
 

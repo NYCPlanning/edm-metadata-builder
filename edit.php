@@ -300,7 +300,7 @@ li {
   <div id="wrapper">
 
     <!-- Top Div -->
-    <div id="top-div" class="border-bottom">
+    <div id="top-div" class="border-bottom align-middle">
       <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" id="readme-form" method="POST" >
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="hidden" name="sde_old" value="<?php echo $sde_name; ?>">

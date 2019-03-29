@@ -197,6 +197,23 @@ li {
   font-size: 18px;
 }
 
+.modal-dialog {
+  width: 370px;
+}
+
+.readme-modal {
+  width: 120px;
+  display: inline-block !important;
+}
+
+.readme-modal-header {
+  width: 110px;
+}
+
+.modal-format-header {
+  margin: -15px 0 -20px;
+}
+
 </style>
 
 <div class="common-name-header border-bottom">
@@ -253,36 +270,93 @@ li {
 
         <!-- Trigger the modal with a button -->
         <button type="button" class="btn btn-default btn-rounded mb-4 export-file" data-toggle="modal" data-target="#exportReadme">Export</button>
+      </div>
 
-        <!-- Modal -->
-        <div id="exportReadme" class="modal fade" role="dialog" style="margin-top: 200px;">
-          <div class="modal-dialog">
+    </div>
+  </div>
+  <!-- Modal -->
+  <div id="exportReadme" class="modal fade " role="dialog" style="margin-top: 200px;">
+    <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title text-left" style="">Readme Export</h4>
-              </div>
-              <div class="modal-body text-center">
-                <form class="form-horizontal" action="expbut_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value=".CSV"/>
-                </form>
-                <form class="form-horizontal" action="expxml_readme_ind.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                  <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value=".XML"/>
-                </form>
-                <form class="form-horizontal" action="expmd_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
-                  <input type="submit" name="Expor2md" class="btn btn-default btn-rounded mb-4" value=".MD"/>
-                </form>
-                <form class="form-horizontal" action="exppdf_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
-                  <input type="submit" name="Expor2pdf" class="btn btn-default btn-rounded mb-4" value=".PDF"/>
-                </form>
-              </div>
-
-            </div>
-
-          </div>
+      <!-- Modal content-->
+      <div class="modal-content ">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-left" style="">Readme Export</h3>
         </div>
+        <div class="modal-body">
+          <div class="modal-format-header">
+            <div class="readme-modal-header" style="display:inline-block;">
+              <h4>Format</h4>
+            </div>
+            <div class=""  style="display:inline-block; margin-left:15px;">
+              <h4>Layout</h4>
+            </div>
+          </div>
+          <hr>
+          <div class="readme-csv">
+            <div class="readme-modal-header" style="display:inline-block;">
+              <h4>CSV <a data-toggle="tooltip" data-placement="top" title="All Data contains all the columns within the database"><i class="fas fa-info-circle"></i></a></h4>
+            </div>
+            <div class=""  style="display:inline-block; margin-left:15px;">
+              <form class="form-horizontal" action="expbut_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                <input type="submit" name="export-all" class="btn btn-default btn-rounded mb-4" value="All Data"/>
+                <input type="submit" name="export-template" class="btn btn-default btn-rounded mb-4" value="Blank Template"/>
+              </form>
+            </div>
+          </div>
+          <div class="readme-xml">
+            <div class="readme-modal-header" style="display:inline-block;">
+              <h4>XML <a data-toggle="tooltip" data-placement="top" title="The XML file is ESRI compatible"><i class="fas fa-info-circle"></i></a></h4>
+            </div>
+            <div class=""  style="display:inline-block; margin-left:15px;">
+              <form class="form-horizontal" action="expxml_readme_ind.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                <input type="submit" name="export-sde" class="btn btn-default btn-rounded mb-4" value="Sde"/>
+                <input type="submit" name="export-bytes" class="btn btn-default btn-rounded mb-4" value="Bytes" disabled/>
+              </form>
+            </div>
+          </div>
+          <div class="readme-pdf">
+            <div class="readme-modal-header" style="display:inline-block;">
+              <h4>PDF <a data-toggle="tooltip" data-placement="top" title="The PDF version of the user guide."><i class="fas fa-info-circle"></i></a></h4>
+            </div>
+            <div class=""  style="display:inline-block; margin-left:15px;">
+              <form class="form-horizontal" action="exppdf_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
+                <input type="submit" name="export-opendata" class="btn btn-default btn-rounded mb-4" value="Open Data"/>
+                <input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide" disabled/>
+              </form>
+            </div>
+          </div>
+          <div class="readme-md">
+            <div class="readme-modal-header" style="display:inline-block;">
+              <h4>MarkDown <a data-toggle="tooltip" data-placement="top" title="Markdown is a lightweight and easy-to-use syntax for styling all forms of writing on the GitHub platform."><i class="fas fa-info-circle"></i></a></h4>
+            </div>
+            <div class=""  style="display:inline-block; margin-left:15px;">
+              <form class="form-horizontal" action="expmd_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
+                <input type="submit" name="export-opendata" class="btn btn-default btn-rounded mb-4" value="Open Data"/>
+                <input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide" disabled/>
+              </form>
+            </div>
+          </div>
+          <!-- <div class="readme-sde text-center readme-modal">
+            <h4>Sde</h4>
+            <form class="form-horizontal" action="expbut_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+              <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value=".CSV"/>
+            </form>
+            <form class="form-horizontal" action="expxml_readme_ind.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+              <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value=".XML"/>
+            </form>
+            <form class="form-horizontal" action="expmd_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
+              <input type="submit" name="Expor2md" class="btn btn-default btn-rounded mb-4" value=".MD"/>
+            </form>
+            <form class="form-horizontal" action="exppdf_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
+              <input type="submit" name="Expor2pdf" class="btn btn-default btn-rounded mb-4" value=".PDF"/>
+            </form>
+          </div> -->
+
+
+        </div>
+
       </div>
 
     </div>

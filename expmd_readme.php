@@ -35,95 +35,94 @@ $readme_row = pg_fetch_assoc($readme_results);
     $contact = $readme_row['contact'];
 
  // Connect to the Database
-if (isset($_POST["Expor2md"])) {
-//the header is used to download the csv file with the name passed in the header
-header('Content-Type: text/csv;');
-header('Content-Disposition: attachment; filename='.$tbname.'.md'); //
+if (isset($_POST["export-opendata"])) {
+  //the header is used to download the csv file with the name passed in the header
+  header('Content-Type: text/csv;');
+  header('Content-Disposition: attachment; filename='.$tbname.'.md'); //
 
-//opening the csv file that is to be downloaded
-$fp = fopen("php://output", "w");
-$html = '<h3>Common Name</h3>
-<p>'. $common_name.'</p>
-<br>
-<h3>SDE Name</h3>
-<p>' . $sde_name . '</p>
-<br>
-<h3>Tags for Guide</h3>
-<p>' . $tags_guide .'</p>
-<br>
-<h3>Tags for SDE</h3>
-<p>' . $tags_sde . '</p>
-<br>
-<h3>Summary</h3>
-<p>' .$summary. '</p>
-<br>
-<h3>Summary - Update Date</h3>
-<p>' . $summary_update_date . '</p>
-<br>
-<h3>Description</h3>
-<p>' .$description .'</p>
-<br>
-<h3>Description - Data Location</h3>
-<p>' .$description_data_loc .'</p>
-<br>
-<h3>Data Steward</h3>
-<p>'.$data_steward .'</p>
-<br>
-<h3>Data Engineer</h3>
-<p>' .$data_engineer . '</p>
-<br>
-<h3>Credits</h3>
-<p>' .$credits .'</p>
-<br>
-<h3>General Constraints Use Limitations</h3>
-<p>' .$genconst .'</p>
-<br>
-<h3>Legal Constraints Use Limitations</h3>
-<p>' .$legconst .'</p>
-<br>
-<h3>Update Frequency</h3>
-<p>' .$update_freq .'</p>
-<br>
-<h3>Date of Last Update</h3>
-<p>' .$date_last_update .'</p>
-<br>
-<h3>Date of Underlying Data</h3>
-<p>' .$date_underlying_data .'</p>
-<br>
-<h3>Data Sources and Compilation Process</h3>
-<p>' .$data_source .'</p>
-<br>
-<h3>Version</h3>
-<p>' .$version .'</p>
-<br>
-<h3>Common Uses</h3>
-<p>' .$common_uses.'</p>
-<br>
-<h3>Data Quality</h3>
-<p>' .$data_quality.'</p>
-<br>
-<h3>Caveats</h3>
-<p>' .$caveats .'</p>
-<br>
-<h3>Future Plans</h3>
-<p>' .$future_plans .'</p>
-<br>
-<h3>Distribution</h3>
-<p>' . $distribution .'</p>
-<br>
-<h3>Contact</h3>
-<p>' .$contact .'</p>
-<br>';
-
-
-$converter = new HtmlConverter();
-
-$markdown = $converter->convert($html);
-echo $markdown;
+  //opening the csv file that is to be downloaded
+  $fp = fopen("php://output", "w");
+  $html = '
+  <h3>Common Name</h3>
+  <p>'. $common_name.'</p>
+  <br>
+  <h3>SDE Name</h3>
+  <p>' . $sde_name . '</p>
+  <br>
+  <h3>Tags for Guide</h3>
+  <p>' . $tags_guide .'</p>
+  <br>
+  <h3>Tags for SDE</h3>
+  <p>' . $tags_sde . '</p>
+  <br>
+  <h3>Summary</h3>
+  <p>' .$summary. '</p>
+  <br>
+  <h3>Summary - Update Date</h3>
+  <p>' . $summary_update_date . '</p>
+  <br>
+  <h3>Description</h3>
+  <p>' .$description .'</p>
+  <br>
+  <h3>Description - Data Location</h3>
+  <p>' .$description_data_loc .'</p>
+  <br>
+  <h3>Data Steward</h3>
+  <p>'.$data_steward .'</p>
+  <br>
+  <h3>Data Engineer</h3>
+  <p>' .$data_engineer . '</p>
+  <br>
+  <h3>Credits</h3>
+  <p>' .$credits .'</p>
+  <br>
+  <h3>General Constraints Use Limitations</h3>
+  <p>' .$genconst .'</p>
+  <br>
+  <h3>Legal Constraints Use Limitations</h3>
+  <p>' .$legconst .'</p>
+  <br>
+  <h3>Update Frequency</h3>
+  <p>' .$update_freq .'</p>
+  <br>
+  <h3>Date of Last Update</h3>
+  <p>' .$date_last_update .'</p>
+  <br>
+  <h3>Date of Underlying Data</h3>
+  <p>' .$date_underlying_data .'</p>
+  <br>
+  <h3>Data Sources and Compilation Process</h3>
+  <p>' .$data_source .'</p>
+  <br>
+  <h3>Version</h3>
+  <p>' .$version .'</p>
+  <br>
+  <h3>Common Uses</h3>
+  <p>' .$common_uses.'</p>
+  <br>
+  <h3>Data Quality</h3>
+  <p>' .$data_quality.'</p>
+  <br>
+  <h3>Caveats</h3>
+  <p>' .$caveats .'</p>
+  <br>
+  <h3>Future Plans</h3>
+  <p>' .$future_plans .'</p>
+  <br>
+  <h3>Distribution</h3>
+  <p>' . $distribution .'</p>
+  <br>
+  <h3>Contact</h3>
+  <p>' .$contact .'</p>
+  <br>';
 
 
+  $converter = new HtmlConverter();
 
-fclose($fp);
+  $markdown = $converter->convert($html);
+  echo $markdown;
+
+  fclose($fp);
 }
 
 ?>

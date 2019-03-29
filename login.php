@@ -3,6 +3,7 @@ session_start();
 include ('navbar.php');
 $error = NULL;
 
+// Display Email Verification Success Message
 if(!empty($_SESSION['message'])) {
    $message = $_SESSION['message'];
    echo '<div class="alert alert-success alert-dismissible fade in">
@@ -12,61 +13,10 @@ if(!empty($_SESSION['message'])) {
    unset($_SESSION['message']);
 }
 
-//
-// if(isset($_POST['submit'])) {
-//   // Get form data after submission
-//   $email = $_POST['email'];
-//   $password = $_POST['psw'];
-//   $password_repeat = $_POST['psw-repeat'];
-//
-//   // Validate Email
-//   if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-//     $error = "<p>Please enter a valid E-Mail.</p>";
-//   // Validate Password
-//   } elseif($password != $password_repeat) {
-//     $error.= "<p>Your passwords do not match.</p>";
-//   // Check if password is at least 6 characters in length
-//   } elseif(strlen($password) < 5) {
-//     $error.= "<p>Your password needs to be at least 6 characters in length.</p>";
-//   // Insert into database
-//   } else {
-//     // Sanitize form data
-//     $email = pg_escape_string($email);
-//     $password = pg_escape_string($password);
-//     $password_repeat = pg_escape_string($password_repeat);
-//     $password = md5($password);
-//     // Generate Vkey
-//     $vkey = md5(time().$email);
-//
-//     // Insert form data
-//     $query = "INSERT INTO users (email, password, vkey) VALUES ('$email','$password','$vkey')";
-//     $insert = pg_query($query);
-//
-//     if($insert) {
-//       // echo '<div class="alert alert-success" role="alert">Success!</div>';
-//       // Send Verification Email
-//       $SGemail = new \SendGrid\Mail\Mail();
-//       $SGemail->setFrom("twang@planning.nyc.gov");
-//       $SGemail->setSubject("Verification Email For Metadata Management Tool");
-//       $SGemail->addTo($email);
-//       $SGemail->addContent(
-//           "text/html", "<a href='http://localhost:8888/Metadata/verification.php?vkey=$vkey'>Verify Account</a>"
-//       );
-//       $sendgrid = new \SendGrid('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');
-//       try {
-//           $response = $sendgrid->send($SGemail);
-//           print $response->statusCode() . "\n";
-//           print_r($response->headers());
-//           print $response->body() . "\n";
-//       } catch (Exception $e) {
-//           echo 'Caught exception: '. $e->getMessage() ."\n";
-//       }
-//     } else {
-//       echo pg_last_error($insert);
-//     }
-//   }
-//
-// }
+// USE THIS METHOD TO VERIFY PASSWORD
+// https://secure.php.net/manual/en/function.password-verify.php
+
+
 
 ?>
 

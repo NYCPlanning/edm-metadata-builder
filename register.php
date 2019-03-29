@@ -24,7 +24,8 @@ if(isset($_POST['submit'])) {
     $email = pg_escape_string($email);
     $password = pg_escape_string($password);
     $password_repeat = pg_escape_string($password_repeat);
-    $password = md5($password);
+    // https://secure.php.net/manual/en/function.password-hash.php
+    $password = password_hash($password, PASSWORD_DEFAULT);
     // Generate Vkey
     $vkey = md5(time().$email);
 

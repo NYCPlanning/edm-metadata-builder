@@ -94,12 +94,14 @@ $selection = $_POST['update_freq'];
     width: 250px;
 
   }
+
   #display ul{
     list-style-type: none;
     padding-left: 13px;
     padding-bottom: 6px;
 
   }
+
   #display a {
 
     cursor: pointer;
@@ -113,7 +115,6 @@ $selection = $_POST['update_freq'];
     border-color: #4BB543 !important;
     box-shadow: 0px 1.5px rgba(75, 181, 67, 0.8) !important;
   }
-
 </style>
 
 <body>
