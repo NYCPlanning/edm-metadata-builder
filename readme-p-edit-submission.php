@@ -28,7 +28,8 @@ if (isset($_POST['readme_save_button'])) {
               caveats = '" . $_POST['caveats'] . "',
               future_plans = '" . $_POST['future_plans'] . "',
               distribution = '" . $_POST['distribution'] . "',
-              contact = '" . $_POST['contact'] . "'
+              contact = '" . $_POST['contact'] . "',
+              data_access = '" . $_POST['data_access'] . "'
              WHERE uid = $id";
   $sql2 = "ALTER TABLE $sde_old RENAME TO $sde_new";
   pg_query($sql1);

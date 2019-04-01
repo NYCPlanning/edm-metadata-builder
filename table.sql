@@ -42,7 +42,8 @@ terms_fees text,
 dis_transfer_option_location text,
 dis_transfer_option_description text,
 responsible_party_name text,
-sdp_vector_object_count text
+sdp_vector_object_count text,
+data_access text
 );
 
 

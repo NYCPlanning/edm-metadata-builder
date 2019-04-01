@@ -78,7 +78,7 @@ $readme_row = pg_fetch_assoc($readme_results);
     $future_plans = $readme_row['future_plans'];
     $distribution = $readme_row['distribution'];
     $contact = $readme_row['contact'];
-
+    $data_access = $readme_row['data_access'];
     $sde_name_normalize = trim($sde_name);
     $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
 
@@ -300,7 +300,7 @@ li {
   <div id="wrapper">
 
     <!-- Top Div -->
-    <div id="top-div" class="border-bottom align-middle">
+    <div id="top-div" class="border-bottom">
       <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" id="readme-form" method="POST" >
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="hidden" name="sde_old" value="<?php echo $sde_name; ?>">
@@ -360,6 +360,8 @@ li {
         <li>Distribution <a data-toggle="tooltip" data-placement="top" title="Who is allowed to use this data set? Specific divisions within DCP, all DCP staff, other city agencies, the public?"><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="distribution" style="width:500px;" value="<?php echo $distribution; ?>"/></li>
         <br>
         <li>Contact <a data-toggle="tooltip" data-placement="top" title="If known, include contact information for the dataset."><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="contact" style="width:500px;" value="<?php echo $contact; ?>"/></li>
+        <br>
+        <li>Data Access <a data-toggle="tooltip" data-placement="top" title="The Guide specific, path to layers."><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="data_access" style="width:500px;" value="<?php echo $data_access; ?>"/></li>
         <br>
         <br>
       </form>

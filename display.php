@@ -59,7 +59,7 @@ $readme_row = pg_fetch_assoc($readme_results);
     $future_plans = $readme_row['future_plans'];
     $distribution = $readme_row['distribution'];
     $contact = $readme_row['contact'];
-
+    $data_access = $readme_row['data_access'];
     $sde_name_normalize = trim($sde_name);
     $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
 
@@ -312,7 +312,7 @@ li {
             <div class=""  style="display:inline-block; margin-left:15px;">
               <form class="form-horizontal" action="expxml_readme_ind.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                 <input type="submit" name="export-sde" class="btn btn-default btn-rounded mb-4" value="Sde"/>
-                <input type="submit" name="export-bytes" class="btn btn-default btn-rounded mb-4" value="Bytes" disabled/>
+                <input type="submit" name="export-sde" class="btn btn-default btn-rounded mb-4" value="Bytes"/>
               </form>
             </div>
           </div>
@@ -437,6 +437,9 @@ li {
         <br>
         <h5>Contact <a data-toggle="tooltip" data-placement="top" title="If known, include contact information for the dataset."><i class="fas fa-info-circle"></i></a></h5>
         <p><?php echo $contact; ?></p>
+        <br>
+        <h5>Data Access <a data-toggle="tooltip" data-placement="top" title="The Guide Specific, path to layers."><i class="fas fa-info-circle"></i></a></h5>
+        <p><?php echo $data_access; ?></p>
         <br>
     </div><!-- /Top Div -->
 

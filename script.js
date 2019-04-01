@@ -13,10 +13,12 @@ function fill(Value) {
 }
 
 
-
+//  Create button for import metadata page
 function create_button() {
+  // If common name and sde name is both unique then the create button would be enabled
   if(common_status === true && sde_status === true) {
     document.getElementById("create_dataset").disabled = false;
+  // Else it would be disabled
   } else {
     document.getElementById("create_dataset").disabled = true;
   }
