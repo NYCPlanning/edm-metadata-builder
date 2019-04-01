@@ -243,7 +243,6 @@ li {
             </div>
             <form action="display.php" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
                 <fieldset>
-
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="filebutton">Select File</label>
                         <div class="col-md-4">
