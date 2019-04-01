@@ -177,17 +177,21 @@ $(document).ready(function() {
    $("#sdeName").keyup(function() {
        //Assigning search box value to javascript variable named as "name".
        var name = $('#sdeName').val();
+       var first_Char = parseInt(name.charAt(0));
        //Validating, if "name" is empty.
-       if (name == "") {
+       if (name === "") {
            //Assigning empty value to "display" div in "search.php" file.
            document.getElementById("sdeName").classList.remove("success");
            document.getElementById("sdeName").classList.remove("error");
            sde_status = false;
            create_button();
-       }
-
+       } else if(!isNaN(first_Char)) {
+           document.getElementById("sdeName").classList.add("error");
+           document.getElementById("sdeName").classList.remove("success");
+           sde_status = false;
+           create_button();
        //If name is not empty.
-       else {
+       } else {
            //AJAX is called.
            $.ajax({
                //AJAX type is "Post".
