@@ -1,5 +1,4 @@
 <?php
-session_start();
 include ('navbar.php');
 $error = NULL;
 
@@ -15,7 +14,24 @@ if(!empty($_SESSION['message'])) {
 
 // USE THIS METHOD TO VERIFY PASSWORD
 // https://secure.php.net/manual/en/function.password-verify.php
+if(isset($_POST['submit'])) {
+  $email = pg_escape_string($_POST['email']);
+  $pass = pg_escape_string($_POST['psw']);
+  $query = "SELECT * FROM users WHERE email = '$email'";
+  $results = pg_query($query);
+  $row = pg_fetch_assoc($results);
+  $hash = $row['password'];
+  $verified = $row['verified'];
 
+  if(!password_verify($pass, $hash)) {
+    $error = "Incorrect Email or Password.";
+  } else if(!$verified) {
+    $error = "Please verify you account first.";
+  } else {
+    $_SESSION['user'] = $email;
+    header('location: Main.php');
+  }
+}
 
 
 ?>
@@ -81,7 +97,14 @@ a {
   }
 }
 </style>
-
+<?php
+  if($error != NULL) {
+    echo '<div class="alert alert-danger alert-dismissible">
+                <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>'.$error.'</strong>
+              </div>';
+  }
+?>
   <form method="POST" action="">
     <div class="container">
       <h1>Login</h1>
@@ -102,4 +125,3 @@ a {
       <p>Don't have an account yet? <a href="register.php">Register</a>.</p>
     </div>
   </form>
-  <?php echo $error; ?>

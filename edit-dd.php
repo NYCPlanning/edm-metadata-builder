@@ -1,10 +1,15 @@
 <?php
 include ('navbar.php');
+// If not logged in, bring user back to main page
+if (!isset($_SESSION['user'])) {
+  header('location: Main.php');
+}
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
 include ('dd-delete.php');
 include ('dd-edit-submission.php');
 include ('readme-p-edit-submission.php');
+
 
 
 if (isset($_GET['id'])) {

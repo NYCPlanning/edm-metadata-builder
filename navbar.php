@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config.php';
 $selection = $_POST['update_freq'];
 ?>
@@ -137,9 +138,25 @@ $selection = $_POST['update_freq'];
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="import_metadata.php">Import Metadata</a></li>
+          <!-- If user isn't logged in hide import metadata -->
+          <?php
+              if (isset( $_SESSION["user"]))
+              {
+                echo'<li><a href="import_metadata.php">Import Metadata</a></li>';
+              }
+         ?>
           <li><a href="export_metadata.php">Export Metadata</a></li>
-          <li><a href="login.php">Login</a></li>
+          <!-- If user isn't logged in show login button -->
+          <?php
+              if (!isset( $_SESSION["user"])) {
+                echo'<li><a href="login.php">Login</a></li>';
+              } else {
+                echo'<li><a href="logout.php">Logout</a></li>';
+              }
+         ?>
+
+
+
           <form class="navbar-form navbar-left" id="searchbar-form" autocomplete="off" action="display.php">
             <div class="form-group">
               <input type="text" id="searchbar" class="form-control" placeholder="Search Dataset" name="search" list="display" required >

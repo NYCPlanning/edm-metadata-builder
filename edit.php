@@ -1,10 +1,15 @@
 <?php
 include ('navbar.php');
+// If not logged in, bring user back to main page
+if (!isset($_SESSION['user'])) {
+  header('location: Main.php');
+}
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
 include ('dd-delete.php');
 include ('dd-edit-submission.php');
 include ('readme-p-edit-submission.php');
+
 
 
 // Trim white spaces
@@ -81,16 +86,6 @@ $readme_row = pg_fetch_assoc($readme_results);
     $data_access = $readme_row['data_access'];
     $sde_name_normalize = trim($sde_name);
     $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
-
-
-
-
-
-
-
-
-
-
 
 ?>
 

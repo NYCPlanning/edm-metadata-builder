@@ -220,7 +220,11 @@ li {
   <h3 id="common-name-delete"><?php echo $common_name; ?></h3>
   <input type="hidden" id="sde-name-delete" value="<?php echo $sde_name_underscore; ?>">
   <input type="hidden" id="readme-id" value="<?php echo $id; ?>">
-  <a id="deleteData"><i class="far fa-trash-alt dataset-delete"></i></a>
+  <?php
+      if (isset( $_SESSION["user"])) {
+        echo'<a id="deleteData"><i class="far fa-trash-alt dataset-delete"></i></a>';
+      }
+ ?>
 </div>
 
 
@@ -265,7 +269,12 @@ li {
       </div>
 
       <div class="text-right">
-        <a href= "edit-readme.php?id=<?php echo $id; ?>"  class="btn btn-default btn-rounded mb-4">Edit</a>
+        <?php
+            if (isset( $_SESSION["user"])) {
+              echo'<a href="edit-readme.php?id=' .$id. '" class="btn btn-default btn-rounded mb-4">Edit</a>';
+            }
+       ?>
+
 
         <!-- Trigger the modal with a button -->
         <button type="button" class="btn btn-default btn-rounded mb-4 export-file" data-toggle="modal" data-target="#exportReadme">Export</button>
@@ -437,9 +446,13 @@ li {
         <h5>Contact <a data-toggle="tooltip" data-placement="top" title="If known, include contact information for the dataset."><i class="fas fa-info-circle"></i></a></h5>
         <p><?php echo $contact; ?></p>
         <br>
-        <h5>Data Access <a data-toggle="tooltip" data-placement="top" title="The Guide Specific, path to layers."><i class="fas fa-info-circle"></i></a></h5>
-        <p><?php echo $data_access; ?></p>
-        <br>
+        <?php
+            if (isset( $_SESSION["user"])) {
+              echo'<h5>Data Access <a data-toggle="tooltip" data-placement="top" title="The Guide Specific, path to layers."><i class="fas fa-info-circle"></i></a></h5>
+                      <p>'.$data_access.'</p><br>';
+            }
+       ?>
+
     </div><!-- /Top Div -->
 
     <div class="dd-header-container">
@@ -447,7 +460,12 @@ li {
         <h4>Data Dictionary</h4>
       </div>
       <div class="text-right dd-header-container">
-        <a href= "edit-dd.php?id=<?php echo $id; ?>"  class="btn btn-default btn-rounded mb-4">Edit</a>
+        <?php
+            if (isset( $_SESSION["user"])) {
+              echo'<a href= "edit-dd.php?id=' .$id. '"  class="btn btn-default btn-rounded mb-4">Edit</a>';
+            }
+       ?>
+
 
         <!-- Trigger the modal with a button -->
         <button type="button" class="btn btn-default btn-rounded mb-4 export-file" data-toggle="modal" data-target="#exportDD">Export</button>

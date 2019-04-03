@@ -8,10 +8,21 @@ if(isset($_POST['submit'])) {
   $email = $_POST['email'];
   $password = $_POST['psw'];
   $password_repeat = $_POST['psw-repeat'];
+  $query_email = "SELECT email FROM users WHERE email = '$email'";
+  $results = pg_query($query_email);
+  $row = pg_fetch_assoc($results);
+  $email_check = $row['email'];
+  $domain_name = substr(strrchr($email, "@"), 1);
 
   // Validate Email
   if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $error = "<p>Please enter a valid E-Mail.</p>";
+  // Check if it's city planning's email domain
+  } elseif($domain_name != 'planning.nyc.gov') {
+    $error.= "You must use a City Planning Email to sign up.";
+  // Check if Email already exists
+  } elseif($email == $email_check) {
+    $error.= "The Email you entered is already in use.";
   // Validate Password
   } elseif($password != $password_repeat) {
     $error.= "Your passwords do not match.";

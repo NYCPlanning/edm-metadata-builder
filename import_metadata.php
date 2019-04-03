@@ -1,5 +1,9 @@
 <?php
 include ('navbar.php');
+// If not logged in, bring user back to main page
+if (!isset($_SESSION['user'])) {
+  header('location: Main.php');
+}
 ?>
 
 <style>
