@@ -59,7 +59,7 @@ if(isset($_POST['submit'])) {
       $response = $sg->client->mail()->send()->post($SGemail);
       echo '<div class="alert alert-success alert-dismissible fade in">
              <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-             <strong>A verification link has been sent to your email account.</strong>
+             <strong>A verification link has been sent to your email account. Please allow a couple minutes for this message to arrive.</strong>
            </div>';
     } else {
       $response = $sg->client->mail()->send()->post($SGemail);

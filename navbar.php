@@ -146,12 +146,25 @@ $selection = $_POST['update_freq'];
               }
          ?>
           <li><a href="export_metadata.php">Export Metadata</a></li>
+
           <!-- If user isn't logged in show login button -->
           <?php
               if (!isset( $_SESSION["user"])) {
                 echo'<li><a href="login.php">Login</a></li>';
               } else {
-                echo'<li><a href="logout.php">Logout</a></li>';
+                $firstCharacter = substr($_SESSION["user"], 0, 1);
+                echo'<div class="dropdown" style="display:inline-block; padding-top:8px;">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:50%; border-color:black; border-style: solid;">
+                        '.strtoupper($firstCharacter).'
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li style="padding:2px 10px;">'.$_SESSION["user"].'</li>
+                        <hr style="margin:5px 0;">
+                        <li><a class="dropdown-item" href="#">View Datasets</a></li>
+                        <li><a class="dropdown-item" href="#">Manage Users</a></li>
+                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                      </div>
+                    </div>';
               }
          ?>
 
