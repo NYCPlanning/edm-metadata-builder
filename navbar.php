@@ -58,13 +58,11 @@ $selection = $_POST['update_freq'];
   #searchbar {
     width: 250px;
   }
-
   .img {
   background-color: #fff;
   width: 50px;
   height: 50px;
   display: block;
-
   }
   .navbar-brand {
     padding-top: 0;
@@ -75,13 +73,10 @@ $selection = $_POST['update_freq'];
   .nav>li>a {
     color: black;
   }
-
   .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
         background-color: #D96B27;
   }
-
  a.dropdown-toggle:focus {
-
     color: white;
   }
   #top-div h5 {
@@ -93,21 +88,15 @@ $selection = $_POST['update_freq'];
     border-bottom: 1px solid #DFE0E5;
     box-shadow: 0 5px 5px -3px #DFE0E5;
     width: 250px;
-
   }
-
   #display ul{
     list-style-type: none;
     padding-left: 13px;
     padding-bottom: 6px;
-
   }
-
   #display a {
-
     cursor: pointer;
   }
-
   .error {
     border-color: #ff0000 !important;
     box-shadow: 0px 1.5px rgba(255, 0, 0, 0.8) !important;

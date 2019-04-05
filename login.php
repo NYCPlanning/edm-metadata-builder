@@ -2,6 +2,11 @@
 include ('navbar.php');
 $error = NULL;
 
+// If user is logged in relocate to main page
+if (isset($_SESSION['user'])) {
+  header('Location:Main.php');
+}
+
 // Display Email Verification Success Message
 if(!empty($_SESSION['message'])) {
    $message = $_SESSION['message'];
@@ -9,27 +14,34 @@ if(!empty($_SESSION['message'])) {
           <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <strong>Success! '.$message.'</strong>
         </div>';
+   // Unset session message so that it only appears once
    unset($_SESSION['message']);
 }
 
 // USE THIS METHOD TO VERIFY PASSWORD
 // https://secure.php.net/manual/en/function.password-verify.php
+// login form is submitted
 if(isset($_POST['submit'])) {
+  // Get form data after submission
   $email = pg_escape_string($_POST['email']);
   $pass = pg_escape_string($_POST['psw']);
+  // Query to get the password and verified status of the account associated with the email
   $query = "SELECT * FROM users WHERE email = '$email'";
   $results = pg_query($query);
   $row = pg_fetch_assoc($results);
   $hash = $row['password'];
   $verified = $row['verified'];
-
+  // If password doesn't match
   if(!password_verify($pass, $hash)) {
     $error = "Incorrect Email or Password.";
+  // If the account isn't verified
   } else if(!$verified) {
-    $error = "Please verify you account first.";
+    $error = "Please verify your account first.";
+    // Set the session variable user to the email
   } else {
     $_SESSION['user'] = $email;
-    header('location: Main.php');
+    // Redirect to main page
+    header('Location:Main.php');
   }
 }
 
@@ -118,10 +130,20 @@ a {
       <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
       <hr>
 
-      <button type="submit" name="submit" class="loginBtn">Login</button>
+      <button type="submit" id="form-submit" name="submit" class="loginBtn">Login</button>
     </div>
 
     <div class="container register">
       <p>Don't have an account yet? <a href="register.php">Register</a>.</p>
     </div>
   </form>
+
+  <script>
+    // Trigger form submit on enter key
+    window.addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+       event.preventDefault();
+       document.getElementById("form-submit").click();
+      }
+    });
+  </script>

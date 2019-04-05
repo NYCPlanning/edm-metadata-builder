@@ -319,7 +319,11 @@ li {
             </div>
             <div class=""  style="display:inline-block; margin-left:15px;">
               <form class="form-horizontal" action="expxml_readme_ind.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                <input type="submit" name="export-sde" class="btn btn-default btn-rounded mb-4" value="Sde"/>
+              <?php
+                    if (isset( $_SESSION["user"])) {
+                      echo'<input type="submit" name="export-sde" class="btn btn-default btn-rounded mb-4" value="Sde"/>';
+                    }
+               ?>
                 <input type="submit" name="export-sde" class="btn btn-default btn-rounded mb-4" value="Bytes"/>
               </form>
             </div>
@@ -331,7 +335,12 @@ li {
             <div class=""  style="display:inline-block; margin-left:15px;">
               <form class="form-horizontal" action="exppdf_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
                 <input type="submit" name="export-opendata" class="btn btn-default btn-rounded mb-4" value="Open Data"/>
-                <input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide" disabled/>
+                <?php
+                      if (isset( $_SESSION["user"])) {
+                        echo'<input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide" disabled/>';
+                      }
+                 ?>
+
               </form>
             </div>
           </div>
@@ -342,7 +351,11 @@ li {
             <div class=""  style="display:inline-block; margin-left:15px;">
               <form class="form-horizontal" action="expmd_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
                 <input type="submit" name="export-opendata" class="btn btn-default btn-rounded mb-4" value="Open Data"/>
-                <input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide" disabled/>
+                <?php
+                      if (isset( $_SESSION["user"])) {
+                        echo'<input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide" disabled/>';
+                      }
+                 ?>
               </form>
             </div>
           </div>

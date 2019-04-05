@@ -3,11 +3,13 @@ include ('navbar.php');
 require 'vendor/autoload.php';
 $error = NULL;
 
+// Register form is submitted
 if(isset($_POST['submit'])) {
   // Get form data after submission
   $email = $_POST['email'];
   $password = $_POST['psw'];
   $password_repeat = $_POST['psw-repeat'];
+  // Query to check if the email is already in use
   $query_email = "SELECT email FROM users WHERE email = '$email'";
   $results = pg_query($query_email);
   $row = pg_fetch_assoc($results);
@@ -43,9 +45,8 @@ if(isset($_POST['submit'])) {
     // Insert form data
     $query = "INSERT INTO users (email, password, vkey) VALUES ('$email','$password','$vkey')";
     $insert = pg_query($query);
-
+    // If data is inserted to database then send verification email to user
     if($insert) {
-      // echo '<div class="alert alert-success" role="alert">Success!</div>';
       // Send Verification Email
       $SGemail = new \SendGrid\Mail\Mail();
       $SGemail->setFrom("twang@planning.nyc.gov");
@@ -54,6 +55,7 @@ if(isset($_POST['submit'])) {
       $SGemail->addContent(
           "text/html", "<a href='http://morning-stream-61756.herokuapp.com/verification.php?vkey=$vkey'>Verify Account</a>"
       );
+      // Environment variable stored in heroku
       $apiKey = getenv('SENDGRID_API_KEY');
       $sg = new \SendGrid($apiKey);
       $response = $sg->client->mail()->send()->post($SGemail);
@@ -135,6 +137,7 @@ a {
 }
 </style>
   <?php
+    // If there is an error message
     if($error != NULL) {
       echo '<div class="alert alert-danger alert-dismissible">
                   <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
