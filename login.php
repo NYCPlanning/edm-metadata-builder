@@ -31,6 +31,7 @@ if(isset($_POST['submit'])) {
   $row = pg_fetch_assoc($results);
   $hash = $row['password'];
   $verified = $row['verified'];
+  $type = $row['type'];
   // If password doesn't match
   if(!password_verify($pass, $hash)) {
     $error = "Incorrect Email or Password.";
@@ -40,6 +41,7 @@ if(isset($_POST['submit'])) {
     // Set the session variable user to the email
   } else {
     $_SESSION['user'] = $email;
+    $_SESSION['type'] = $type;
     // Redirect to main page
     header('Location:Main.php');
   }

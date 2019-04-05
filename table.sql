@@ -64,6 +64,11 @@ VALUES ('monthly', '005'),
        ('as-needed', '009');
 
 
+CREATE TABLE collaboration(
+  sdename text,
+  email text
+)
+
  -- Data Type Table
  -- CREATE TABLE datatype (
  --   datatype text

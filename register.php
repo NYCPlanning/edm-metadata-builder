@@ -161,10 +161,20 @@ a {
       <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
       <hr>
 
-      <button type="submit" name="submit" class="registerbtn">Register</button>
+      <button type="submit" id="form-submit" name="submit" class="registerbtn">Register</button>
     </div>
 
     <div class="container signin">
       <p>Already have an account? <a href="login.php">Sign in</a>.</p>
     </div>
   </form>
+
+  <script>
+    // Trigger form submit on enter key
+    window.addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+       event.preventDefault();
+       document.getElementById("form-submit").click();
+      }
+    });
+  </script>
