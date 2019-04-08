@@ -21,9 +21,9 @@ $u_type = $_SESSION['type'];
     }
   }
   if($u_type == 'basic'){
-    $query = "SELECT common_name, description FROM readme, collaboration WHERE sdename = sde_name AND email = '$email' ORDER BY common_name";
+    $query = "SELECT common_name, sde_name, description FROM readme, collaboration WHERE sdename = sde_name AND email = '$email' ORDER BY common_name";
   } elseif($u_type == 'admin' || $u_type == 'superuser') {
-    $query = "SELECT common_name, description FROM readme ORDER BY common_name";
+    $query = "SELECT common_name, sde_name, description FROM readme ORDER BY common_name";
   }
 
   $result = pg_query($query);
@@ -31,7 +31,7 @@ $u_type = $_SESSION['type'];
 
   // Displays all the retrieved data from the database
   foreach($row as $r) {
-    echo "<a href='#'><h4>" .  $r["common_name"] . "</h4></a>";
+    echo "<a href='view_dataset_manage.php?sde=".$r["sde_name"]."&common=".$r["common_name"]."'><h4>" .  $r["common_name"] . "</h4></a>";
     echo "<p><em>" . custom_echo($r['description'], 350) . "</em></p>";
     echo "<hr>";
   }
