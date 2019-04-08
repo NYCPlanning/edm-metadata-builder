@@ -87,6 +87,27 @@ $readme_row = pg_fetch_assoc($readme_results);
     $sde_name_normalize = trim($sde_name);
     $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
 
+
+// Checks if user is admin or super
+$privilege = FALSE;
+if (($_SESSION["type"] == 'superuser')) {
+  $privilege = TRUE;
+}
+// If $privilege is false then check if user has access from collaboration
+if(!$privilege){
+  $user = $_SESSION["user"];
+  // Check if user have access to this dataset in the collaboration table
+  $query = "SELECT sdename FROM collaboration WHERE email = '$user'";
+  $result = pg_query($query);
+  $arr = pg_fetch_all($result);
+  foreach($arr as $v) {
+    if($v["sdename"] == $sde_name){
+      $privilege = TRUE;
+    }
+  }
+}
+
+
 ?>
 
 <style>

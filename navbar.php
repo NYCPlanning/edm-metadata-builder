@@ -149,9 +149,11 @@ $selection = $_POST['update_freq'];
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <li style="padding:2px 10px;">'.$_SESSION["user"].'</li>
                         <hr style="margin:5px 0;">
-                        <li><a class="dropdown-item" href="#">View Datasets</a></li>
-                        <li><a class="dropdown-item" href="#">Manage Users</a></li>
-                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                        <li><a class="dropdown-item" href="view_dataset.php">View Datasets</a></li>';
+                        if ($_SESSION["type"] == 'admin') {
+                          echo '<li><a class="dropdown-item" href="manage_user.php">Manage Users</a></li>';
+                        }
+                  echo'<li><a class="dropdown-item" href="logout.php">Logout</a></li>
                       </div>
                     </div>';
               }

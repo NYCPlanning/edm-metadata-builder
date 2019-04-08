@@ -3,6 +3,7 @@
 session_start();
 // Unset all of the session variables.
 unset($_SESSION['user']);
+unset($_SESSION['type']);
 // Finally, destroy the session.
 session_destroy();
 

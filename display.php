@@ -64,9 +64,24 @@ $readme_row = pg_fetch_assoc($readme_results);
     $sde_name_underscore =  str_replace(' ', '_', $sde_name_normalize);
 
 
-
-
-
+// Checks if user is admin or super
+$privilege = FALSE;
+if (($_SESSION["type"] == 'superuser')) {
+  $privilege = TRUE;
+}
+// If $privilege is false then check if user has access from collaboration
+if(!$privilege){
+  $user = $_SESSION["user"];
+  // Check if user have access to this dataset in the collaboration table
+  $query = "SELECT sdename FROM collaboration WHERE email = '$user'";
+  $result = pg_query($query);
+  $arr = pg_fetch_all($result);
+  foreach($arr as $v) {
+    if($v["sdename"] == $sde_name){
+      $privilege = TRUE;
+    }
+  }
+}
 
 
 // If dataset name doesn't exist in database send user back to Main.php
@@ -221,7 +236,7 @@ li {
   <input type="hidden" id="sde-name-delete" value="<?php echo $sde_name_underscore; ?>">
   <input type="hidden" id="readme-id" value="<?php echo $id; ?>">
   <?php
-      if (isset( $_SESSION["user"])) {
+      if ($privilege) {
         echo'<a id="deleteData"><i class="far fa-trash-alt dataset-delete"></i></a>';
       }
  ?>
@@ -270,7 +285,7 @@ li {
 
       <div class="text-right">
         <?php
-            if (isset( $_SESSION["user"])) {
+            if ($privilege) {
               echo'<a href="edit-readme.php?id=' .$id. '" class="btn btn-default btn-rounded mb-4">Edit</a>';
             }
        ?>
@@ -308,7 +323,12 @@ li {
             </div>
             <div class=""  style="display:inline-block; margin-left:15px;">
               <form class="form-horizontal" action="expbut_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
-                <input type="submit" name="export-all" class="btn btn-default btn-rounded mb-4" value="All Data"/>
+                <?php
+                      if ($privilege) {
+                        echo'<input type="submit" name="export-all" class="btn btn-default btn-rounded mb-4" value="All Data"/>';
+                      }
+                 ?>
+
                 <input type="submit" name="export-template" class="btn btn-default btn-rounded mb-4" value="Blank Template"/>
               </form>
             </div>
@@ -320,7 +340,7 @@ li {
             <div class=""  style="display:inline-block; margin-left:15px;">
               <form class="form-horizontal" action="expxml_readme_ind.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
               <?php
-                    if (isset( $_SESSION["user"])) {
+                    if ($privilege) {
                       echo'<input type="submit" name="export-sde" class="btn btn-default btn-rounded mb-4" value="Sde"/>';
                     }
                ?>
@@ -336,7 +356,7 @@ li {
               <form class="form-horizontal" action="exppdf_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
                 <input type="submit" name="export-opendata" class="btn btn-default btn-rounded mb-4" value="Open Data"/>
                 <?php
-                      if (isset( $_SESSION["user"])) {
+                      if ($privilege) {
                         echo'<input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide" disabled/>';
                       }
                  ?>
@@ -352,7 +372,7 @@ li {
               <form class="form-horizontal" action="expmd_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">
                 <input type="submit" name="export-opendata" class="btn btn-default btn-rounded mb-4" value="Open Data"/>
                 <?php
-                      if (isset( $_SESSION["user"])) {
+                      if ($privilege) {
                         echo'<input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide" disabled/>';
                       }
                  ?>
@@ -460,7 +480,7 @@ li {
         <p><?php echo $contact; ?></p>
         <br>
         <?php
-            if (isset( $_SESSION["user"])) {
+            if ($privilege) {
               echo'<h5>Data Access <a data-toggle="tooltip" data-placement="top" title="The Guide Specific, path to layers."><i class="fas fa-info-circle"></i></a></h5>
                       <p>'.$data_access.'</p><br>';
             }
@@ -474,7 +494,7 @@ li {
       </div>
       <div class="text-right dd-header-container">
         <?php
-            if (isset( $_SESSION["user"])) {
+            if ($privilege) {
               echo'<a href= "edit-dd.php?id=' .$id. '"  class="btn btn-default btn-rounded mb-4">Edit</a>';
             }
        ?>
