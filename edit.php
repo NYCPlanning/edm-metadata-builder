@@ -1,8 +1,12 @@
 <?php
 include ('navbar.php');
+$u_type = $_SESSION['type'];
+$email = $_SESSION['user'];
 // If not logged in, bring user back to main page
 if (!isset($_SESSION['user'])) {
-  header('location: Main.php');
+  echo '<script>';
+  echo 'window.location.href="Main.php"';  //not showing an alert box.
+  echo '</script>';
 }
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
@@ -34,6 +38,11 @@ if (isset($_POST['common_name'])) {
                     notes text
                   );";
   pg_query($query);
+  if ($u_type == 'basic') {
+    $u_query = "INSERT INTO collaboration (sdename, email)
+                VALUES ('$sde_name_normalize', '$email')";
+    pg_query($u_query);
+  }
 }
 
 

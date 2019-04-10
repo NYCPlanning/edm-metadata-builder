@@ -4,7 +4,9 @@ $error = NULL;
 
 // If user is logged in relocate to main page
 if (isset($_SESSION['user'])) {
-  header('Location:Main.php');
+  echo '<script>';
+  echo 'window.location.href="Main.php"';  //not showing an alert box.
+  echo '</script>';
 }
 
 // Display Email Verification Success Message
@@ -43,7 +45,9 @@ if(isset($_POST['submit'])) {
     $_SESSION['user'] = $email;
     $_SESSION['type'] = $type;
     // Redirect to main page
-    header('Location:Main.php');
+    echo '<script>';
+    echo 'window.location.href="Main.php"';  //not showing an alert box.
+    echo '</script>';
   }
 }
 
