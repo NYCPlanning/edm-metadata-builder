@@ -116,14 +116,16 @@ if (isset($_POST['sde'])) {
     $id = $_POST['deleteID'];
     $sde = $_POST['deleteSde'];
     $common = $_POST['deleteCommon'];
+    $sde_space = str_replace('_', ' ', $sde);
     // Delete row from readme table.
     $Query1 = "DELETE FROM readme WHERE uid = $id";
     // Drop data dictionary table associated with that readme record
     $Query2 = "DROP TABLE $sde";
     //Query execution
+    $Query3 = "DELETE FROM collaboration WHERE sdename = '$sde_space'";
     pg_query($Query1);
     pg_query($Query2);
-
+    pg_query($Query3);
 
 }
 
