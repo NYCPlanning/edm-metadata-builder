@@ -11,7 +11,6 @@ include ('dd-edit-submission.php');
 include ('readme-p-edit-submission.php');
 
 
-
 // Trim white spaces
 if (isset($_POST['common_name'])) {
   $current_date = date("m-d-Y");

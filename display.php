@@ -66,7 +66,7 @@ $readme_row = pg_fetch_assoc($readme_results);
 
 // Checks if user is admin or super
 $privilege = FALSE;
-if (($_SESSION["type"] == 'superuser')) {
+if (($_SESSION["type"] == 'superuser') || ($_SESSION["type"] == 'admin')) {
   $privilege = TRUE;
 }
 // If $privilege is false then check if user has access from collaboration

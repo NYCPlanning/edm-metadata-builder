@@ -105,6 +105,13 @@ $selection = $_POST['update_freq'];
     border-color: #4BB543 !important;
     box-shadow: 0px 1.5px rgba(75, 181, 67, 0.8) !important;
   }
+  i {
+    color: black;
+  }
+  i:hover {
+    color: #D96B27;
+    cursor: pointer;
+  }
 </style>
 
 <body>
