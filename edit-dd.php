@@ -1,9 +1,5 @@
 <?php
 include ('navbar.php');
-// If not logged in, bring user back to main page
-if (!isset($_SESSION['user'])) {
-  header('location: Main.php');
-}
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
 include ('dd-delete.php');
@@ -59,9 +55,32 @@ $readme_row = pg_fetch_assoc($readme_results);
 
 
 
+  // Checks if user is admin or super
+  $privilege = FALSE;
+  if (($_SESSION["type"] == 'superuser') || ($_SESSION["type"] == 'admin')) {
+    $privilege = TRUE;
+  }
+  // If $privilege is false then check if user has access from collaboration
+  if(!$privilege){
+    $user = $_SESSION["user"];
+    // Check if user have access to this dataset in the collaboration table
+    $query = "SELECT sdename FROM collaboration WHERE email = '$user'";
+    $result = pg_query($query);
+    $arr = pg_fetch_all($result);
+    foreach($arr as $v) {
+      if($v["sdename"] == $sde_name){
+        $privilege = TRUE;
+      }
+    }
+  }
 
 
-
+  // If dataset name doesn't exist in database send user back to Main.php
+  if (!isset($id) || !$privilege) {
+    echo '<script>';
+    echo 'window.location.href="Main.php"';  //not showing an alert box.
+    echo '</script>';
+  }
 ?>
 
 
