@@ -337,7 +337,7 @@ li {
               <h4>XML <a data-toggle="tooltip" data-placement="top" title="The XML file is ESRI compatible"><i class="fas fa-info-circle"></i></a></h4>
             </div>
             <div class=""  style="display:inline-block; margin-left:15px;">
-              <form class="form-horizontal" action="expxml_readme_ind.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+              <form class="form-horizontal" action="expxml_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
               <?php
                     if ($privilege) {
                       echo'<input type="submit" name="export-sde" class="btn btn-default btn-rounded mb-4" value="Sde"/>';
@@ -383,7 +383,7 @@ li {
             <form class="form-horizontal" action="expcsv_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
               <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value=".CSV"/>
             </form>
-            <form class="form-horizontal" action="expxml_readme_ind.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+            <form class="form-horizontal" action="expxml_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
               <input type="submit" name="Expor2xml" class="btn btn-default btn-rounded mb-4" value=".XML"/>
             </form>
             <form class="form-horizontal" action="expmd_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post" enctype="multipart/form-data">

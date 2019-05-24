@@ -57,7 +57,7 @@ while ($row = pg_fetch_row($result))
           <form action=expcsv_readme.php?id=" . $uid . "&tbname=" . $common_name . " method='post'  name='upload_excel' enctype='multipart/form-data' class='export-button'>
             <input type=submit name=Export class='btn btn-default btn-rounded mb-4' value='.CSV'/>
           </form>
-          <form action=expxml_readme_ind.php?id=" . $uid . "&tbname=" . $common_name . " method='post'  name='upload_excel' enctype='multipart/form-data' class='export-button'>
+          <form action=expxml_readme.php?id=" . $uid . "&tbname=" . $common_name . " method='post'  name='upload_excel' enctype='multipart/form-data' class='export-button'>
             <input type=submit name=Expor2xml class='btn btn-default btn-rounded mb-4' value='.XML'/>
           </form>
           <form class='form-horizontal export-button' action=expmd_readme.php?id=" . $uid . "&tbname=". $common_name . " method='post' enctype='multipart/form-data'>
