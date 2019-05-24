@@ -1,6 +1,5 @@
 <?php
 include ('navbar.php');
-include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
 include ('dd_delete.php');
 include ('dd_edit_submission.php');
@@ -297,7 +296,7 @@ li {
               <h4>CSV <a data-toggle="tooltip" data-placement="top" title="All Data contains all the columns within the database"><i class="fas fa-info-circle"></i></a></h4>
             </div>
             <div class=""  style="display:inline-block; margin-left:15px;">
-              <form class="form-horizontal" action="expbut_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+              <form class="form-horizontal" action="expcsv_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                 <input type="submit" name="export-all" class="btn btn-default btn-rounded mb-4" value="All Data"/>
                 <input type="submit" name="export-template" class="btn btn-default btn-rounded mb-4" value="Blank Template"/>
               </form>
@@ -338,7 +337,7 @@ li {
           </div>
           <!-- <div class="readme-sde text-center readme-modal">
             <h4>Sde</h4>
-            <form class="form-horizontal" action="expbut_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+            <form class="form-horizontal" action="expcsv_readme.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
               <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value=".CSV"/>
             </form>
             <form class="form-horizontal" action="expxml_readme_ind.php?id=<?php echo $id;?>&tbname=<?php echo $common_name;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
@@ -496,7 +495,7 @@ li {
                 <h4 class="modal-title text-left" style="">Data Dictionary Export</h4>
               </div>
               <div class="modal-body text-center">
-                <form class="form-horizontal" action="expbut_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                <form class="form-horizontal" action="expcsv_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value=".CSV"/>
                 </form>
                 <form class="form-horizontal" action="expxml_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">

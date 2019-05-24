@@ -1,6 +1,6 @@
 <?php
 include ('navbar.php');
-include ('MaintFreq_dropdown.php');
+
 ?>
 
 <style>

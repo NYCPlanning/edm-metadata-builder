@@ -1,4 +1,5 @@
 <?php
+// Uploading either xml or csv for readme table
 if(isset($_POST['readme_submit'])) {
     // Get the file
     $id = $_GET['id'];
@@ -173,42 +174,45 @@ if(isset($_POST['readme_submit'])) {
       $sdp_vector_object_count = str_replace("'", "''", $sdp_vector_object_count);
 
       $query = "UPDATE ReadMe
-                SET tags_guide = '$tags_guide',
-                    tags_sde = '$tags_sde',
-                    summary = '$summary',
-                    description = '$descript',
-                    credits = '$credits',
-                    update_freq = '$update_freq',
-                    version = '$version',
-                    date_last_update = '$date_last_update',
-                    caveats = '$caveats',
-                    date_underlying_data = '$date_underlying_data',
-                    contact = '$contact',
-                    legconst = '$legconst',
-                    genconst = '$genconst',
-                    data_source = '$data_source',
-                    dates_input_dataset = '$dates_input_dataset',
-                    extent = '$extent',
-                    fgdc_geo_format = '$fgdc_geo_format',
-                    series_name = '$series_name',
-                    series_issue = '$series_issue',
-                    spatial_repre_type = '$spatial_repre_type',
-                    processing_env = '$processing_env',
-                    arcgis_item_prop_name = '$arcgis_item_prop_name',
-                    rpoc_contact_position = '$rpoc_contact_position',
-                    rpoc_address = '$rpoc_address',
-                    sdp_vector_object_count = '$sdp_vector_object_count',
-                    sr_geo_coor_ref = '$sr_geo_coor_ref',
-                    sr_projection = '$sr_projection',
-                    terms_fees = '$terms_fees',
-                    dis_transfer_option_location = '$dis_transfer_option_location',
-                    dis_transfer_option_description = '$dis_transfer_option_description',
-                    responsible_party_name = '$responsible_party_name'
-                WHERE uid = $id";
+                SET tags_guide = $1,
+                    tags_sde = $2,
+                    summary = $3,
+                    description = $4,
+                    credits = $5,
+                    update_freq = $6,
+                    version = $7,
+                    date_last_update = $8,
+                    caveats = $9,
+                    date_underlying_data = $10,
+                    contact = $11,
+                    legconst = $12,
+                    genconst = $13,
+                    data_source = $14,
+                    dates_input_dataset = $15,
+                    extent = $16,
+                    fgdc_geo_format = $17,
+                    series_name = $18,
+                    series_issue = $19,
+                    spatial_repre_type = $20,
+                    processing_env = $21,
+                    arcgis_item_prop_name = $22,
+                    rpoc_contact_position = $23,
+                    rpoc_address = $24,
+                    sdp_vector_object_count = $25,
+                    sr_geo_coor_ref = $26,
+                    sr_projection = $27,
+                    terms_fees = $28,
+                    dis_transfer_option_location = $29,
+                    dis_transfer_option_description = $30,
+                    responsible_party_name = $31
+                WHERE uid = $32";
+      $params = array($tags_guide, $tags_sde, $summary, $descript, $credits, $update_freq, $version, $date_last_update, $caveats, $date_underlying_data,
+                      $contact, $legconst, $genconst, $data_source, $dates_input_dataset, $extent, $fgdc_geo_format, $series_name, $series_issue,
+                      $spatial_repre_type, $processing_env, $arcgis_item_prop_name, $rpoc_contact_position, $rpoc_address, $sdp_vector_object_count,
+                      $sr_geo_coor_ref, $sr_projection, $terms_fees, $dis_transfer_option_location, $dis_transfer_option_description, $responsible_party_name, $id);
 
-      // $query="INSERT INTO ReadMe(tags_guide,summary,description,credits,update_freq,date_last_update, date_underlying_data) VALUES ('$tags_guide','$summary','$descript','$credits','$update_freq','$date_last_update','$date_underlying_data')";
-      $res = pg_query($db, $query);
-
+      pg_query_params($db, $query, $params);
+      echo pg_last_error($db);
     }
     // CSV file upload
     else if($ext === 'csv') {
@@ -217,37 +221,61 @@ if(isset($_POST['readme_submit'])) {
         $flag = true;
           //loop through the csv file and insert into database
         while (($data = fgetcsv($handle,10000,",")) !== FALSE) {
+           $tags_guide = $data[2];
+           $tags_sde = $data[3];
+           $summary = $data[4];
+           $summary_update_date = $data[5];
+           $description = $data[6];
+           $description_data_loc = $data[7];
+           $data_steward = $data[8];
+           $data_engineer = $data[9];
+           $credits = $data[10];
+           $genconst = $data[11];
+           $legconst = $data[12];
+           $update_freq = $data[13];
+           $date_last_update = $data[14];
+           $date_underlying_data = $data[15];
+           $data_source = $data[16];
+           $version = $data[17];
+           $common_uses = $data[18];
+           $data_quality = $data[19];
+           $caveats = $data[20];
+           $future_plans = $data[21];
+           $distribution = $data[22];
+           $contact = $data[23];
+
            if($flag) { $flag = false; continue; }
 
             $query = "UPDATE ReadMe
-                      SET tags_guide = '$data[2]',
-                      tags_sde = '$data[3]',
-                      summary = '$data[4]',
-                      summary_update_date = '$data[5]',
-                      description = '$data[6]',
-                      description_data_loc = '$data[7]',
-                      data_steward = '$data[8]',
-                      data_engineer = '$data[9]',
-                      credits = '$data[10]',
-                      genconst = '$data[11]',
-                      legconst = '$data[12]',
-                      update_freq = '$data[13]',
-                      date_last_update = '$data[14]',
-                      date_underlying_data = '$data[15]',
-                      data_source = '$data[16]',
-                      version = '$data[17]',
-                      common_uses = '$data[18]',
-                      data_quality = '$data[19]',
-                      caveats = '$data[20]',
-                      future_plans = '$data[21]',
-                      distribution = '$data[22]',
-                      contact = '$data[23]'
-                      WHERE uid = $id";
+                      SET tags_guide = $1,
+                      tags_sde = $2,
+                      summary = $3,
+                      summary_update_date = $4,
+                      description = $5,
+                      description_data_loc = $6,
+                      data_steward = $7,
+                      data_engineer = $8,
+                      credits = $9,
+                      genconst = $10,
+                      legconst = $11,
+                      update_freq = $12,
+                      date_last_update = $13,
+                      date_underlying_data = $14,
+                      data_source = $15,
+                      version = $16,
+                      common_uses = $17,
+                      data_quality = $18,
+                      caveats = $19,
+                      future_plans = $20,
+                      distribution = $21,
+                      contact = $22
+                      WHERE uid = $23";
 
-                 // $query="INSERT INTO ReadMe(common_name, sde_name, tags_guide, tags_sde, summary, summary_update_date, description, description_data_loc,
-                 // data_steward, data_engineer, credits, genconst, legconst, update_freq, date_last_update, date_underlying_data, data_source, version,
-                 // common_uses, data_quality, caveats, future_plans, distribution, contact) VALUES ('$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]','$data[11]','$data[12]','$data[13]','$data[14]','$data[15]','$data[16]','$data[17]','$data[18]', '$data[19]','$data[20]', '$data[21]', '$data[22]','$data[23]')";
-            $res = pg_query($db, $query);
+            $params = array($tags_guide, $tags_sde, $summary, $summary_update_date, $description, $description_data_loc, $data_steward, $data_engineer, $credits,
+                            $genconst, $legconst, $update_freq, $date_last_update, $date_underlying_data, $data_source, $version, $common_uses, $data_quality,
+                            $caveats, $future_plans, $distribution, $contact, $id);
+            pg_query_params($db, $query, $params);
+            echo pg_last_error($db);
           }
       fclose($handle);
        }

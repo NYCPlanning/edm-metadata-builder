@@ -1,6 +1,5 @@
 <?php
 include ('navbar.php');
-include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
 include ('dd_upload.php');
 include ('readme_edit_submission.php');
@@ -306,9 +305,14 @@ li {
         <li>Update Frequency <a data-toggle="tooltip" data-placement="top" title="How often will this data set be updated? For data sets with a regular update schedule, this may be Monthly, Quarterly, or Annually. For one-off data sets, such as those created for a particular study, this may be None planned or As needed."><i class="fas fa-info-circle"></i></a></li>
         <select required name="update_freq" id="ddTables" style="font-size:12pt; height:45px; width:500px;">
           <option value="<?php echo $update_freq; ?>" selected><?php echo $update_freq; ?></option>
-          <?php
-          echo $tables;
-          ?>
+          <option value="monthly">Monthly</option>
+          <option value="biannually">Biannually</option>
+          <option value="annually">Annually</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="fortnightly">Fortnightly</option>
+          <option value="as-needed">As Needed</option>
         </select>
         <br>
         <br><li>Date of Last Update <a data-toggle="tooltip" data-placement="top" title="When was the data set last updated? This should be the date that any processing and quality assurance was complete. It is the release date of the data set."><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="date_last_update" style="width:500px;" value="<?php echo $date_last_update; ?>"/></li>
@@ -358,7 +362,7 @@ li {
                 <h4 class="modal-title text-left" style="">Data Dictionary Export</h4>
               </div>
               <div class="modal-body text-center">
-                <form class="form-horizontal" action="expbut_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
+                <form class="form-horizontal" action="expcsv_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
                   <input type="submit" name="Export" class="btn btn-default btn-rounded mb-4" value=".CSV"/>
                 </form>
                 <form class="form-horizontal" action="expxml_dict.php?sde_normalize=<?php echo $sde_name_normalize;?>&sde_underscore=<?php echo $sde_name_underscore;?>" method="post"  name="upload_excel" enctype="multipart/form-data">
