@@ -2,9 +2,9 @@
 include ('navbar.php');
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
-include ('dd-delete.php');
-include ('dd-edit-submission.php');
-include ('readme-p-edit-submission.php');
+include ('dd_delete.php');
+include ('dd_edit_submission.php');
+include ('readme_edit_submission.php');
 $u_type = $_SESSION['type'];
 $email = $_SESSION['user'];
 
@@ -288,7 +288,7 @@ li {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form action="edit-dd.php?id=<?php echo $id;?>" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
+            <form action="edit_dd.php?id=<?php echo $id;?>" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
                 <fieldset>
 
                     <div class="form-group">
@@ -324,7 +324,7 @@ li {
 
     <!-- Top Div -->
     <div id="top-div" class="border-bottom">
-      <form name="readme" action="edit-dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" id="readme-form" method="POST" >
+      <form name="readme" action="edit_dd.php?selection=<?php echo $selection;?>&id=<?php echo $id;?>" id="readme-form" method="POST" >
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="hidden" name="sde_old" value="<?php echo $sde_name; ?>">
         <li>Common Name <a data-toggle="tooltip" data-placement="top" title="Descriptive name without underscores or abbreviations"><i class="fas fa-info-circle"></i></a></li><li><input type="text" name="common_name" style="width:500px;" value="<?php echo $common_name; ?>"/></li>
@@ -407,7 +407,7 @@ li {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <form action="edit-readme.php?tbname=<?php echo $sde_name_underscore;?>&id=<?php echo $id;?>" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
+              <form action="edit_readme.php?tbname=<?php echo $sde_name_underscore;?>&id=<?php echo $id;?>" class="form-horizontal" method="post" name="upload_excel" enctype="multipart/form-data">
                   <fieldset>
 
                       <div class="form-group">

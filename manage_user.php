@@ -25,7 +25,7 @@ if(isset($_GET['delete'])) {
     echo '</script>';
     // Else delete user from users table and all the datasets they have access to in the collaboration table
   } else {
-    $d_query = "DELETE FROM collaboration WHERE email = '$delete_email';";
+    $d_query  = "DELETE FROM collaboration WHERE email = '$delete_email';";
     $d_query .= "DELETE FROM users WHERE email = '$delete_email'";
     pg_query($d_query);
   }

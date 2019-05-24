@@ -3,7 +3,7 @@ include ('navbar.php');
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
 include ('dd_upload.php');
-include ('readme-p-edit-submission.php');
+include ('readme_edit_submission.php');
 
 
 

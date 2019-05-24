@@ -9,26 +9,26 @@ $delete_email = $_GET['delete_email'];
 
 if(isset($_GET['add_email'])) {
   $email = $_GET['add_email'];
-  $a_query ="INSERT INTO collaboration(sdename, email) VALUES ('$sde','$email')";
-  pg_query($a_query);
+  $a_query ="INSERT INTO collaboration(sdename, email) VALUES ($1,$2)";
+  pg_query_params($db, $a_query, array($sde, $email));
 }
 
 if(isset($_GET['delete'])) {
   if($email == $delete_email){
-    $d_query = "DELETE FROM collaboration WHERE sdename = '$sde' AND email = '$delete_email'";
-    pg_query($d_query);
+    $d_query = "DELETE FROM collaboration WHERE sdename = $1 AND email = $2";
+    pg_query_params($db, $d_query, array($sde, $delete_email));
     echo '<script>';
     echo 'window.location.href="view_dataset.php"';  //not showing an alert box.
     echo '</script>';
   } else {
-    $d_query = "DELETE FROM collaboration WHERE sdename = '$sde' AND email = '$delete_email'";
-    pg_query($d_query);
+    $d_query = "DELETE FROM collaboration WHERE sdename = $1 AND email = $2";
+    pg_query_params($db, $d_query, array($sde, $delete_email));
   }
 
 }
 
-$query = "SELECT email FROM collaboration WHERE sdename = '$sde' ORDER BY email";
-$result = pg_query($query);
+$query = "SELECT email FROM collaboration WHERE sdename = $1 ORDER BY email";
+$result = pg_query_params($db, $query, array($sde));
 $row =pg_fetch_all($result);
 
 

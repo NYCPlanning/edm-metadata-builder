@@ -49,7 +49,7 @@ if(isset($_POST['submit'])) {
     if($insert) {
       // Send Verification Email
       $SGemail = new \SendGrid\Mail\Mail();
-      $SGemail->setFrom("twang@planning.nyc.gov");
+      $SGemail->setFrom("EDM_DL@planning.nyc.gov");
       $SGemail->setSubject("Verification Email For Metadata Management Tool");
       $SGemail->addTo($email);
       $SGemail->addContent(

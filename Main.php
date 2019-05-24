@@ -36,7 +36,6 @@ html, body {
 }
 
 #searchbar-form {
-
   display: none;
 }
 

@@ -1,4 +1,7 @@
 <?php
+// Data Dictionary File Upload
+
+// Append button is pressed
 if (isset($_POST['dd_submit_append'])) {
   // Get the file
   $tbname = $_GET['tbname'];
@@ -52,7 +55,7 @@ if (isset($_POST['dd_submit_append'])) {
 
 }
 
-
+// Overwrite button is pressed
 else if (isset($_POST['dd_submit_overwrite'])) {
   $tbname = $_GET['tbname'];
   $id = $_GET['id'];

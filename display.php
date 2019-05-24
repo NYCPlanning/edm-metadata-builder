@@ -3,7 +3,7 @@ include ('navbar.php');
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
 include ('dd_upload.php');
-include ('readme-p-edit-submission.php');
+include ('readme_edit_submission.php');
 
 
 // Get search result from the navbar
@@ -286,7 +286,7 @@ li {
       <div class="text-right">
         <?php
             if ($privilege) {
-              echo'<a href="edit-readme.php?id=' .$id. '" class="btn btn-default btn-rounded mb-4">Edit</a>';
+              echo'<a href="edit_readme.php?id=' .$id. '" class="btn btn-default btn-rounded mb-4">Edit</a>';
             }
        ?>
 
@@ -495,7 +495,7 @@ li {
       <div class="text-right dd-header-container">
         <?php
             if ($privilege) {
-              echo'<a href= "edit-dd.php?id=' .$id. '"  class="btn btn-default btn-rounded mb-4">Edit</a>';
+              echo'<a href= "edit_dd.php?id=' .$id. '"  class="btn btn-default btn-rounded mb-4">Edit</a>';
             }
        ?>
 

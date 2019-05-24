@@ -126,7 +126,7 @@ $selection = $_POST['update_freq'];
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="Main.php"><img class="img" src="logo.png"></a>
+        <a class="navbar-brand" href="Main.php"><img class="img" src="img/logo.png"></a>
         <a class="navbar-brand" id="navbar-title" href="Main.php">Metadata Management Web Tool</a>
       </div>
 

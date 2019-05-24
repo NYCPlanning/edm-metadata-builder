@@ -8,25 +8,25 @@ $u_type = $_SESSION['type'];
   <br><br>
   <!-- Retrieve data from database -->
   <?php
-  function custom_echo($x, $length)
-  {
-    if(strlen($x)<=$length)
-    {
+  function custom_echo($x, $length) {
+    if(strlen($x)<=$length) {
       echo $x;
     }
-    else
-    {
+    else {
       $y=substr($x,0,$length) . '...';
       echo $y;
     }
   }
-  if($u_type == 'basic'){
-    $query = "SELECT common_name, sde_name, description FROM readme, collaboration WHERE sdename = sde_name AND email = '$email' ORDER BY common_name";
+  $result;
+  if($u_type == 'basic') {
+    $query = "SELECT common_name, sde_name, description FROM readme, collaboration WHERE sdename = sde_name AND email = $1 ORDER BY common_name";
+    $result = pg_query_params($db, $query, array($email));
   } elseif($u_type == 'admin' || $u_type == 'superuser') {
     $query = "SELECT common_name, sde_name, description FROM readme ORDER BY common_name";
+    $result = pg_query($db, $query);
   }
 
-  $result = pg_query($query);
+
   $row =pg_fetch_all($result);
 
   // Displays all the retrieved data from the database

@@ -1,5 +1,6 @@
 <?php
 
+// Editing row in data dictionary
 if(isset($_GET['save-submit'])) {
   $id = $_GET['s0'];
   $sde = $_GET['sde_table'];
@@ -34,11 +35,7 @@ if(isset($_GET['add_row'])) {
 
   $dd_results = pg_query($dd_query);
   $dd_row = pg_fetch_assoc($dd_results);
-  $uid_focus = $dd_row['uid'];
 
-  echo  "<script>
-          editFunc('edit" .$uid_focus . "');
-        </script>";
 }
 
 

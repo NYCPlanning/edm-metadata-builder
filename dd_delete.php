@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+// Delete row in data dictionary
 if (isset($_GET['delete-id'])) {
     $delete_id = $_GET['delete-id'];
     $table = $_GET['tbname'];

@@ -2,9 +2,9 @@
 include ('navbar.php');
 include ('MaintFreq_dropdown.php');
 include ('readme_upload.php');
-include ('dd-delete.php');
-include ('dd-edit-submission.php');
-include ('readme-p-edit-submission.php');
+include ('dd_delete.php');
+include ('dd_edit_submission.php');
+include ('readme_edit_submission.php');
 
 
 
@@ -560,7 +560,7 @@ li {
                   <button class='btn edit-btn' id='edit".$row[0]. "' onClick='editFunc(this.id)' >
                     <i class='far fa-edit'></i>
                   </button>
-                  <form action='edit-dd.php' id='form".$row[0]."'>
+                  <form action='edit_dd.php' id='form".$row[0]."'>
                   <button class='save-btn' id='saveedit" .$row[0]."' type='submit' name='save-submit' form='form".$row[0]."' style=display:none;'>
                     <i class='far fa-save' ></i>
                   </button>
@@ -568,7 +568,7 @@ li {
 
               </td>";
               echo "<td style='text-align: center'>
-                      <form action=edit-dd.php?delete-id=".$row[0]."&tbname=". $sde_name_underscore ."&id=".$id." " . " method='post' enctype='multipart/form-data'>
+                      <form action=edit_dd.php?delete-id=".$row[0]."&tbname=". $sde_name_underscore ."&id=".$id." " . " method='post' enctype='multipart/form-data'>
                         <button class='btn' type='submit'>
                           <i class='far fa-trash-alt'></i>
                         </button>
@@ -613,7 +613,7 @@ li {
 
       echo '</table></div>';
       echo '<div id="dd_add_row">
-              <form action="edit-dd.php" id="add_row_form">
+              <form action="edit_dd.php" id="add_row_form">
                 <button type="submit" name="add_row">
                   <i class="fas fa-plus-circle"></i>
                 </button>
