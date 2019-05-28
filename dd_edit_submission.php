@@ -31,10 +31,6 @@ if(isset($_GET['add_row'])) {
 
   pg_query($sql_add);
 
-  $dd_query = "SELECT uid FROM $sde ORDER BY uid DESC LIMIT 1";
-
-  $dd_results = pg_query($dd_query);
-  $dd_row = pg_fetch_assoc($dd_results);
 
 }
 

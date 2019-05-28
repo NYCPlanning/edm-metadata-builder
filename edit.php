@@ -4,10 +4,10 @@ include ('readme_upload.php');
 include ('dd_delete.php');
 include ('dd_edit_submission.php');
 include ('readme_edit_submission.php');
-$u_type = $_SESSION['type'];
-$email = $_SESSION['user'];
+// $u_type = $_SESSION['type'];
+// $email = $_SESSION['user'];
 
-// Trim white spaces
+// After import metadata page form submission
 if (isset($_POST['common_name'])) {
   $current_date = date("m-d-Y");
   $common_name_normalize = trim($_POST['common_name']);
@@ -30,21 +30,20 @@ if (isset($_POST['common_name'])) {
                     notes text
                   );";
   pg_query($query);
-  if ($u_type == 'basic') {
-    $u_query = "INSERT INTO collaboration (sdename, email)
-                VALUES ('$sde_name_normalize', '$email')";
-    pg_query($u_query);
-  }
+  // if ($u_type == 'basic') {
+  //   $u_query = "INSERT INTO collaboration (sdename, email)
+  //               VALUES ('$sde_name_normalize', '$email')";
+  //   pg_query($u_query);
+  // }
 }
 
 
-
+// Getting the ID of the form
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
 } else if (isset($_POST['id'])){
   $id = $_POST['id'];
 } else {
-
   $id_query = "SELECT uid FROM readme WHERE sde_name = '$sde_name_normalize'";
   $id_results = pg_query($id_query);
   $id_row = pg_fetch_assoc($id_results);
@@ -53,7 +52,7 @@ if (isset($_GET['id'])) {
 
 
 
-
+// Retrieve row from Readme table
 $readme_query = "SELECT * FROM readme WHERE uid = $id";
 
 $readme_results = pg_query($readme_query);
@@ -108,10 +107,10 @@ $readme_row = pg_fetch_assoc($readme_results);
     }
 
 
-    // If dataset name doesn't exist in database send user back to Main.php
+    // If dataset name doesn't exist in database or user has no CRUD privilege send user back to Main.php
     if (!isset($id) || !$privilege) {
       echo '<script>';
-      echo 'window.location.href="Main.php"';  //not showing an alert box.
+      echo 'window.location.href="Main.php"';
       echo '</script>';
     }
   ?>
@@ -590,7 +589,7 @@ li {
   <script>
     // Counter to limit row that can be edited at a time to 1;
     var counter = 0;
-    // Data dictionary Edit event listener
+    // Data dictionary Edit event listener that enables all the input fields.
     function editFunc(clicked_id) {
       var editbtn = document.getElementById(clicked_id);
       var savebtn = document.getElementById("save" + clicked_id);

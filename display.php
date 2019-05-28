@@ -12,7 +12,7 @@ $id_results = pg_query($id_query);
 $id_row = pg_fetch_assoc($id_results);
 $id = $id_row['uid'];
 
-
+// Getting the uid
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
 } else if (isset($_POST['id'])){
@@ -29,6 +29,7 @@ if (isset($_GET['id'])) {
   $id = $id_row['uid'];
 }
 
+// Retrieve row from Readme table
 $readme_query = "SELECT * FROM readme WHERE uid = $id";
 
 $readme_results = pg_query($readme_query);

@@ -31,11 +31,12 @@ if (isset($_POST['readme_save_button'])) {
   $contact = $_POST['contact'];
   $data_access = $_POST['data_access'];
 
-  $sql1 = "ALTER TABLE ".$sde_old." RENAME TO ".$sde_new."";
-  $result = pg_query($sql1);
 
-
-  if($result) {
+  $sql = "SELECT * FROM $sde_new";
+  $result = pg_query($sql);
+  // If the new sde name is not a duplicate
+  if (pg_num_rows($result)==0) {
+    // Update readme row
     $sql2 = "UPDATE readme
              SET common_name = $1,
                 sde_name    = $2,
@@ -63,12 +64,23 @@ if (isset($_POST['readme_save_button'])) {
                 contact = $24,
                 data_access = $25
                 WHERE uid = $26";
-    pg_query_params($db, $sql2, array($common_name, $sde, $tags_guide, $tags_sde, $summary, $summary_update_date, $description, $description_data_loc, $data_steward, $data_engineer,
+    $result = pg_query_params($db, $sql2, array($common_name, $sde, $tags_guide, $tags_sde, $summary, $summary_update_date, $description, $description_data_loc, $data_steward, $data_engineer,
                                       $credits, $genconst, $legconst, $update_freq, $data_last_update, $date_underlying_data, $data_source, $version, $common_uses, $data_quality,
                                       $caveats, $future_plans, $distribution, $contact, $data_access, $id));
-  } else {
-    echo pg_last_error($db);
+
+
+    // If update was successful and the new sde name doesn't equal old sde name
+    if($result && ($sde_new !== $sde_old)) {
+
+      $sql1 = "ALTER TABLE ".$sde_old." RENAME TO ".$sde_new."";
+      pg_query($sql1);
+
+    }
+    // else {
+    //   echo "Sde table name didn't update.";
+    // }
   }
+
 
 }
 

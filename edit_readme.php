@@ -5,8 +5,6 @@ include ('dd_upload.php');
 include ('readme_edit_submission.php');
 
 
-
-
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
 } else if (isset($_POST['id'])){
