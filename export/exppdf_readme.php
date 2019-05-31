@@ -35,84 +35,93 @@ $caveats = $readme_row['caveats'];
 $future_plans = $readme_row['future_plans'];
 $distribution = $readme_row['distribution'];
 $contact = $readme_row['contact'];
+$html;
 
 
- // Connect to the Database
-if (isset($_POST["export-opendata"])) {
-  $html = '
-  <h3>Common Name</h3>
-  <p>'. $common_name.'</p>
-  <br>
-  <h3>SDE Name</h3>
-  <p>' . $sde_name . '</p>
-  <br>
-  <h3>Tags for Guide</h3>
-  <p>' . $tags_guide .'</p>
-  <br>
-  <h3>Tags for SDE</h3>
-  <p>' . $tags_sde . '</p>
-  <br>
-  <h3>Summary</h3>
-  <p>' .$summary. '</p>
-  <br>
-  <h3>Summary - Update Date</h3>
-  <p>' . $summary_update_date . '</p>
-  <br>
-  <h3>Description</h3>
-  <p>' .$description .'</p>
-  <br>
-  <h3>Description - Data Location</h3>
-  <p>' .$description_data_loc .'</p>
-  <br>
-  <h3>Data Steward</h3>
-  <p>'.$data_steward .'</p>
-  <br>
-  <h3>Data Engineer</h3>
-  <p>' .$data_engineer . '</p>
-  <br>
-  <h3>Credits</h3>
-  <p>' .$credits .'</p>
-  <br>
-  <h3>General Constraints Use Limitations</h3>
-  <p>' .$genconst .'</p>
-  <br>
-  <h3>Legal Constraints Use Limitations</h3>
-  <p>' .$legconst .'</p>
-  <br>
-  <h3>Update Frequency</h3>
-  <p>' .$update_freq .'</p>
-  <br>
-  <h3>Date of Last Update</h3>
-  <p>' .$date_last_update .'</p>
-  <br>
-  <h3>Date of Underlying Data</h3>
-  <p>' .$date_underlying_data .'</p>
-  <br>
-  <h3>Data Sources and Compilation Process</h3>
-  <p>' .$data_source .'</p>
-  <br>
-  <h3>Version</h3>
-  <p>' .$version .'</p>
-  <br>
-  <h3>Common Uses</h3>
-  <p>' .$common_uses.'</p>
-  <br>
-  <h3>Data Quality</h3>
-  <p>' .$data_quality.'</p>
-  <br>
-  <h3>Caveats</h3>
-  <p>' .$caveats .'</p>
-  <br>
-  <h3>Future Plans</h3>
-  <p>' .$future_plans .'</p>
-  <br>
-  <h3>Distribution</h3>
-  <p>' . $distribution .'</p>
-  <br>
-  <h3>Contact</h3>
-  <p>' .$contact .'</p>
-  <br>';
+if (isset($_POST["export-opendata"]) || isset($_POST["export-guide"])) {
+  // If the export pdf to opendata is pressed
+  if (isset($_POST["export-opendata"])) {
+    $html = '
+    <h3>Common Name</h3>
+    <p>'. $common_name.'</p>
+    <br>
+    <h3>Tags for Guide</h3>
+    <p>' . $tags_guide .'</p>
+    <br>
+    <h3>Tags for SDE</h3>
+    <p>' . $tags_sde . '</p>
+    <br>
+    <h3>Summary</h3>
+    <p>' .$summary. '</p>
+    <br>
+    <h3>Description</h3>
+    <p>' .$description .'</p>
+    <br>
+    <h3>Credits</h3>
+    <p>' .$credits .'</p>
+    <br>
+    <h3>General Constraints Use Limitations</h3>
+    <p>' .$genconst .'</p>
+    <br>
+    <h3>Legal Constraints Use Limitations</h3>
+    <p>' .$legconst .'</p>
+    <br>
+    <h3>Update Frequency</h3>
+    <p>' .$update_freq .'</p>
+    <br>
+    <h3>Date of Last Update</h3>
+    <p>' .$date_last_update .'</p>
+    <br>
+    <h3>Date of Underlying Data</h3>
+    <p>' .$date_underlying_data .'</p>
+    <br>
+    <h3>Data Sources and Compilation Process</h3>
+    <p>' .$data_source .'</p>
+    <br>
+    <h3>Version</h3>
+    <p>' .$version .'</p>
+    <br>
+    <h3>Common Uses</h3>
+    <p>' .$common_uses.'</p>
+    <br>
+    <h3>Data Quality</h3>
+    <p>' .$data_quality.'</p>
+    <br>
+    <h3>Caveats</h3>
+    <p>' .$caveats .'</p>
+    <br>
+    <h3>Future Plans</h3>
+    <p>' .$future_plans .'</p>
+    <br>
+    <h3>Distribution</h3>
+    <p>' . $distribution .'</p>
+    <br>
+    <h3>Contact</h3>
+    <p>' .$contact .'</p>
+    <br>';
 
+  // If the export pdf to the guide is pressed
+  } else if(isset($_POST["export-guide"])) {
+    $html = '
+    <h3>SDE Name</h3>
+    <p>' . $sde_name . '</p>
+    <br>
+    <h3>Tags for Guide</h3>
+    <p>' . $tags_guide .'</p>
+    <br>
+    <h3>Summary - Update Date</h3>
+    <p>' . $summary_update_date . '</p>
+    <br>
+    <h3>Description - Data Location</h3>
+    <p>' .$description_data_loc .'</p>
+    <br>
+    <h3>Data Steward</h3>
+    <p>'.$data_steward .'</p>
+    <br>
+    <h3>Data Engineer</h3>
+    <p>' .$data_engineer . '</p>
+    <br>';
+  }
   // instantiate and use the dompdf class
   $dompdf = new DOMPDF();
 
@@ -126,8 +135,6 @@ if (isset($_POST["export-opendata"])) {
 
   // Output the generated PDF to Browser
   $dompdf->stream($tbname.'.pdf');
-
-
 }
 
 ?>

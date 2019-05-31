@@ -157,7 +157,7 @@ li {
 }
 
 .modal-content {
-  margin-top: 300px;
+  margin-top: 240px;
 }
 
 .readme-header-container {

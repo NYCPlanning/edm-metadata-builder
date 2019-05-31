@@ -115,7 +115,7 @@ aria-hidden="true">
               <input type="submit" name="export-opendata" class="btn btn-default btn-rounded mb-4" value="Open Data"/>';
 
                     if ($privilege) {
-                      echo'<input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide" disabled/>';
+                      echo'<input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide"/>';
                     }
 
 
@@ -132,7 +132,7 @@ aria-hidden="true">
               <input type="submit" name="export-opendata" class="btn btn-default btn-rounded mb-4" value="Open Data"/>';
 
                     if ($privilege) {
-                      echo'<input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide" disabled/>';
+                      echo'<input type="submit" name="export-guide" class="btn btn-default btn-rounded mb-4" value="The Guide"/>';
                     }
 
         echo'  </form>
