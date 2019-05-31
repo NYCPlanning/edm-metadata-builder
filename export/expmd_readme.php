@@ -1,6 +1,6 @@
 <?php
-require 'vendor/autoload.php';
-include 'config.php';
+require '../vendor/autoload.php';
+include '../config.php';
 use League\HTMLToMarkdown\HtmlConverter;
 
 $uid = $_GET['id'];

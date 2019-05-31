@@ -1,5 +1,5 @@
 <?php
-include ('navbar.php');
+include ('../navbar.php');
 $email = $_SESSION['user'];
 $u_type = $_SESSION['type'];
 ?>
@@ -31,7 +31,7 @@ $u_type = $_SESSION['type'];
 
   // Displays all the retrieved data from the database
   foreach($row as $r) {
-    echo "<a href='view_dataset_manage.php?sde=".$r["sde_name"]."&common=".$r["common_name"]."'><h4>" .  $r["common_name"] . "</h4></a>";
+    echo "<a href='" . $path . "/user/view_dataset_manage.php?sde=".$r["sde_name"]."&common=".$r["common_name"]."'><h4>" .  $r["common_name"] . "</h4></a>";
     echo "<p><em>" . custom_echo($r['description'], 350) . "</em></p>";
     echo "<hr>";
   }

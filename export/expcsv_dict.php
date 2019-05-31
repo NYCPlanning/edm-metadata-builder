@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../config.php';
 $sde_underscore = $_GET['sde_underscore'];
  // Connect to the Database
 if (isset($_POST["Export"])) {

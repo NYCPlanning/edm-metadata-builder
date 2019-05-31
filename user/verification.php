@@ -1,6 +1,13 @@
 <?php
 	// When users click on the verification email their account becomes verified.
 	include 'config.php';
+	// Getting the absolute path
+	$path;
+	if ($_SERVER['SERVER_NAME'] === "localhost") {
+	  $path = 'http://localhost:8888/Metadata';
+	} else {
+  	$path = $_SERVER['SERVER_NAME'];
+	}
 	if(isset($_GET['vkey'])) {
 		$vkey = $_GET['vkey'];
 
@@ -15,7 +22,7 @@
 			session_start();
 			$_SESSION['message'] = 'Your Email has been verified, you may now login.';
 			// Redirect to login page
-			header('location: login.php');
+			header('location: '.$path.'/Main.php');
 		} else {
 			echo "This account is invalid or already verified";
 		}

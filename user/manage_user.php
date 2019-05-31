@@ -1,5 +1,5 @@
 <?php
-include ('navbar.php');
+include ('../navbar.php');
 $u_type = $_SESSION['type'];
 $email = $_SESSION['user'];
 $delete_email = $_GET['delete_email'];
@@ -105,7 +105,7 @@ th {
                       <button class='btn' id='edit".$i. "' onClick='editFunc(this.id)'>
                         <i class='far fa-edit'></i>
                       </button>
-                      <form action='manage_user.php' id='form".$i."' method='post' style='margin-bottom:0px;'>
+                      <form action='" . $path . "/user/manage_user.php' id='form".$i."' method='post' style='margin-bottom:0px;'>
                       <button class='btn save-btn' id='saveedit" .$i."' type='submit' name='save-submit' form='form".$i."' style='display:none;'>
                         <i class='far fa-save'></i>
                         <input type='hidden' class='textedit" .$i. "'name='save-email' form='form".$i."' value='".$email_var."' disabled>
@@ -160,7 +160,7 @@ th {
 
   function deleteUser(id) {
       if (confirm("Are you sure you want to delete this user?")) {
-          window.location.href= "manage_user.php?delete=True&delete_email="+id;
+          window.location.href= "<?php echo $path; ?>/user/manage_user.php?delete=True&delete_email="+id;
       }
   }
 

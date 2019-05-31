@@ -1,8 +1,8 @@
 <?php
 // reference the Dompdf namespace
 use Dompdf\Dompdf;
-require 'vendor/autoload.php';
-include 'config.php';
+require '../vendor/autoload.php';
+include '../config.php';
 
 
 $uid = $_GET['id'];

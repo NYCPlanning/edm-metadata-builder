@@ -1,13 +1,13 @@
 <?php
-include ('navbar.php');
+ob_start();
+include ('../navbar.php');
 $error = NULL;
 
 // If user is logged in relocate to main page
 if (isset($_SESSION['user'])) {
-  echo '<script>';
-  echo 'window.location.href="Main.php"';  //not showing an alert box.
-  echo '</script>';
+    header('location: '.$path.'/Main.php');
 }
+
 
 // Display Email Verification Success Message
 if(!empty($_SESSION['message'])) {
@@ -45,9 +45,7 @@ if(isset($_POST['submit'])) {
     $_SESSION['user'] = $email;
     $_SESSION['type'] = $type;
     // Redirect to main page
-    echo '<script>';
-    echo 'window.location.href="Main.php"';  //not showing an alert box.
-    echo '</script>';
+    header('location: '.$path.'/Main.php');
   }
 }
 
@@ -140,7 +138,7 @@ a {
     </div>
 
     <div class="container register">
-      <p>Don't have an account yet? <a href="register.php">Register</a>.</p>
+      <p>Don't have an account yet? <a href='<?php echo $path; ?>/user/register.php'>Register</a>.</p>
     </div>
   </form>
 

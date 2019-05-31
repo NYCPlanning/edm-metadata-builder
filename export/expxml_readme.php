@@ -2,7 +2,7 @@
 
 //this code exports the table into the Esri accepted xml format
 
-include 'config.php'; //connect to database
+include '../config.php'; //connect to database
 $uid = $_GET['id'];
 $tbname = $_GET['tbname'];
 
