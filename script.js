@@ -1,6 +1,15 @@
-var common_status, sde_status;
+var common_status, sde_status, path;
 common_status = false;
 sde_status = false;
+path;
+
+// Getting the absolute path
+if (window.location.hostname === "localhost") {
+  path = 'http://localhost:8888/Metadata/'
+} else {
+  path = window.location.hostname;
+}
+
 
 
 //Getting value from "ajax.php".
@@ -50,7 +59,7 @@ $(document).ready(function() {
                //AJAX type is "Post".
                type: "POST",
                //Data will be sent to "ajax.php".
-               url: "ajax.php",
+               url: path + "/ajax.php",
                //Data, that will be sent to "ajax.php".
                data: {
                    //Assigning value of "name" into "search" variable.
@@ -79,7 +88,7 @@ $(document).ready(function() {
              //AJAX type is "Post".
              type: "POST",
              //Data will be sent to "ajax.php".
-             url: "ajax.php",
+             url: path + "/ajax.php",
              //Data, that will be sent to "ajax.php".
              data: {
                  //Assigning value of "name" into "search" variable.
@@ -100,7 +109,7 @@ $(document).ready(function() {
                //AJAX type is "Post".
                type: "POST",
                //Data will be sent to "ajax.php".
-               url: "ajax.php",
+               url: path + "/ajax.php",
                //Data, that will be sent to "ajax.php".
                data: {
                    //Assigning value of "name" into "search" variable.
@@ -141,7 +150,7 @@ $(document).ready(function() {
                //AJAX type is "Post".
                type: "POST",
                //Data will be sent to "ajax.php".
-               url: "ajax.php",
+               url: path + "/ajax.php",
                //Data, that will be sent to "ajax.php".
                data: {
                    //Assigning value of "name" into "common" variable.
@@ -197,7 +206,7 @@ $(document).ready(function() {
                //AJAX type is "Post".
                type: "POST",
                //Data will be sent to "ajax.php".
-               url: "ajax.php",
+               url: path + "/ajax.php",
                //Data, that will be sent to "ajax.php".
                data: {
                    //Assigning value of "name" into "sde" variable.
@@ -237,7 +246,7 @@ $(document).ready(function() {
            //AJAX type is "Post".
            type: "POST",
            //Data will be sent to "ajax.php".
-           url: "ajax.php",
+           url: path + "/ajax.php",
            //Data, that will be sent to "ajax.php".
            data: {
                //Assigning values into variables.
@@ -287,7 +296,7 @@ $(document).ready(function() {
 
 
 
-
+console.log(window.location.href);
 
 
 

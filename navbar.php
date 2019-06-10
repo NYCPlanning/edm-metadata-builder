@@ -2,6 +2,14 @@
 session_start();
 include 'config.php';
 $selection = $_POST['update_freq'];
+
+// Getting the absolute path
+$path;
+if ($_SERVER['SERVER_NAME'] === "localhost") {
+  $path = 'http://localhost:8888/Metadata';
+} else {
+  $path = $_SERVER['SERVER_NAME'];
+}
 ?>
 
 
@@ -14,8 +22,9 @@ $selection = $_POST['update_freq'];
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="script.js"></script>
+  <script src="<?php echo $path; ?>/script.js"></script>
   <script>
+
     $(document).ready(function(){
       $('[data-toggle="tooltip"]').tooltip();
     });
@@ -126,8 +135,8 @@ $selection = $_POST['update_freq'];
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="Main.php"><img class="img" src="img/logo.png"></a>
-        <a class="navbar-brand" id="navbar-title" href="Main.php">Metadata Management Web Tool</a>
+        <a class="navbar-brand" href='<?php echo $path; ?>/Main.php'><img class="img" src='<?php echo $path; ?>/img/logo.png'></a>
+        <a class="navbar-brand" id="navbar-title" href='<?php echo $path; ?>/Main.php'>Metadata Management Web Tool</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -138,15 +147,15 @@ $selection = $_POST['update_freq'];
           <?php
               if (isset( $_SESSION["user"]))
               {
-                echo'<li><a href="import_metadata.php">Import Metadata</a></li>';
+                echo'<li><a href=' . $path . '/import/import_metadata.php>Import Metadata</a></li>';
               }
-         ?>
-          <li><a href="export_metadata.php">Export Metadata</a></li>
 
+          echo '<li><a href=' . $path . '/export/export_metadata.php>Export Metadata</a></li>';
+          ?>
           <!-- If user isn't logged in show login button -->
           <?php
               if (!isset( $_SESSION["user"])) {
-                echo'<li><a href="login.php">Login</a></li>';
+                echo'<li><a href=' . $path . '/user/login.php>Login</a></li>';
               } else {
                 $firstCharacter = substr($_SESSION["user"], 0, 1);
                 echo'<div class="dropdown" style="display:inline-block; padding-top:8px;">
@@ -156,11 +165,11 @@ $selection = $_POST['update_freq'];
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <li style="padding:2px 10px;">'.$_SESSION["user"].'</li>
                         <hr style="margin:5px 0;">
-                        <li><a class="dropdown-item" href="view_dataset.php">View Datasets</a></li>';
+                        <li><a class="dropdown-item" href=' . $path . '/user/view_dataset.php>View Datasets</a></li>';
                         if ($_SESSION["type"] == 'admin') {
-                          echo '<li><a class="dropdown-item" href="manage_user.php">Manage Users</a></li>';
+                          echo '<li><a class="dropdown-item" href=' . $path . '/user/manage_user.php>Manage Users</a></li>';
                         }
-                  echo'<li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                  echo'<li><a class="dropdown-item" href=' . $path . '/user/logout.php>Logout</a></li>
                       </div>
                     </div>';
               }

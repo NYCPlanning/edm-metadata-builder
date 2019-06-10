@@ -1,6 +1,6 @@
 <?php
-require 'vendor/autoload.php';
-include 'config.php';
+require '../vendor/autoload.php';
+include '../config.php';
 use League\HTMLToMarkdown\HtmlConverter;
 $sde_underscore = $_GET['sde_underscore'];
  // Connect to the Database

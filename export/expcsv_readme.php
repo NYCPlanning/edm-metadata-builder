@@ -1,6 +1,6 @@
 <?php
 // Connect to the Database
-include 'config.php';
+include '../config.php';
 // Getting the unique id and tbname
 $uid = $_GET['id'];
 $tbname = $_GET['tbname'];

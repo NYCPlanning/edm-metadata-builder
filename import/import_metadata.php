@@ -1,8 +1,9 @@
 <?php
-include ('navbar.php');
+ob_start();
+include ('../navbar.php');
 // If not logged in, bring user back to main page
 if (!isset($_SESSION['user'])) {
-  header('location: Main.php');
+    header('location: '.$path.'/Main.php');
 }
 ?>
 
@@ -24,7 +25,7 @@ if (!isset($_SESSION['user'])) {
 
 <div class="wrapper">
   <h3>Create Table</h3>
-  <form class="search" method="post" action="edit.php">
+  <form class="search" method="post" action="../display.php">
     <div class="form-group">
       <input type="text" class="form-control create-searchbar" name="common_name" id="commonName" placeholder="Common Name" autocomplete="off" required list="common_list">
       <datalist id="common_list">

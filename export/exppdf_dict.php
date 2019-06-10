@@ -1,8 +1,8 @@
 <?php
 // reference the Dompdf namespace
 use Dompdf\Dompdf;
-require 'vendor/autoload.php';
-include 'config.php';
+require '../vendor/autoload.php';
+include '../config.php';
 
 $sde_underscore = $_GET['sde_underscore'];
  // Connect to the Database

@@ -79,6 +79,7 @@ if (isset($_POST['readme_save_button'])) {
     // else {
     //   echo "Sde table name didn't update.";
     // }
+    unset($_SESSION["edit-readme"]);
   }
 
 

@@ -1,5 +1,5 @@
 <?php
-include ('navbar.php');
+include ('../navbar.php');
 $email = $_SESSION['user'];
 $u_type = $_SESSION['type'];
 
@@ -18,7 +18,7 @@ if(isset($_GET['delete'])) {
     $d_query = "DELETE FROM collaboration WHERE sdename = $1 AND email = $2";
     pg_query_params($db, $d_query, array($sde, $delete_email));
     echo '<script>';
-    echo 'window.location.href="view_dataset.php"';  //not showing an alert box.
+    echo 'window.location.href=' . $path . '/user/view_dataset.php';  //not showing an alert box.
     echo '</script>';
   } else {
     $d_query = "DELETE FROM collaboration WHERE sdename = $1 AND email = $2";
@@ -74,7 +74,7 @@ $row =pg_fetch_all($result);
       <div class="modal-body">
         <div class="">
           <div class="text-center">
-            <form method="get" action="view_dataset_manage.php">
+            <form method="get" action="">
                 <label for="email">Email:</label>
                 <input type="text" name="add_email" id="email">
                 <input type="hidden" name="sde" value="<?php echo $sde?>">
@@ -108,7 +108,7 @@ $row =pg_fetch_all($result);
 
    function deleteUser(id) {
        if (confirm("Are you sure you want to delete this user?")) {
-           window.location.href= "view_dataset_manage.php?delete=True&sde=<?php echo $sde.'&common='.$common.'&delete_email=';?>"+id;
+           window.location.href= "<?php echo $path; ?>/user/view_dataset_manage.php?delete=True&sde=<?php echo $sde.'&common='.$common.'&delete_email=';?>"+id;
        }
 
    }

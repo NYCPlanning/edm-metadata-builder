@@ -1,7 +1,13 @@
 <?php
-include ('navbar.php');
-require 'vendor/autoload.php';
+ob_start();
+include ('../navbar.php');
+require '../vendor/autoload.php';
 $error = NULL;
+
+// If user is logged in relocate to main page
+if (isset($_SESSION['user'])) {
+    header('location: '.$path.'/Main.php');
+}
 
 // Register form is submitted
 if(isset($_POST['submit'])) {
@@ -165,7 +171,7 @@ a {
     </div>
 
     <div class="container signin">
-      <p>Already have an account? <a href="login.php">Sign in</a>.</p>
+      <p>Already have an account? <a href='<?php echo $path; ?>/user/login.php'>Sign in</a>.</p>
     </div>
   </form>
 

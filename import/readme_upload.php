@@ -283,6 +283,7 @@ if(isset($_POST['readme_submit'])) {
 
 
 }
+unset($_SESSION["edit-readme"]);
 
 
  ?>
